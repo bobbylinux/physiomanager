@@ -1,0 +1,35 @@
+<div class="register-header">
+  <h4>Fisioterapisti</h4>
+  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/physiotherapists/new" placement="top" ngbTooltip="Aggiungi fisioterapista"></fa>
+</div>
+<div *ngIf="physiotherapists.length > 0">
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Cognome</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Attivo</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let physiotherapist of physiotherapists">
+      <td scope="row">{{physiotherapist.id}}</td>
+      <td scope="row">{{physiotherapist.last_name}}</td>
+      <td scope="row">{{physiotherapist.first_name}}</td>
+      <td scope="row">
+        <fa *ngIf="physiotherapist.enabled" name="check" size="lg" class="fa enabled"></fa>
+        <fa *ngIf="!physiotherapist.enabled" name="times" size="lg" class="fa disabled"></fa>
+      </td>
+      <td>
+        <fa name="pencil" size="lg" class="fa edit-element" (click)="editPhysiotherapist(physiotherapist)" placement="top" ngbTooltip="Modifica fisioterapista"></fa>
+        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(physiotherapist)" placement="top" ngbTooltip="Elimina fisioterapista"></fa>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="physiotherapists.length == 0" class="register-empty-body">
+  <h5 class="text-center">Ancora nessuna fisioterapista registrato</h5>
+</div>

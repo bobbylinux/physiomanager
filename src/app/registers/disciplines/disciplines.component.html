@@ -1,0 +1,46 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Discipline</h5>
+        </div>
+        <div class="card-body">
+          <!--fa name="plus-circle" size="lg" class="fa add-element" routerLink="/disciplines/new" placement="top" ngbTooltip="Aggiungi disciplina"></fa>-->
+          <div *ngIf="disciplines.length > 0" class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Descrizione</th>
+                  <th scope="col">Attiva</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let discipline of disciplines">
+                  <td scope="row">{{discipline.id}}</td>
+                  <td scope="row">{{discipline.description}}</td>
+                  <td scope="row">
+                    <i *ngIf="discipline.enabled" name="check" size="lg" class="now-ui-icons ui-1_check"></i>
+                    <i *ngIf="!discipline.enabled" name="times" size="lg" class="now-ui-icons ui-1_simple-remove"></i>
+                  </td>
+                  <td>
+                    <i class="now-ui-icons ui-1_check"></i>
+                    <!--fa name="pencil" size="lg" class="fa edit-element" (click)="editDiscipline(discipline)" placement="top" ngbTooltip="Modifica disciplina"></fa>
+      <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(discipline)" placement="top" ngbTooltip="Elimina disciplina"></fa>-->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="disciplines.length == 0" class="register-empty-body">
+            <h5 class="text-center">Ancora nessuna disciplina registrata</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

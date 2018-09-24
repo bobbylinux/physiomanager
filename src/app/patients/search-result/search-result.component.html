@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Cognome
+        </th>
+        <th>
+          Nome
+        </th>
+        <th>
+          Codice Fiscale
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of patients">
+        <td>{{patient.last_name}}</td>
+        <td>{{patient.first_name}}</td>
+        <td>{{patient.tax_code}}</td>
+        <td class="text-right">
+          <button class="btn btn-warning" routerLink='/plans/{{patient.id}}'><i class="now-ui-icons design_bullet-list-67"></i> Vai alla Scheda</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

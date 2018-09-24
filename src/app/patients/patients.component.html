@@ -1,0 +1,74 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ricerca Paziente</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="last-name">Cognome</label>
+                  <input [(ngModel)]="last_name" type="text" class="form-control" placeholder="Cognome" name="last_name"
+                    id="last-name" value="">
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="first-name">Nome</label>
+                  <input [(ngModel)]="first_name" type="text" class="form-control" placeholder="Nome" name="first_name"
+                    id="first-name" value="">
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label for="tax-code">Codice Fiscale</label>
+                  <input [(ngModel)]="tax_code" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
+                    id="tax-code" value="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <button class="btn btn-warning btn-block" (click)="searchPatient()">Cerca</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="searched" class="col-md-10">
+      <div class="card">
+        <div class="card-body">
+          <a class="btn btn-warning" [routerLink]="['/add-patient']"><i class="now-ui-icons ui-1_simple-add"></i> Aggiungi
+            Paziente</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="searched">
+    <div class="col-md-10">
+      <div *ngIf="patients.length > 0" class="card">
+        <div class="card-header">
+          <h5 class="title">Lista Pazienti</h5>
+        </div>
+        <div class="card-body">
+          <app-search-result [searched]="searched" [patients]="patients"></app-search-result>
+        </div>
+      </div>
+      <div *ngIf="patients.length == 0" class="card">
+        <div class="card-header">
+          <h5 class="title">Nessun paziente trovato</h5>
+        </div>
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

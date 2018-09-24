@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-2">
+    <label for="data">Data</label>
+    <input type="date" class="form-control" placeholder="Data" id="data" name="data" [(ngModel)]="date">
+  </div>
+  <div class="col-md-4">
+    <label for="physiotherapist">Fisioterapista</label>
+    <select class="form-control" name="physiotherapist" ng-model id="physiotherapist" (change)="selectPhysiotherapist($event)"
+      [(ngModel)]="physiotherapist">
+      <option *ngFor="let physiotherapist of physiotherapists" [value]="physiotherapist.id">
+        {{ physiotherapist.last_name }} {{ physiotherapist.first_name }}
+      </option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label for="therapy">Terapia</label>
+    <select class="form-control" name="therapy" ng-model id="therapy" (change)="selectTherapy($event)" [(ngModel)]="therapy">
+      <option *ngFor="let therapy of therapies" [value]="therapy.id">
+        {{ therapy.description }}
+      </option>
+    </select>
+  </div>
+  <div class="col-md-1">
+    <label for="price">Prezzo</label>
+    <input class="form-control" type="number" id="price" name="price" [(ngModel)]="price">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <label for="note">Note</label>
+    <input [(ngModel)]="note" class="form-control" type="text" id="note" name="note">
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-warning btn-block btn-add-therapy" (click)="addTherapyToSessions()">Aggiungi</button>
+  </div>
+</div>

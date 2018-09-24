@@ -1,0 +1,33 @@
+<div class="register-header">
+  <h4>Terapie</h4>
+  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/therapies/new" placement="top" ngbTooltip="Aggiungi terapia"></fa>
+</div>
+<div *ngIf="therapies.length > 0">
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Descrizione</th>
+      <th scope="col">Abilitata</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let therapy of therapies">
+      <td scope="row">{{therapy.id}}</td>
+      <td scope="row">{{therapy.description}}</td>
+      <td scope="row">
+        <fa *ngIf="therapy.enabled" name="check" size="lg" class="fa enabled"></fa>
+        <fa *ngIf="!therapy.enabled" name="times" size="lg" class="fa disabled"></fa>
+      </td>
+      <td>
+        <fa name="pencil" size="lg" class="fa edit-element" (click)="editTherapy(therapy)" placement="top" ngbTooltip="Modifica terapia"></fa>
+        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(therapy)" placement="top" ngbTooltip="Elimina terapia"></fa>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="therapies.length == 0" class="register-empty-body">
+  <h5 class="text-center">Ancora nessuna terapia registrata</h5>
+</div>

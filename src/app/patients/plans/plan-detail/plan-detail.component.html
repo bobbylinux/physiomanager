@@ -1,0 +1,78 @@
+<form [formGroup]="planFormGroup">
+  <div class="row">
+    <div class="col-md-7 pr-1">
+      <div class="form-group">
+        <label for="pathological-conditions">Quadro Clinico</label>
+        <textarea class="form-control" placeholder="Quadro Clinico" name="pathological_conditions" formControlName="pathological_conditions"
+          id="pathological-conditions" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="col-md-4 pr-1">
+      <div class="form-group">
+        <label for="note">Note</label>
+        <textarea class="form-control" placeholder="Note" name="note" formControlName="note" id="note" rows="5"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 pr-1">
+      <label for="select-program">Programma</label>
+      <select class="form-control" name="select_program" id="select-program" (change)="selectProgram($event)">
+        <option *ngFor="let program of programs" [value]="program.id">
+          {{ program.title }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-3 pr-1">
+      <label for="privacy">Privacy</label>
+      <select class="form-control" name="privacy" id="privacy" formControlName="privacy">
+        <option *ngFor="let privacyOption of privacyOptions" [value]="privacyOption.id">
+          {{ privacyOption.text }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-3 pr-1">
+      <label for="work-result">Risultato del lavoro</label>
+      <select class="form-control" name="selectWorResult" ng-model id="work-result" formControlName="work_result_id">
+        <option *ngFor="let workResult of workResults" [value]="workResult.id">
+          {{ workResult.description }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 pr-1">
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Programma" name="program" formControlName="program" id="program"
+          rows="5"></textarea>
+      </div>
+    </div>
+    <div class="col-md-3 pr-1">
+      <label for="pain">Dolore</label>
+      <select class="form-control" name="selectPain" id="pain" formControlName="pain_id">
+        <option *ngFor="let pain of pains" [value]="pain.id">
+          {{ pain.description }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-3 pr-1">
+      <label for="mobility">Mobilità</label>
+      <select class="form-control" name="selectWorResult" ng-model id="mobility" formControlName="mobility_id">
+        <option *ngFor="let mobility of mobilities" [value]="mobility.id">
+          {{ mobility.description }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11 pr-1">
+      <label for="final-report">Referto Finale</label>
+      <textarea class="form-control" id="final-report" name="final_report" rows="3" formControlName="final_report"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 pr-1">
+      <button class="btn btn-warning" (click)="savePlan()">Salva Scheda</button>
+    </div>
+  </div>
+</form>

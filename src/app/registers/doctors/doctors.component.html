@@ -1,0 +1,35 @@
+<div class="register-header">
+  <h4>Medici</h4>
+  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/doctors/new" placement="top" ngbTooltip="Aggiungi medico"></fa>
+</div>
+<div *ngIf="doctors.length > 0">
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Cognome</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Attivo</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let doctor of doctors">
+      <td scope="row">{{doctor.id}}</td>
+      <td scope="row">{{doctor.last_name}}</td>
+      <td scope="row">{{doctor.first_name}}</td>
+      <td scope="row">
+        <fa *ngIf="doctor.enabled" name="check" size="lg" class="fa enabled"></fa>
+        <fa *ngIf="!doctor.enabled" name="times" size="lg" class="fa disabled"></fa>
+      </td>
+      <td>
+        <fa name="pencil" size="lg" class="fa edit-element" (click)="editDoctor(doctor)" placement="top" ngbTooltip="Modifica medico"></fa>
+        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(doctor)" placement="top" ngbTooltip="Elimina medico"></fa>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="doctors.length == 0" class="register-empty-body">
+  <h5 class="text-center">Ancora nessun medico registrato</h5>
+</div>

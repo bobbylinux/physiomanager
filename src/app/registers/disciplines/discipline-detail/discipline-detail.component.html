@@ -1,0 +1,16 @@
+<h1 *ngIf="newDiscipline" class="text-center">Aggiungi Disciplina</h1>
+<h1 *ngIf="!newDiscipline" class="text-center">Modifica Disciplina</h1>
+<form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+  <div class="form-group">
+    <label for="description">Descrizione</label>
+    <input type="text" class="form-control" id="description" name="description"  placeholder="Descrizione" formControlName="description">
+  </div>
+  <div class="form-group">
+    <label for="enabled">Abilitato</label>
+    <select class="custom-select" id="enabled" name="enabled" formControlName="enabled">
+      <option *ngFor="let option of enabledOptions" [value]="option.id">{{option.text}}</option>
+    </select>
+  </div>
+  <input type="hidden" formControlName="id" id="id" name="id">
+  <button type="submit" class="btn btn-primary btn-lg btn-block">Salva</button>
+</form>

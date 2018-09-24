@@ -1,0 +1,98 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Aggiungi Nuovo Paziente</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="submitForm()" [formGroup]="formGroup">
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="last-name">Cognome</label>
+                  <input type="text" class="form-control" placeholder="Cognome" name="last_name" formControlName="last_name"
+                    id="last-name" value="">
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="first-name">Nome</label>
+                  <input type="text" class="form-control" placeholder="Nome" name="first_name" formControlName="first_name"
+                    id="first-name" value="">
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label for="tax-code">Codice Fiscale</label>
+                  <input type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code" formControlName="tax_code"
+                    id="tax-code" value="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 pr-1">
+                <div class="form-group">
+                  <label for="sex">Sesso</label>
+                  <select class="custom-select form-control" id="sex" name="sex" formControlName="sex">
+                    <option *ngFor="let option of sexOptions" [value]="option.id">{{option.text}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2 pr-1">
+                <div class="form-group">
+                  <label for="birthday">Data di nascita</label>
+                  <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
+                    formControlName="birthday">
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label for="place-of-birth">Luogo di nascita</label>
+                  <input type="text" class="form-control" id="place-of-birth" name="place_of_birth" placeholder="Luogo di nascita"
+                    formControlName="place_of_birth">
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="address">Indirizzo</label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Indirizzo"
+                    formControlName="address">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label for="city">Città</label>
+                  <input type="text" class="form-control" id="city" name="city" placeholder="Città" formControlName="city">
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label for="phone-number">Telefono</label>
+                  <input type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
+                    formControlName="phone_number">
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label for="email">E-Mail</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Indirizzo E-Mail"
+                    formControlName="email">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <button class="btn btn-warning btn-block">Salva</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

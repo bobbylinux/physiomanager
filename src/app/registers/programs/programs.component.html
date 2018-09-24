@@ -1,0 +1,33 @@
+<div class="register-header">
+  <h4>Programmi</h4>
+  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/programs/new" placement="top" ngbTooltip="Aggiungi programma"></fa>
+</div>
+<div *ngIf="programs.length > 0">
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Titolo</th>
+      <th scope="col">Abilitato</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let program of programs">
+      <td scope="row">{{program.id}}</td>
+      <td scope="row">{{program.title}}</td>
+      <td scope="row">
+        <fa *ngIf="program.enabled" name="check" size="lg" class="fa enabled"></fa>
+        <fa *ngIf="!program.enabled" name="times" size="lg" class="fa disabled"></fa>
+      </td>
+      <td>
+        <fa name="pencil" size="lg" class="fa edit-element" (click)="editProgram(program)" placement="top" ngbTooltip="Modifica programma"></fa>
+        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(program)" placement="top" ngbTooltip="Elimina programma"></fa>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="programs.length == 0" class="register-empty-body">
+  <h5 class="text-center">Ancora nessuna programma registrato</h5>
+</div>

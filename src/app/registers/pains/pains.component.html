@@ -1,0 +1,33 @@
+<div class="register-header">
+  <h4>Dolore</h4>
+  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/pains/new" placement="top" ngbTooltip="Aggiungi dolore"></fa>
+</div>
+<div *ngIf="pains.length > 0">
+  <table class="table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Descrizione</th>
+      <th scope="col">Abilitato</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pain of pains">
+      <td scope="row">{{pain.id}}</td>
+      <td scope="row">{{pain.description}}</td>
+      <td scope="row">
+        <fa *ngIf="pain.enabled" name="check" size="lg" class="fa enabled"></fa>
+        <fa *ngIf="!pain.enabled" name="times" size="lg" class="fa disabled"></fa>
+      </td>
+      <td>
+        <fa name="pencil" size="lg" class="fa edit-element" (click)="editPain(pain)" placement="top" ngbTooltip="Modifica dolore"></fa>
+        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(pain)" placement="top" ngbTooltip="Elimina dolore"></fa>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="pains.length == 0" class="register-empty-body">
+  <h5 class="text-center">Ancora nessun dolore registrato</h5>
+</div>
