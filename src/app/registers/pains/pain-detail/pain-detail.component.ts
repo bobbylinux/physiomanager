@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Mobility} from '../../../classes/mobility';
 import {MobilityInterface} from '../../../interfaces/mobility.interface';
 import {FormControl, FormGroup} from '@angular/forms';
-import {MobilityService} from '../../../services/mobility.service';
-import {Discipline} from '../../../classes/discipline';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PainInterface} from '../../../interfaces/pain.interface';
 import {PainService} from '../../../services/pain.service';
@@ -78,7 +76,7 @@ export class PainDetailComponent implements OnInit {
     pain.enabled = enabled === 'true' ? true : false;
 
     this.painService.create(pain).subscribe(
-      response => {
+      () => {
         this.router.navigate(['pains']);
       }
     );
@@ -94,7 +92,7 @@ export class PainDetailComponent implements OnInit {
     pain.enabled = enabled === 'true' ? true : false;
 
     this.painService.update(pain).subscribe(
-      response => {
+      () => {
         this.router.navigate(['pains']);
       }
     );

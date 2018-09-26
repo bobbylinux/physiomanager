@@ -17,14 +17,15 @@ import { PlanService } from './services/plan.service';
 import { WorkResultService } from './services/work-result.service';
 import { MobilityService } from './services/mobility.service';
 import { PainService } from './services/pain.service';
-import { DisciplineService } from './services/registers/discipline.service';
-import { DoctorService } from './services/doctor.service';
+import { DoctorService } from './services/registers/doctor.service';
 import { PhysiotherapistService } from './services/registers/physiotherapist.service';
 import { ProgramService } from './services/registers/program.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TherapyService } from './services/registers/therapy.service';
 import { SessionService } from './services/session.service';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -35,13 +36,14 @@ import { BrowserModule } from '@angular/platform-browser';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MatIconModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DisciplineService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService],
+  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,9 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PlanDetailComponent } from '../../patients/plans/plan-detail/plan-detail.component';
 import { AddPlanSessionComponent } from '../../patients/plans/add-plan-session/add-plan-session.component';
 import { NewPlanComponent } from '../../patients/plans/new-plan/new-plan.component';
-import { DisciplinesComponent } from './../../registers/disciplines/disciplines.component';
-import { DisciplineDetailComponent } from './../../registers/disciplines/discipline-detail/discipline-detail.component';
-import { DeleteDisciplineComponent } from '../../registers/disciplines/delete/delete-discipline.component';
 import { SearchResultComponent } from '../../patients/search-result/search-result.component';
 import { AddPatientComponent } from '../../patients/add-patient/add-patient.component';
 import { PlansComponent } from '../../patients/plans/plans.component';
@@ -49,9 +46,6 @@ CommonModule,
     AddPlanSessionComponent,    
     NewPlanComponent,
     PlanSessionsComponent,
-    DisciplinesComponent,
-    DisciplineDetailComponent,
-    DeleteDisciplineComponent,
     UserProfileComponent,
     
     TableListComponent,

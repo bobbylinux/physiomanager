@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {PhysiotherapistService} from '../../../services/registers/physiotherapist.service';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Physiotherapist} from '../../../classes/physiotherapist';
-import {PhysiotherapistInterface} from '../../../interfaces/physiotherapist.interface';
-import {Discipline} from '../../../classes/discipline';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PhysiotherapistService } from '../../../services/registers/physiotherapist.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Physiotherapist } from '../../../classes/physiotherapist';
+import { PhysiotherapistInterface } from '../../../interfaces/physiotherapist.interface';
 
 @Component({
   selector: 'app-physiotherapist-detail',
@@ -16,8 +15,8 @@ export class PhysiotherapistDetailComponent implements OnInit {
   private newPhysiotherapist = false;
 
   enabledOptions = [
-    {id: true, text: 'Sì'},
-    {id: false, text: 'No'}
+    { id: true, text: 'Sì' },
+    { id: false, text: 'No' }
   ];
 
   private physiotherapist: PhysiotherapistInterface;
@@ -29,7 +28,7 @@ export class PhysiotherapistDetailComponent implements OnInit {
     enabled: new FormControl()
   });
 
-  constructor(private physiotherapistService: PhysiotherapistService,private route: ActivatedRoute, private router: Router) { }
+  constructor(private physiotherapistService: PhysiotherapistService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.physiotherapist = new Physiotherapist();

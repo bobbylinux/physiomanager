@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DoctorService} from './../../services/doctor.service';
+import {DoctorService} from '../../services/registers/doctor.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteDoctorComponent} from './delete/delete-doctor.component';
 import {Router} from '@angular/router';

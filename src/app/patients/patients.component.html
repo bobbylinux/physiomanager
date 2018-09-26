@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 offset-1">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Ricerca Paziente</h5>
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="row">
-    <div *ngIf="searched" class="col-md-10">
+    <div *ngIf="searched" class="col-md-10 offset-1">
       <div class="card">
         <div class="card-body">
           <a class="btn btn-warning" [routerLink]="['/add-patient']"><i class="now-ui-icons ui-1_simple-add"></i> Aggiungi
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="row" *ngIf="searched">
-    <div class="col-md-10">
+    <div class="col-md-10 offset-1">
       <div *ngIf="patients.length > 0" class="card">
         <div class="card-header">
           <h5 class="title">Lista Pazienti</h5>

@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 offset-1">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Dati Anagrafici</h5>
@@ -101,7 +101,7 @@
   </div>
   <div *ngIf="newPlan">
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10 offset-1">
         <div class="card">
           <div class="card-header">
             <div class="row">
@@ -118,7 +118,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10 offset-1">
         <div class="card">
           <div class="card-header">
             <div class="row">
@@ -134,7 +134,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10 offset-1">
         <div class="card">
           <div class="card-body">
             <app-plan-sessions [sessions]="sessions" [session]="session"></app-plan-sessions>
@@ -144,7 +144,7 @@
     </div>
   </div>
   <div class="row" *ngIf="!newPlan">
-    <div class="col-md-10">
+    <div class="col-md-10 offset-1">
       <div class="card">
         <div class="card-header">
           <div class="row">

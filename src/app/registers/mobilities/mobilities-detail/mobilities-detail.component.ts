@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Discipline} from '../../../classes/discipline';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MobilityService} from '../../../services/mobility.service';
 import {Mobility} from '../../../classes/mobility';

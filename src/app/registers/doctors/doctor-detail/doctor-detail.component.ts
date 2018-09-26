@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DoctorService } from '../../../services/doctor.service';
+import { DoctorService } from '../../../services/registers/doctor.service';
 import { Doctor } from '../../../classes/doctor';
-import { DisciplineService } from '../../../services/registers/discipline.service';
-import { DisciplineInterface } from '../../../interfaces/discipline.interface';
 import { DoctorInterface } from '../../../interfaces/doctor.interface';
 
 @Component({
@@ -22,33 +20,21 @@ export class DoctorDetailComponent implements OnInit {
   ];
 
   private doctor: DoctorInterface;
-  private disciplines: DisciplineInterface[];
 
   formGroup = new FormGroup({
     id: new FormControl(),
     last_name: new FormControl(),
     first_name: new FormControl(),
-    discipline: new FormControl(),
     enabled: new FormControl()
   });
 
-  constructor(private doctorService: DoctorService, private disciplineService: DisciplineService, private route: ActivatedRoute, private router: Router) {
+  constructor(private doctorService: DoctorService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
     this.doctor = new Doctor();
     this.route.params.subscribe(
       (params) => {
-        this.disciplineService.getAll('').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.disciplines = response['data'];
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
         if (!params.id) {
           this.newDoctor = true;
           return;
@@ -62,7 +48,6 @@ export class DoctorDetailComponent implements OnInit {
                 id: new FormControl(this.doctor.id),
                 last_name: new FormControl(this.doctor.last_name),
                 first_name: new FormControl(this.doctor.first_name),
-                discipline: new FormControl(this.doctor.discipline_id),
                 enabled: new FormControl(this.doctor.enabled)
               });
             }
@@ -84,10 +69,6 @@ export class DoctorDetailComponent implements OnInit {
     return this.formGroup.get('first_name');
   }
 
-  get discipline() {
-    return this.formGroup.get('discipline');
-  }
-
   get enabled() {
     return this.formGroup.get('enabled');
   }
@@ -95,12 +76,10 @@ export class DoctorDetailComponent implements OnInit {
   addDoctor() {
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
-    const discipline_id = this.discipline.value;
     const enabled = this.enabled.value === 'true' ? true : false;
     const doctor = new Doctor();
     doctor.last_name = last_name;
     doctor.first_name = first_name;
-    doctor.discipline_id = discipline_id;
     doctor.enabled = enabled;
 
     this.doctorService.create(doctor).subscribe(
@@ -114,13 +93,11 @@ export class DoctorDetailComponent implements OnInit {
     const id = this.id.value;
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
-    const discipline_id = this.discipline.value;
     const enabled = this.enabled.value;
     const doctor = new Doctor();
     doctor.id = id;
     doctor.last_name = last_name;
     doctor.first_name = first_name;
-    doctor.discipline_id = discipline_id;
     doctor.enabled = enabled === 'true' ? true : false;
 
     this.doctorService.update(doctor).subscribe(
