@@ -3,4 +3,5 @@ export interface PatientDetailInterface {
     city: string;
     phone_number: string;
     email: string;
+    doctor_id: number;
 }

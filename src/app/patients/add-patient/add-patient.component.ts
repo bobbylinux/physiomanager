@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../classes/patient';
 import { PatientDetail } from '../../classes/patient-detail';
+import { DoctorService } from './../../services/registers/doctor.service';
+import { DoctorInterface } from './../../interfaces/doctor.interface';
 
 @Component({
   selector: 'app-add-patient',
@@ -18,6 +20,8 @@ export class AddPatientComponent implements OnInit {
     { id: 'F', text: 'Femmina' }
   ];
 
+  doctors: DoctorInterface[];
+
   formGroup = new FormGroup({
     id: new FormControl(),
     last_name: new FormControl(),
@@ -29,12 +33,19 @@ export class AddPatientComponent implements OnInit {
     address: new FormControl(),
     city: new FormControl(),
     phone_number: new FormControl(),
-    email: new FormControl()
+    email: new FormControl(),
+    doctor_id: new FormControl()
   });
 
-  constructor(private patientService: PatientService, private toastr: ToastrService, private router: Router) { }
+  constructor(private patientService: PatientService, private doctorService: DoctorService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
+    this.doctorService.getAll('').subscribe(
+        response => {
+          this.doctors = response['data'];
+          console.log(this.doctors);
+        }
+    )
   }
 
   get id() {
@@ -81,6 +92,10 @@ export class AddPatientComponent implements OnInit {
     return this.formGroup.get('email');
   }
 
+  get doctorId() {
+    return this.formGroup.get('doctor_id');
+  }
+
   submitForm() {
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
@@ -92,17 +107,20 @@ export class AddPatientComponent implements OnInit {
     const city = this.city.value;
     const phone = this.phone_number.value;
     const email = this.email.value;
+    const doctor_id = this.doctorId.value;
     const patient = new Patient();
     patient.last_name = last_name;
     patient.first_name = first_name;
     patient.tax_code = tax_code;
     patient.birthday = birthday;
     patient.place_of_birth = place_of_birth;
+    patient.sex = sex;
     patient.detail = new PatientDetail();
     patient.detail.address = address;
     patient.detail.city = city;
     patient.detail.phone_number = phone;
     patient.detail.email = email;
+    patient.detail.doctor_id = doctor_id;
 
     this.patientService.create(patient).subscribe(
       () => {

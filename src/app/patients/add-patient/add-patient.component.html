@@ -17,22 +17,20 @@
                     id="last-name" value="">
                 </div>
               </div>
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="first-name">Nome</label>
                   <input type="text" class="form-control" placeholder="Nome" name="first_name" formControlName="first_name"
                     id="first-name" value="">
                 </div>
               </div>
-              <div class="col-md-3 px-1">
+              <div class="col-md-2 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
                   <input type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code" formControlName="tax_code"
                     id="tax-code" value="">
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-md-2 pr-1">
                 <div class="form-group">
                   <label for="sex">Sesso</label>
@@ -41,6 +39,8 @@
                   </select>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-md-2 pr-1">
                 <div class="form-group">
                   <label for="birthday">Data di nascita</label>
@@ -55,33 +55,42 @@
                     formControlName="place_of_birth">
                 </div>
               </div>
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="address">Indirizzo</label>
                   <input type="text" class="form-control" id="address" name="address" placeholder="Indirizzo"
                     formControlName="address">
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="city">Città</label>
                   <input type="text" class="form-control" id="city" name="city" placeholder="Città" formControlName="city">
                 </div>
               </div>
-              <div class="col-md-3 px-1">
+            </div>
+            <div class="row">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="phone-number">Telefono</label>
                   <input type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
                     formControlName="phone_number">
                 </div>
               </div>
-              <div class="col-md-4 px-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="email">E-Mail</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Indirizzo E-Mail"
                     formControlName="email">
+                </div>
+              </div>
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label for="doctor-id">Medico</label>
+                  <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
+                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
+                      {{option.first_name}}</option>
+                  </select>
                 </div>
               </div>
             </div>

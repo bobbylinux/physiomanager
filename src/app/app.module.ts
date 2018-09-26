@@ -30,6 +30,7 @@ import { MatIconModule } from '@angular/material';
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     HttpClientModule,

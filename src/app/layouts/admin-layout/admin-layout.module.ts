@@ -23,6 +23,9 @@ import { SearchResultComponent } from '../../patients/search-result/search-resul
 import { AddPatientComponent } from '../../patients/add-patient/add-patient.component';
 import { PlansComponent } from '../../patients/plans/plans.component';
 import { PlanSessionsComponent } from '../../patients/plans/plan-sessions/plan-sessions.component';
+import { DoctorsComponent } from '../../registers/doctors/doctors.component';
+import { DoctorDetailComponent } from '../../registers/doctors/doctor-detail/doctor-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -46,6 +49,9 @@ CommonModule,
     AddPlanSessionComponent,    
     NewPlanComponent,
     PlanSessionsComponent,
+    DoctorsComponent,
+    DoctorDetailComponent,
+
     UserProfileComponent,
     
     TableListComponent,

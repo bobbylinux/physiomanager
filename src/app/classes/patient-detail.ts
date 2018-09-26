@@ -5,11 +5,13 @@ export class PatientDetail implements PatientDetailInterface {
     city: string;
     phone_number: string;
     email: string;
+    doctor_id: number;
 
     constructor() {
         this.address = '';
         this.city = '';
         this.phone_number = '';
         this.email = '';
+        this.doctor_id = 0;
     }
 }
