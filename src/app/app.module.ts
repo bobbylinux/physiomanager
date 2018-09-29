@@ -11,21 +11,18 @@ import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { PatientService } from './services/patient.service';
-import { PlanService } from './services/plan.service';
-import { WorkResultService } from './services/work-result.service';
-import { MobilityService } from './services/mobility.service';
-import { PainService } from './services/pain.service';
-import { DoctorService } from './services/registers/doctor.service';
-import { PhysiotherapistService } from './services/registers/physiotherapist.service';
-import { ProgramService } from './services/registers/program.service';
 import { HttpClientModule } from '@angular/common/http';
-import { TherapyService } from './services/registers/therapy.service';
-import { SessionService } from './services/session.service';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatDialogModule } from '@angular/material';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { DeleteDoctorComponent } from './registers/doctors/delete/delete-doctor.component';
+import { DeleteMobilityComponent } from './registers/mobilities/delete/delete-mobility.component';
+import { DeletePainComponent } from './registers/pains/delete/delete-pain.component';
+import { DeletePhysiotherapistComponent } from './registers/physiotherapists/delete/delete-physiotherapist.component';
+import { DeleteProgramComponent } from './registers/programs/delete/delete-program.component';
+import { DeleteTherapyComponent } from './registers/therapies/delete/delete-therapy.component';
+import { DeleteWorkResultComponent } from './registers/work-results/delete/delete-work-result.component';
 
 @NgModule({
   imports: [
@@ -38,13 +35,23 @@ import { MatIconModule } from '@angular/material';
     RouterModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-    MatIconModule
-  ],
+    MatIconModule,
+    MatDialogModule
+    ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
+    AdminLayoutComponent,    
+    /*delete*/
+    DeleteDoctorComponent,
+    DeleteMobilityComponent,
+    DeletePainComponent,
+    DeletePhysiotherapistComponent,
+    DeleteProgramComponent,
+    DeleteTherapyComponent,
+    DeleteWorkResultComponent,
+
   ],
-  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService],
-  bootstrap: [AppComponent]
+  entryComponents: [DeleteDoctorComponent, DeleteMobilityComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

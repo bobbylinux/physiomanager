@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, Inject} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {PainInterface} from '../../../interfaces/pain.interface';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
 @Component({
   selector: 'app-delete-pain',
   templateUrl: './delete-pain.component.html',
@@ -13,14 +16,16 @@ export class DeletePainComponent implements OnInit {
 
   @Output() confirmedDelete = new EventEmitter();
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public dialogRef: MatDialogRef<DeletePainComponent>,@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
   }
 
   deletePain() {
-    this.confirmedDelete.emit(this.pain);
-    this.activeModal.close();
+    this.dialogRef.close("delete");
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }

@@ -1,13 +1,13 @@
 <div class="modal-header">
-  <h4 class="modal-title">Elimina Indice di Dolore</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <h5 class="title">Elimina Indice di Dolore</h5>
+  <button type="button" class="close" aria-label="Close" (click)="closeDialog()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <p>Si è sicuri di voler eliminare questo indice di dolore: <strong>"{{pain.description}}"</strong> ? L'operazione è irreversibile</p>
+  <p>Si è sicuri di voler eliminare questo indice di dolore: <strong>"{{data.pain.description}}"</strong> ? L'operazione è irreversibile</p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Annulla</button>
+  <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">Annulla</button>
   <button type="button" class="btn btn-outline-danger" (click)="deletePain()">Elimina</button>
 </div>

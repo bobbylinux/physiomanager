@@ -37,7 +37,22 @@ import { WorkResultDetailComponent } from '../../registers/work-results/work-res
 import { WorkResultsComponent } from './../../registers/work-results/work-results.component';
 import { ProgramsComponent } from './../../registers/programs/programs.component';
 import { ProgramDetailComponent } from './../../registers/programs/program-detail/program-detail.component';
-
+import { DeleteDoctorComponent } from '../../registers/doctors/delete/delete-doctor.component';
+import { DeleteMobilityComponent } from '../../registers/mobilities/delete/delete-mobility.component';
+import { DeletePainComponent } from '../../registers/pains/delete/delete-pain.component';
+import { DeletePhysiotherapistComponent } from '../../registers/physiotherapists/delete/delete-physiotherapist.component';
+import { DeleteProgramComponent } from '../../registers/programs/delete/delete-program.component';
+import { DeleteTherapyComponent } from '../../registers/therapies/delete/delete-therapy.component';
+import { DeleteWorkResultComponent } from '../../registers/work-results/delete/delete-work-result.component';
+import { PlanService } from '../../services/plan.service';
+import { WorkResultService } from '../../services/work-result.service';
+import { MobilityService } from '../../services/mobility.service';
+import { PainService } from '../../services/pain.service';
+import { DoctorService } from '../../services/registers/doctor.service';
+import { PhysiotherapistService } from '../../services/registers/physiotherapist.service';
+import { ProgramService } from '../../services/registers/program.service';
+import { TherapyService } from '../../services/registers/therapy.service';
+import { SessionService } from '../../services/session.service';
 
 @NgModule({
   imports: [
@@ -76,13 +91,13 @@ import { ProgramDetailComponent } from './../../registers/programs/program-detai
     ProgramsComponent,
     ProgramDetailComponent,
     UserProfileComponent,
-
     TableListComponent,
     TypographyComponent,
     IconsComponent,
     NotificationsComponent,
   ],
-  providers: [PatientService]
+ 
+  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService],
 })
 
 export class AdminLayoutModule { }

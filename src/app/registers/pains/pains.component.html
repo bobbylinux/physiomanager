@@ -5,40 +5,46 @@
     <div class="col-md-10 offset-1">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Dolore</h5>
+          <div class="row">
+            <div class="col-md-5">
+              <h5 class="title">Dolore</h5>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-warning" [routerLink]="['/pains/new']"><i class="now-ui-icons ui-1_simple-add"></i> Aggiungi un dolore</button>
+            </div>
+          </div>
         </div>
         <div class="card-body">
-          <!--fa name="plus-circle" size="lg" class="fa add-element" routerLink="/pains/new" placement="top" ngbTooltip="Aggiungi dolore"></fa>-->
-        </div>
-        <div class="col-md-11">
-          <div class="table-responsive" *ngIf="pains.length > 0">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Descrizione</th>
-                  <th scope="col">Abilitato</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let pain of pains">
-                  <td scope="row">{{pain.id}}</td>
-                  <td scope="row">{{pain.description}}</td>
-                  <td scope="row">
-                    <i *ngIf="pain.enabled" class="material-icons">check</i>
-                    <i *ngIf="!pain.enabled" class="material-icons">close</i>
-                  </td>
-                  <td>
-                    <i class="material-icons" (click)="editPain(pain)">edit</i>
-                    <i class="material-icons" (click)="deleteConfirmation(pain)">delete</i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div *ngIf="pains.length == 0" class="register-empty-body">
-            <h5 class="text-center">Ancora nessun dolore registrato</h5>
+          <div class="col-md-11">
+            <div class="table-responsive" *ngIf="pains.length > 0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Abilitato</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pain of pains">
+                    <td scope="row">{{pain.id}}</td>
+                    <td scope="row">{{pain.description}}</td>
+                    <td scope="row">
+                      <i *ngIf="pain.enabled" class="material-icons">check</i>
+                      <i *ngIf="!pain.enabled" class="material-icons">close</i>
+                    </td>
+                    <td>
+                      <i class="material-icons" (click)="editPain(pain)">edit</i>
+                      <i class="material-icons" (click)="deleteConfirmation(pain)">delete</i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="pains.length == 0" class="register-empty-body">
+              <h5 class="text-center">Ancora nessun dolore registrato</h5>
+            </div>
           </div>
         </div>
       </div>
