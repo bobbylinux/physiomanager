@@ -25,11 +25,23 @@ import { PlansComponent } from '../../patients/plans/plans.component';
 import { PlanSessionsComponent } from '../../patients/plans/plan-sessions/plan-sessions.component';
 import { DoctorsComponent } from '../../registers/doctors/doctors.component';
 import { DoctorDetailComponent } from '../../registers/doctors/doctor-detail/doctor-detail.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MobilitiesComponent } from '../../registers/mobilities/mobilities.component';
+import { MobilitiesDetailComponent } from '../../registers/mobilities/mobilities-detail/mobilities-detail.component';
+import { PainDetailComponent } from '../../registers/pains/pain-detail/pain-detail.component';
+import { PainsComponent } from './../../registers/pains/pains.component';
+import { PhysiotherapistsComponent } from './../../registers/physiotherapists/physiotherapists.component';
+import { PhysiotherapistDetailComponent } from './../../registers/physiotherapists/physiotherapist-detail/physiotherapist-detail.component';
+import { TherapiesComponent } from '../../registers/therapies/therapies.component';
+import { TherapyDetailComponent } from '../../registers/therapies/therapy-detail/therapy-detail.component';
+import { WorkResultDetailComponent } from '../../registers/work-results/work-result-detail/work-result-detail.component';
+import { WorkResultsComponent } from './../../registers/work-results/work-results.component';
+import { ProgramsComponent } from './../../registers/programs/programs.component';
+import { ProgramDetailComponent } from './../../registers/programs/program-detail/program-detail.component';
+
 
 @NgModule({
   imports: [
-CommonModule,
+    CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
@@ -46,14 +58,25 @@ CommonModule,
     AddPatientComponent,
     PlansComponent,
     PlanDetailComponent,
-    AddPlanSessionComponent,    
+    AddPlanSessionComponent,
     NewPlanComponent,
     PlanSessionsComponent,
     DoctorsComponent,
     DoctorDetailComponent,
-
+    MobilitiesComponent,
+    MobilitiesDetailComponent,
+    PainsComponent,
+    PainDetailComponent,
+    PhysiotherapistsComponent,
+    PhysiotherapistDetailComponent,
+    TherapiesComponent,
+    TherapyDetailComponent,
+    WorkResultsComponent,
+    WorkResultDetailComponent,
+    ProgramsComponent,
+    ProgramDetailComponent,
     UserProfileComponent,
-    
+
     TableListComponent,
     TypographyComponent,
     IconsComponent,
@@ -62,4 +85,4 @@ CommonModule,
   providers: [PatientService]
 })
 
-export class AdminLayoutModule {}
+export class AdminLayoutModule { }

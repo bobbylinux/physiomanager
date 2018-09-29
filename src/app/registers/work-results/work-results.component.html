@@ -1,33 +1,48 @@
-<div class="register-header">
-  <h4>Risultati del Lavoro</h4>
-  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/work_results/new" placement="top" ngbTooltip="Aggiungi risultato del lavoro"></fa>
+<div class="panel-header panel-header-sm">
 </div>
-<div *ngIf="workResults.length > 0">
-  <table class="table table-hover table-bordered">
-    <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Descrizione</th>
-      <th scope="col">Abilitato</th>
-      <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let workResult of workResults">
-      <td scope="row">{{workResult.id}}</td>
-      <td scope="row">{{workResult.description}}</td>
-      <td scope="row">
-        <fa *ngIf="workResult.enabled" name="check" size="lg" class="fa enabled"></fa>
-        <fa *ngIf="!workResult.enabled" name="times" size="lg" class="fa disabled"></fa>
-      </td>
-      <td>
-        <fa name="pencil" size="lg" class="fa edit-element" (click)="editWorkResult(workResult)" placement="top" ngbTooltip="Modifica risultato del lavoro"></fa>
-        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(workResult)" placement="top" ngbTooltip="Elimina risultato del lavoro"></fa>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="workResults.length == 0" class="register-empty-body">
-  <h5 class="text-center">Ancora nessun risultato del lavoro registrato</h5>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10 offset-1">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Risultati del lavoro</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-11">
+              <div class="table-responsive" *ngIf="workResults.length > 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Descrizione</th>
+                      <th scope="col">Abilitato</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let workResult of workResults">
+                      <td scope="row">{{workResult.id}}</td>
+                      <td scope="row">{{workResult.description}}</td>
+                      <td scope="row">
+                        <i *ngIf="workResult.enabled" class="material-icons">check</i>
+                        <i *ngIf="!workResult.enabled" class="material-icons">close</i>
+                      </td>
+                      <td>
+                        <i class="material-icons" (click)="editWorkResult(workResult)">edit</i>
+                        <i class="material-icons" (click)="deleteConfirmation(workResult)">delete</i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="workResults.length == 0" class="register-empty-body">
+                <h5 class="text-center">Ancora nessun risultato del lavoro registrato</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

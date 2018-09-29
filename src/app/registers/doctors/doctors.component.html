@@ -8,7 +8,6 @@
           <h5 class="title">Medici</h5>
         </div>
         <div class="card-body">
-          <!--<fa name="plus-circle" size="lg" class="fa add-element" routerLink="/doctors/new" placement="top" ngbTooltip="Aggiungi medico"></fa>-->
           <div class="row">
             <div class="col-md-11">
               <div class="table-responsive" *ngIf="doctors.length > 0">
@@ -34,8 +33,6 @@
                       <td>
                         <i class="material-icons" (click)="editDoctor(doctor)">edit</i>
                         <i class="material-icons" (click)="deleteConfirmation(doctor)">delete</i>
-                        <!--<fa name="pencil" size="lg" class="fa edit-element" (click)="editDoctor(doctor)" placement="top" ngbTooltip="Modifica medico"></fa>-->
-                        <!--<fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(doctor)" placement="top" ngbTooltip="Elimina medico"></fa>-->
                       </td>
                     </tr>
                   </tbody>

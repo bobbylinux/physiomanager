@@ -1,33 +1,47 @@
-<div class="register-header">
-  <h4>Mobilità</h4>
-  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/mobilities/new" placement="top" ngbTooltip="Aggiungi mobilità"></fa>
+<div class="panel-header panel-header-sm">
 </div>
-<div *ngIf="mobilities.length > 0">
-  <table class="table table-hover table-bordered">
-    <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Descrizione</th>
-      <th scope="col">Abilitato</th>
-      <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let mobility of mobilities">
-      <td scope="row">{{mobility.id}}</td>
-      <td scope="row">{{mobility.description}}</td>
-      <td scope="row">
-        <fa *ngIf="mobility.enabled" name="check" size="lg" class="fa enabled"></fa>
-        <fa *ngIf="!mobility.enabled" name="times" size="lg" class="fa disabled"></fa>
-      </td>
-      <td>
-        <fa name="pencil" size="lg" class="fa edit-element" (click)="editMobility(mobility)" placement="top" ngbTooltip="Modifica mobilità"></fa>
-        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(mobility)" placement="top" ngbTooltip="Elimina mobilità"></fa>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="mobilities.length == 0" class="register-empty-body">
-  <h5 class="text-center">Ancora nessuna mobilità registrata</h5>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10 offset-1">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Mobilità</h5>
+        </div>
+        <div class="card-body">
+          <!--fa name="plus-circle" size="lg" class="fa add-element" routerLink="/mobilities/new" placement="top" ngbTooltip="Aggiungi mobilità"></fa>-->
+        </div>
+        <div class="col-md-11">
+          <div class="table-responsive" *ngIf="mobilities.length > 0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Descrizione</th>
+                  <th scope="col">Abilitato</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let mobility of mobilities">
+                  <td scope="row">{{mobility.id}}</td>
+                  <td scope="row">{{mobility.description}}</td>
+                  <td scope="row">
+                    <i *ngIf="mobility.enabled" class="material-icons">check</i>
+                    <i *ngIf="!mobility.enabled" class="material-icons">close</i>
+                  </td>
+                  <td>
+                    <i class="material-icons" (click)="editMobility(mobility)">edit</i>
+                    <i class="material-icons" (click)="deleteConfirmation(mobility)">delete</i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="mobilities.length == 0" class="register-empty-body">
+            <h5 class="text-center">Ancora nessuna mobilità registrata</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

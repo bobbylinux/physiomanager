@@ -1,33 +1,48 @@
-<div class="register-header">
-  <h4>Programmi</h4>
-  <fa name="plus-circle" size="lg" class="fa add-element" routerLink="/programs/new" placement="top" ngbTooltip="Aggiungi programma"></fa>
+<div class="panel-header panel-header-sm">
 </div>
-<div *ngIf="programs.length > 0">
-  <table class="table table-hover table-bordered">
-    <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Titolo</th>
-      <th scope="col">Abilitato</th>
-      <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let program of programs">
-      <td scope="row">{{program.id}}</td>
-      <td scope="row">{{program.title}}</td>
-      <td scope="row">
-        <fa *ngIf="program.enabled" name="check" size="lg" class="fa enabled"></fa>
-        <fa *ngIf="!program.enabled" name="times" size="lg" class="fa disabled"></fa>
-      </td>
-      <td>
-        <fa name="pencil" size="lg" class="fa edit-element" (click)="editProgram(program)" placement="top" ngbTooltip="Modifica programma"></fa>
-        <fa name="trash" size="lg" class="fa delete-element" (click)="deleteConfirmation(program)" placement="top" ngbTooltip="Elimina programma"></fa>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="programs.length == 0" class="register-empty-body">
-  <h5 class="text-center">Ancora nessuna programma registrato</h5>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10 offset-1">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Programmi</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-11">
+              <div class="table-responsive" *ngIf="programs.length > 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Titolo</th>
+                      <th scope="col">Abilitato</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let program of programs">
+                      <td scope="row">{{program.id}}</td>
+                      <td scope="row">{{program.title}}</td>
+                      <td scope="row">
+                        <i *ngIf="program.enabled" class="material-icons">check</i>
+                        <i *ngIf="!program.enabled" class="material-icons">close</i>
+                      </td>
+                      <td>
+                        <i class="material-icons" (click)="editProgram(program)">edit</i>
+                        <i class="material-icons" (click)="deleteConfirmation(program)">delete</i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="programs.length == 0" class="register-empty-body">
+                <h5 class="text-center">Ancora nessuna programma registrato</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
