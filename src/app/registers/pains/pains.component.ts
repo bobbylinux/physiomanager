@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { PainService } from '../../services/pain.service';
 import { PainInterface } from '../../interfaces/pain.interface';
@@ -52,7 +51,6 @@ export class PainsComponent implements OnInit {
   deletePain(pain: PainInterface) {
     this.painService.delete(pain.id).subscribe(
       response => {
-        console.log(response);
         const idx = this.pains.indexOf(pain);
         this.pains.splice(idx, 1);
       }

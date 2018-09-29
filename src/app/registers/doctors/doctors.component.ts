@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../../services/registers/doctor.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteDoctorComponent} from './delete/delete-doctor.component';
 import {Router} from '@angular/router';
 import { Doctor } from '../../classes/doctor';
+import { DoctorInterface } from './../../interfaces/doctor.interface';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-doctors',
@@ -13,7 +14,7 @@ import { Doctor } from '../../classes/doctor';
 export class DoctorsComponent implements OnInit {
   doctors: Doctor[] = []; 
 
-  constructor(private modalService: NgbModal, private doctorService: DoctorService, private route: Router) {
+  constructor(private dialog: MatDialog, private doctorService: DoctorService, private route: Router) {
   }
 
    
@@ -29,17 +30,21 @@ export class DoctorsComponent implements OnInit {
     this.route.navigate(['doctors', doctor.id, 'edit']);
   }
 
-  deleteConfirmation(doctor: Doctor) {
-    console.log('deleteConfirmation');
-    const modalRef = this.modalService.open(DeleteDoctorComponent);
-    modalRef.componentInstance.doctor = doctor;
-    modalRef.componentInstance.confirmedDelete.subscribe(($event) => {
-      this.deleteDoctor($event);
+  deleteConfirmation(doctor: DoctorInterface) {
+    const dialogRef = this.dialog.open(DeleteDoctorComponent, {
+      data: {
+        doctor: doctor
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.deleteDoctor(doctor);
+      }
     });
   }
 
-  deleteDoctor(doctor: Doctor) {
-    console.log(doctor);
+  deleteDoctor(doctor: DoctorInterface) {
     this.doctorService.delete(doctor.id).subscribe(
       response => {
         const idx = this.doctors.indexOf(doctor);
