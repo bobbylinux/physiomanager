@@ -5,42 +5,49 @@
     <div class="col-md-10 offset-1">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Fisioterapisti</h5>
+          <div class="row">
+            <div class="col-md-5">
+              <h5 class="title">Fisioterapisti</h5>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-warning" [routerLink]="['/physiotherapists/new']"><i class="now-ui-icons ui-1_simple-add"></i>
+                Aggiungi un fisioterapista</button>
+            </div>
+          </div>
         </div>
         <div class="card-body">
-          <!--fa name="plus-circle" size="lg" class="fa add-element" routerLink="/physiotherapists/new" placement="top" ngbTooltip="Aggiungi fisioterapista"></fa>-->
-        </div>
-        <div class="col-md-11">
-          <div class="table-responsive" *ngIf="physiotherapists.length > 0">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Cognome</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Attivo</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let physiotherapist of physiotherapists">
-                  <td scope="row">{{physiotherapist.id}}</td>
-                  <td scope="row">{{physiotherapist.last_name}}</td>
-                  <td scope="row">{{physiotherapist.first_name}}</td>
-                  <td scope="row">
-                    <i *ngIf="physiotherapist.enabled" class="material-icons">check</i>
-                    <i *ngIf="!physiotherapist.enabled" class="material-icons">close</i>
-                  </td>
-                  <td>
-                    <i class="material-icons" (click)="editPhysiotherapist(physiotherapist)">edit</i>
-                    <i class="material-icons" (click)="deleteConfirmation(physiotherapist)">delete</i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div *ngIf="physiotherapists.length == 0" class="register-empty-body">
-            <h5 class="text-center">Ancora nessuna fisioterapista registrato</h5>
+          <div class="col-md-11">
+            <div class="table-responsive" *ngIf="physiotherapists.length > 0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Cognome</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Attivo</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let physiotherapist of physiotherapists">
+                    <td scope="row">{{physiotherapist.id}}</td>
+                    <td scope="row">{{physiotherapist.last_name}}</td>
+                    <td scope="row">{{physiotherapist.first_name}}</td>
+                    <td scope="row">
+                      <i *ngIf="physiotherapist.enabled" class="material-icons">check</i>
+                      <i *ngIf="!physiotherapist.enabled" class="material-icons">close</i>
+                    </td>
+                    <td>
+                      <i class="material-icons" (click)="editPhysiotherapist(physiotherapist)">edit</i>
+                      <i class="material-icons" (click)="deleteConfirmation(physiotherapist)">delete</i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="physiotherapists.length == 0" class="register-empty-body">
+              <h5 class="text-center">Ancora nessuna fisioterapista registrato</h5>
+            </div>
           </div>
         </div>
       </div>

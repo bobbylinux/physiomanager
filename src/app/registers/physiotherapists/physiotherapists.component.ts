@@ -4,6 +4,7 @@ import {PhysiotherapistService} from '../../services/registers/physiotherapist.s
 import {DeletePhysiotherapistComponent} from './delete/delete-physiotherapist.component';
 import {PhysiotherapistInterface} from '../../interfaces/physiotherapist.interface';
 import {Router} from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-physiotherapists',
@@ -12,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class PhysiotherapistsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private physiotherapistService: PhysiotherapistService, private route: Router) {
+  constructor(private dialog: MatDialog, private physiotherapistService: PhysiotherapistService, private route: Router) {
   }
 
   private physiotherapists: PhysiotherapistInterface[] = [];
@@ -35,16 +36,22 @@ export class PhysiotherapistsComponent implements OnInit {
   }
 
   deleteConfirmation(physiotherapist: PhysiotherapistInterface) {
-    const modalRef = this.modalService.open(DeletePhysiotherapistComponent);
-    modalRef.componentInstance.physiotherapist = physiotherapist;
-    modalRef.componentInstance.confirmedDelete.subscribe(($event) => {
-      this.deletePhysiotherapist($event);
+    const dialogRef = this.dialog.open(DeletePhysiotherapistComponent, {
+      data: {
+        physiotherapist: physiotherapist
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.deletePhysiotherapist(physiotherapist);
+      }
     });
   }
 
   deletePhysiotherapist(physiotherapist: PhysiotherapistInterface) {
     this.physiotherapistService.delete(physiotherapist.id).subscribe(
-      () => {
+      response => {
         const idx = this.physiotherapists.indexOf(physiotherapist);
         this.physiotherapists.splice(idx, 1);
       }
