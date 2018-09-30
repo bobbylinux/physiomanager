@@ -5,40 +5,47 @@
     <div class="col-md-10 offset-1">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Mobilità</h5>
+          <div class="row">
+            <div class="col-md-5">
+              <h5 class="title">Mobilità</h5>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-warning" [routerLink]="['/mobilities/new']"><i class="now-ui-icons ui-1_simple-add"></i>
+                Aggiungi una mobilità</button>
+            </div>
+          </div>
         </div>
         <div class="card-body">
-          <!--fa name="plus-circle" size="lg" class="fa add-element" routerLink="/mobilities/new" placement="top" ngbTooltip="Aggiungi mobilità"></fa>-->
-        </div>
-        <div class="col-md-11">
-          <div class="table-responsive" *ngIf="mobilities.length > 0">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Descrizione</th>
-                  <th scope="col">Abilitato</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let mobility of mobilities">
-                  <td scope="row">{{mobility.id}}</td>
-                  <td scope="row">{{mobility.description}}</td>
-                  <td scope="row">
-                    <i *ngIf="mobility.enabled" class="material-icons">check</i>
-                    <i *ngIf="!mobility.enabled" class="material-icons">close</i>
-                  </td>
-                  <td>
-                    <i class="material-icons" (click)="editMobility(mobility)">edit</i>
-                    <i class="material-icons" (click)="deleteConfirmation(mobility)">delete</i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div *ngIf="mobilities.length == 0" class="register-empty-body">
-            <h5 class="text-center">Ancora nessuna mobilità registrata</h5>
+          <div class="col-md-11">
+            <div class="table-responsive" *ngIf="mobilities.length > 0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Abilitato</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let mobility of mobilities">
+                    <td scope="row">{{mobility.id}}</td>
+                    <td scope="row">{{mobility.description}}</td>
+                    <td scope="row">
+                      <i *ngIf="mobility.enabled" class="material-icons">check</i>
+                      <i *ngIf="!mobility.enabled" class="material-icons">close</i>
+                    </td>
+                    <td>
+                      <i class="material-icons" (click)="editMobility(mobility)">edit</i>
+                      <i class="material-icons" (click)="deleteConfirmation(mobility)">delete</i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="mobilities.length == 0" class="register-empty-body">
+              <h5 class="text-center">Ancora nessuna mobilità registrata</h5>
+            </div>
           </div>
         </div>
       </div>

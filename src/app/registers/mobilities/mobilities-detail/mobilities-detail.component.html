@@ -9,20 +9,28 @@
           <h5 class="title" *ngIf="!newMobility" class="text-center">Modifica Mobilità</h5>
         </div>
         <div class="card-body">
-          <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+          <form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="submitForm()">
             <div class="form-group">
               <label for="description">Descrizione</label>
-              <input type="text" class="form-control" id="description" name="description" placeholder="Descrizione"
+              <input required type="text" class="form-control" id="description" name="description" placeholder="Descrizione"
                 formControlName="description">
+              <div *ngIf="description.touched && description.dirty && description.invalid" class="alert-danger">
+                Il campo descrizione è obbligatorio
+              </div>
             </div>
             <div class="form-group">
               <label for="enabled">Abilitato</label>
-              <select class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled">
+              <select required class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled">
                 <option *ngFor="let option of enabledOptions" [value]="option.id">{{option.text}}</option>
               </select>
+              <div *ngIf="enabled.touched && enabled.dirty && enabled.invalid" class="alert-danger">
+                Il campo abilitato è obbligatorio
+              </div>
             </div>
-            <input type="hidden" formControlName="id" id="id" name="id">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Salva</button>
+            <div class="form-group">
+              <input type="hidden" formControlName="id" id="id" name="id">
+              <button type="submit" class="btn btn-block btn-warning" [disabled]="form.invalid">Salva</button>
+            </div>
           </form>
         </div>
       </div>

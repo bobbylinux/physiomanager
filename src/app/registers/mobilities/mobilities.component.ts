@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProgramService} from '../../services/registers/program.service';
-import {Program} from '../../classes/program';
-import {Router} from '@angular/router';
-import {MobilityService} from '../../services/mobility.service';
-import {MobilityInterface} from '../../interfaces/mobility.interface';
-import {ProgramInterface} from '../../interfaces/program.interface';
-import {DeleteProgramComponent} from '../programs/delete/delete-program.component';
-import {DeleteMobilityComponent} from './delete/delete-mobility.component';
+import { Router } from '@angular/router';
+import { MobilityService } from '../../services/mobility.service';
+import { MobilityInterface } from '../../interfaces/mobility.interface';
+import { DeleteMobilityComponent } from './delete/delete-mobility.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-mobilities',
@@ -16,7 +12,7 @@ import {DeleteMobilityComponent} from './delete/delete-mobility.component';
 })
 export class MobilitiesComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private mobilityService: MobilityService, private route: Router) {
+  constructor(private dialog: MatDialog, private mobilityService: MobilityService, private route: Router) {
   }
 
   private mobilities: MobilityInterface[] = [];
@@ -39,16 +35,22 @@ export class MobilitiesComponent implements OnInit {
   }
 
   deleteConfirmation(mobility: MobilityInterface) {
-    const modalRef = this.modalService.open(DeleteMobilityComponent);
-    modalRef.componentInstance.mobility = mobility;
-    modalRef.componentInstance.confirmedDelete.subscribe(($event) => {
-      this.deleteMobility($event);
+    const dialogRef = this.dialog.open(DeleteMobilityComponent, {
+      data: {
+        mobility: mobility
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.deleteMobility(mobility);
+      }
     });
   }
 
   deleteMobility(mobility: MobilityInterface) {
     this.mobilityService.delete(mobility.id).subscribe(
-      response => {
+      () => {
         const idx = this.mobilities.indexOf(mobility);
         this.mobilities.splice(idx, 1);
       }

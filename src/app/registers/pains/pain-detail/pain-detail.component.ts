@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Mobility} from '../../../classes/mobility';
-import {MobilityInterface} from '../../../interfaces/mobility.interface';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {PainInterface} from '../../../interfaces/pain.interface';
-import {PainService} from '../../../services/pain.service';
-import {Pain} from '../../../classes/pain';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PainInterface } from '../../../interfaces/pain.interface';
+import { PainService } from '../../../services/pain.service';
+import { Pain } from '../../../classes/pain';
 
 @Component({
   selector: 'app-pain-detail',
@@ -16,8 +14,8 @@ export class PainDetailComponent implements OnInit {
   private newPain = false;
 
   enabledOptions = [
-    {id: true, text: 'Sì'},
-    {id: false, text: 'No'}
+    { id: true, text: 'Sì' },
+    { id: false, text: 'No' }
   ];
 
   private pain: PainInterface;
