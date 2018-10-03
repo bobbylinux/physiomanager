@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Program} from '../../../classes/program';
-import {Therapy} from '../../../classes/therapy';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogData } from '../../pains/delete/delete-pain.component';
 
 @Component({
   selector: 'app-delete-therapy',
@@ -10,18 +9,16 @@ import {Therapy} from '../../../classes/therapy';
 })
 export class DeleteTherapyComponent implements OnInit {
 
-  @Input() therapy: Therapy;
-
-  @Output() confirmedDelete = new EventEmitter();
-
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public dialogRef: MatDialogRef<DeleteTherapyComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
   }
 
   deleteTherapy() {
-    this.confirmedDelete.emit(this.therapy);
-    this.activeModal.close();
+    this.dialogRef.close("delete");
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }

@@ -1,13 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ModalComponent} from '../../modals/modal/modal.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Therapy} from '../../classes/therapy';
-import {TherapyService} from '../../services/registers/therapy.service';
-import {DeleteProgramComponent} from '../programs/delete/delete-program.component';
-import {Program} from '../../classes/program';
-import {DeleteTherapyComponent} from './delete/delete-therapy.component';
-import {TherapyInterface} from '../../interfaces/therapy.interface';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Therapy } from '../../classes/therapy';
+import { TherapyService } from '../../services/registers/therapy.service';
+import { TherapyInterface } from '../../interfaces/therapy.interface';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { DeleteTherapyComponent } from './delete/delete-therapy.component';
 
 @Component({
   selector: 'app-therapies',
@@ -16,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class TherapiesComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private therapyService: TherapyService, private route: Router) {
+  constructor(private dialog: MatDialog, private therapyService: TherapyService, private route: Router) {
   }
 
   private therapies: Therapy[] = [];
@@ -39,16 +36,22 @@ export class TherapiesComponent implements OnInit {
   }
 
   deleteConfirmation(therapy: TherapyInterface) {
-    const modalRef = this.modalService.open(DeleteTherapyComponent);
-    modalRef.componentInstance.therapy = therapy;
-    modalRef.componentInstance.confirmedDelete.subscribe(($event) => {
-      this.deletePhysiotherapist($event);
+    const dialogRef = this.dialog.open(DeleteTherapyComponent, {
+      data: {
+        therapy: therapy
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.deleteTherapy(therapy);
+      }
     });
   }
 
-  deletePhysiotherapist(therapy: Therapy) {
+  deleteTherapy(therapy: TherapyInterface) {
     this.therapyService.delete(therapy.id).subscribe(
-      () => {
+      response => {
         const idx = this.therapies.indexOf(therapy);
         this.therapies.splice(idx, 1);
       }

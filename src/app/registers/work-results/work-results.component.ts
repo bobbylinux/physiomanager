@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
-import {WorkResultInterface} from '../../interfaces/work-result.interface';
-import {DeleteWorkResultComponent} from './delete/delete-work-result.component';
-import {WorkResultService} from '../../services/work-result.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { WorkResultInterface } from '../../interfaces/work-result.interface';
+import { DeleteWorkResultComponent } from './delete/delete-work-result.component';
+import { WorkResultService } from '../../services/work-result.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-work-results',
@@ -12,7 +12,7 @@ import {WorkResultService} from '../../services/work-result.service';
 })
 export class WorkResultsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private workResultService: WorkResultService, private route: Router) {
+  constructor(private dialog: MatDialog, private workResultService: WorkResultService, private route: Router) {
   }
 
   private workResults: WorkResultInterface[] = [];
@@ -35,14 +35,20 @@ export class WorkResultsComponent implements OnInit {
   }
 
   deleteConfirmation(workResult: WorkResultInterface) {
-    const modalRef = this.modalService.open(DeleteWorkResultComponent);
-    modalRef.componentInstance.workResult = workResult;
-    modalRef.componentInstance.confirmedDelete.subscribe(($event) => {
-      this.deleteWorkResult($event);
+    const dialogRef = this.dialog.open(DeleteWorkResultComponent, {
+      data: {
+        workResult: workResult
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.deleteTherapy(workResult);
+      }
     });
   }
 
-  deleteWorkResult(workResult: WorkResultInterface) {
+  deleteTherapy(workResult: WorkResultInterface) {
     this.workResultService.delete(workResult.id).subscribe(
       () => {
         const idx = this.workResults.indexOf(workResult);

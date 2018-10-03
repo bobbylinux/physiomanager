@@ -15,7 +15,7 @@ export class DeletePhysiotherapistComponent implements OnInit {
   ngOnInit() {
   }
 
-  deletePain() {
+  deletePhysiotherapist() {
     this.dialogRef.close("delete");
   }
 

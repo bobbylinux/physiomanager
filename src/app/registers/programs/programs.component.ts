@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProgramService} from '../../services/registers/program.service';
-import {Program} from '../../classes/program';
-import {DeleteProgramComponent} from './delete/delete-program.component';
-import {ProgramInterface} from '../../interfaces/program.interface';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ProgramService } from '../../services/registers/program.service';
+import { Program } from '../../classes/program';
+import { DeleteProgramComponent } from './delete/delete-program.component';
+import { ProgramInterface } from '../../interfaces/program.interface';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-programs',
@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class ProgramsComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private programService: ProgramService, private route: Router) {
+  constructor(private dialog: MatDialog, private programService: ProgramService, private route: Router) {
   }
 
   private programs: Program[] = [];
@@ -36,14 +36,20 @@ export class ProgramsComponent implements OnInit {
   }
 
   deleteConfirmation(program: ProgramInterface) {
-    const modalRef = this.modalService.open(DeleteProgramComponent);
-    modalRef.componentInstance.program = program;
-    modalRef.componentInstance.confirmedDelete.subscribe(($event) => {
-      this.deletePhysiotherapist($event);
+    const dialogRef = this.dialog.open(DeleteProgramComponent, {
+      data: {
+        program: program
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.deleteProgram(program);
+      }
     });
   }
 
-  deletePhysiotherapist(program: Program) {
+  deleteProgram(program: ProgramInterface) {
     this.programService.delete(program.id).subscribe(
       response => {
         const idx = this.programs.indexOf(program);

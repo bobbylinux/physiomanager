@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {WorkResultInterface} from '../../../interfaces/work-result.interface';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogData } from '../../pains/delete/delete-pain.component';
 
 @Component({
   selector: 'app-delete-work-result',
@@ -8,19 +8,17 @@ import {WorkResultInterface} from '../../../interfaces/work-result.interface';
   styleUrls: ['./delete-work-result.component.css']
 })
 export class DeleteWorkResultComponent implements OnInit {
-  @Input() workResult: WorkResultInterface;
 
-  @Output() confirmedDelete = new EventEmitter();
-
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public dialogRef: MatDialogRef<DeleteWorkResultComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
   }
 
   deleteWorkResult() {
-    this.confirmedDelete.emit(this.workResult);
-    this.activeModal.close();
+    this.dialogRef.close("delete");
   }
 
-
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }
