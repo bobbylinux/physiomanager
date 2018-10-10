@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { TherapyInterface } from './../../../interfaces/therapy.interface';
-import { Therapy } from './../../../classes/therapy';
-import { PhysiotherapistInterface } from './../../../interfaces/physiotherapist.interface';
-import { Physiotherapist } from './../../../classes/physiotherapist';
-import { Session } from '../../../classes/session';
+import { TherapyInterface } from './../../../../interfaces/therapy.interface';
+import { Therapy } from './../../../../classes/therapy';
+import { PhysiotherapistInterface } from './../../../../interfaces/physiotherapist.interface';
+import { Physiotherapist } from './../../../../classes/physiotherapist';
+import { Session } from '../../../../classes/session';
 
 @Component({
   selector: 'app-add-plan-session',
@@ -27,10 +27,6 @@ export class AddPlanSessionComponent implements OnInit {
   @Input()
   set therapies(value) {
     this._therapies.next(value);
-    if (this.therapies) {
-      const emptyItemTherapy: TherapyInterface = new Therapy();
-      this.therapies.unshift(emptyItemTherapy);
-    }
   }
   get therapies() {
     return this._therapies.getValue();
@@ -38,10 +34,6 @@ export class AddPlanSessionComponent implements OnInit {
   @Input()
   set physiotherapists(value) {
     this._physiotherapists.next(value);
-    if (this.therapies) {
-      const emptyItemPhysiotherapis: PhysiotherapistInterface = new Physiotherapist();
-      this.physiotherapists.unshift(emptyItemPhysiotherapis);
-    }
   }
   get physiotherapists() {
     return this._physiotherapists.getValue();
@@ -94,6 +86,9 @@ export class AddPlanSessionComponent implements OnInit {
     this.note = "";
     this.price = 0;
 
+    console.log("session add-plan-session => ", session);
+
     this.clickOnAddTherapy.emit(session);
+
   }
 }

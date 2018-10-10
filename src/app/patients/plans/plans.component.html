@@ -91,7 +91,8 @@
                   'Modifica' : 'Salva'}}</button>
               </div>
               <div class="col-md-7 pr-1 text-right" *ngIf="!newPlan">
-                <button class="btn btn-warning" (click)="addNewPlan()"><i class="now-ui-icons ui-1_simple-add"></i> Apri nuova scheda</button>
+                <button class="btn btn-warning" (click)="addNewPlan()"><i class="now-ui-icons ui-1_simple-add"></i>
+                  Apri nuova scheda</button>
               </div>
             </div>
           </form>
@@ -99,7 +100,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="newPlan">
+  <div *ngIf="newPlan; else elsePlans">
     <div class="row">
       <div class="col-md-10 offset-1">
         <div class="card">
@@ -111,95 +112,33 @@
             </div>
           </div>
           <div class="card-body">
-            <app-plan-detail [workResults]="workResults" [pains]="pains" [mobilities]="mobilities" [programs]="programs"
-              (clickOnSavePlan)="savePlan($event)"></app-plan-detail>
+            <app-plan></app-plan>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <ng-template #elsePlans>
     <div class="row">
       <div class="col-md-10 offset-1">
         <div class="card">
           <div class="card-header">
             <div class="row">
               <div class="col-md-6">
-                <h5 class="title">Aggiungi Terapia</h5>
+                <h5 class="title">Schede</h5>
               </div>
             </div>
           </div>
           <div class="card-body">
-            <app-add-plan-session [physiotherapists]="physiotherapists" [therapies]="therapies" (clickOnAddTherapy)="addTherapyToSessions($event)"></app-add-plan-session>
+            <mat-tab-group>
+              <mat-tab *ngFor="let plan of plans; let idx = index" label="{{idx+1}}">
+                <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" [mobilities]="mobilities" [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
+                  [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)"></app-plan>
+              </mat-tab>
+            </mat-tab-group>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-10 offset-1">
-        <div class="card">
-          <div class="card-body">
-            <app-plan-sessions [sessions]="sessions" [session]="session"></app-plan-sessions>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row" *ngIf="!newPlan">
-    <div class="col-md-10 offset-1">
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-6">
-              <h5 class="title">Schede</h5>
-            </div>
-            <div class="col-md-5">
-
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <ul class="nav nav-tabs">
-            <li class="nav-item" *ngFor="let plan of plans; let idx = index">
-              <a class="nav-link" data-toggle="tab" href="#{{idx}}" role="tab" aria-controls="profile" aria-selected="false">{{idx+1}}</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div *ngFor="let plan of plans; let idx = index" class="tab-pane fade show active" id="{{idx}}" role="tabpanel"
-              aria-labelledby="tab">
-              <div class="row">
-                <div class="col-md-12">
-                  <app-plan-detail [workResults]="workResults" [pains]="pains" [mobilities]="mobilities" [programs]="programs"
-                    [plan]="plans[0]" (clickOnSavePlan)="savePlan($event)"></app-plan-detail>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-12">
-                    <div class="card">
-                      <div class="card-header">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <h5 class="title">Aggiungi Terapia</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <app-add-plan-session [physiotherapists]="physiotherapists" [therapies]="therapies" (clickOnAddTherapy)="addTherapyToSessions($event)"></app-add-plan-session>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <app-plan-sessions [sessions]="plan.sessions" [session]="session"></app-plan-sessions>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </ng-template>
 </div>

@@ -8,10 +8,8 @@ import { PainService } from '../../services/pain.service';
 import { ProgramService } from '../../services/registers/program.service';
 import { TherapyService } from '../../services/registers/therapy.service';
 import { PhysiotherapistService } from '../../services/registers/physiotherapist.service';
-import { SessionService } from '../../services/session.service';
 import { ActivatedRoute } from '@angular/router';
 import { Patient } from '../../classes/patient';
-import { Plan } from '../../classes/plan';
 import { WorkResult } from '../../classes/work-result';
 import { Pain } from '../../classes/pain';
 import { Mobility } from '../../classes/mobility';
@@ -19,8 +17,13 @@ import { Program } from '../../classes/program';
 import { Therapy } from '../../classes/therapy';
 import { Physiotherapist } from '../../classes/physiotherapist';
 import { SessionInterface } from '../../interfaces/session.interface';
-import { PlanInterface } from '../../interfaces/plan.interface';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { PlanInterface } from './../../interfaces/plan.interface';
+import { ProgramInterface } from '../../interfaces/program.interface';
+import { MobilityInterface } from '../../interfaces/mobility.interface';
+import { WorkResultInterface } from '../../interfaces/work-result.interface';
+import { PainInterface } from '../../interfaces/pain.interface';
+import { PhysiotherapistInterface } from '../../interfaces/physiotherapist.interface';
+import { TherapyInterface } from './../../interfaces/therapy.interface';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -31,7 +34,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PlansComponent implements OnInit {
   newPlan: boolean = false;
   patient: Patient;
-  plans: Plan[];
+  plans: PlanInterface[] = [];
   workResults: WorkResult[];
   pains: Pain[];
   mobilities: Mobility[];
@@ -69,11 +72,11 @@ export class PlansComponent implements OnInit {
     private programService: ProgramService,
     private therapyService: TherapyService,
     private physiotherapistService: PhysiotherapistService,
-    private sessionService: SessionService,
     private route: ActivatedRoute,
     private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.sessions = [];
     this.patient = new Patient();
     this.route.params.subscribe(
       (params) => {
@@ -114,11 +117,12 @@ export class PlansComponent implements OnInit {
             if (response['data'].length > 0) {
               this.plans = response['data'];
               this.newPlan = false;
+              console.log(this.plans);
             } else {
               this.plans = [];
               this.newPlan = true;
             }
-            this.sessions = [];
+
           },
           error => {
             console.log(error);
@@ -129,6 +133,10 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.workResults = response['data'];
+              if (this.workResults) {
+                const emptyItemWorkResult: WorkResultInterface = new WorkResult();
+                this.workResults.unshift(emptyItemWorkResult);
+              }
             }
           },
           error => {
@@ -140,6 +148,10 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.mobilities = response['data'];
+              if (this.mobilities) {
+                const emptyItemMobility: MobilityInterface = new Mobility();
+                this.mobilities.unshift(emptyItemMobility);
+              }
             }
           },
           error => {
@@ -151,6 +163,10 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.pains = response['data'];
+              if (this.pains) {
+                const emptyItemPain: PainInterface = new Pain();
+                this.pains.unshift(emptyItemPain);
+              }
             }
           },
           error => {
@@ -162,6 +178,10 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.programs = response['data'];
+              if (this.programs) {
+                const emptyItemProgram: ProgramInterface = new Program();
+                this.programs.unshift(emptyItemProgram);
+              }
             }
           },
           error => {
@@ -173,6 +193,10 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.therapies = response['data'];
+              if (this.therapies) {
+                const emptyTherapy: TherapyInterface = new Therapy();
+                this.therapies.unshift(emptyTherapy);
+              }
             }
           },
           error => {
@@ -184,6 +208,10 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.physiotherapists = response['data'];
+              if (this.physiotherapists) {
+                const emptyItemPhysiotherapis: PhysiotherapistInterface = new Physiotherapist();
+                this.physiotherapists.unshift(emptyItemPhysiotherapis);
+              }
             }
           },
           error => {
@@ -262,6 +290,35 @@ export class PlansComponent implements OnInit {
       this.formGroup.enable();
     } else {
       //salviamo le modifiche
+      let patient = new Patient();
+      patient.id = this.patient.id;
+      patient.first_name = this.first_name.value;
+      patient.last_name = this.last_name.value;
+      patient.tax_code = this.tax_code.value;
+      patient.sex = this.sex.value;
+      patient.birthday = this.birthday.value;
+      patient.place_of_birth = this.place_of_birth.value;
+      patient.detail.address = this.address.value;
+      patient.detail.city = this.city.value;
+      patient.detail.phone_number = this.phone_number.value;
+      patient.detail.email = this.email.value;
+
+      this.patientService.update(patient).subscribe(
+        response => {
+          this.toastr.info('Paziente aggiornato correttamente', '', {
+            timeOut: 8000,
+            closeButton: true,
+            enableHtml: true,
+            toastClass: "alert alert-warning alert-with-icon",
+            positionClass: 'toast-top-right'
+          });
+          
+        },
+        error =>  {
+
+        }
+      );
+
       this.formGroup.disable();
     }
   }
@@ -270,112 +327,4 @@ export class PlansComponent implements OnInit {
     this.newPlan = true;
   }
 
-  addTherapyToSessions(session) {
-    this.session = session;
-    this.sessions.push(session);
-  }
-
-  savePlan(plan: PlanInterface) {
-    if (this.newPlan) {
-      plan.patient_id = this.patient.id;
-      this.planService.create(plan).subscribe(
-        response => {
-          let planId = response['data'].id;
-
-          if (this.sessions.length > 0) {
-            for (let session of this.sessions) {
-              session.plan_id = planId;
-              //ora devo salvare le sessioni
-              this.sessionService.create(session).subscribe(
-                () => {
-                  plan.sessions = this.sessions;
-                  this.plans.push(plan);
-                  this.newPlan = false;
-                },
-                error => {
-                  console.log(error);
-                }
-              )
-            }
-          } else {
-            this.plans.push(plan);
-          }
-
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    } else {
-      //modifica scheda
-      this.planService.update(plan).subscribe(
-        () => {
-          this.sessionService.getAll('').subscribe(response => {
-            let observables = new Array();
-            for (let session of response['data']) {
-              observables.push(this.sessionService.delete(session.id));
-            }
-            if (observables.length > 0) {
-              forkJoin(observables).subscribe(
-                response => {
-                  for (let session of this.sessions) {
-                    this.sessionService.create(session).subscribe(
-                      () => {
-                        this.toastr.info('Scheda aggiornata correttamente', '', {
-                          timeOut: 8000,
-                          closeButton: true,
-                          enableHtml: true,
-                          toastClass: "alert alert-info alert-with-icon",
-                          positionClass: 'toast-top-right'
-                        });
-                      },
-                      error => {
-                        console.log(error);
-                      }
-                    );
-                  }
-                },
-                error => {
-                  console.log(error);
-                }
-              );
-            } else {
-              if (this.sessions.length > 0) {
-                for (let session of this.sessions) {
-                  session.plan_id = plan.id;
-                  this.sessionService.create(session).subscribe(
-                    () => {
-                      this.toastr.info('Scheda aggiornata correttamente', '', {
-                        timeOut: 8000,
-                        closeButton: true,
-                        enableHtml: true,
-                        toastClass: "alert alert-info alert-with-icon",
-                        positionClass: 'toast-top-right'
-                      });
-                    },
-                    error => {
-                      console.log(error);
-                    }
-                  );
-                }
-              } else { 
-                this.toastr.info('Scheda aggiornata correttamente', '', {
-                  timeOut: 8000,
-                  closeButton: true,
-                  enableHtml: true,
-                  toastClass: "alert alert-info alert-with-icon",
-                  positionClass: 'toast-top-right'
-                });
-              }
-            }
-          }, error => {
-            console.log(error);
-          });
-        },
-        error => {
-          console.log(error);
-        }
-      )
-    }
-  }
 }

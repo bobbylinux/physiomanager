@@ -23,11 +23,19 @@
         </option>
       </select>
     </div>
-    <div class="col-md-3 pr-1">
+    <div class="col-md-1 pr-1">
       <label for="privacy">Privacy</label>
       <select class="form-control" name="privacy" id="privacy" formControlName="privacy">
         <option *ngFor="let privacyOption of privacyOptions" [value]="privacyOption.id">
           {{ privacyOption.text }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-2 pr-1">
+      <label for="medical-certificate">Certificato Medico</label>
+      <select class="form-control" name="medical_certificate" id="medical-certificate" formControlName="medical_certificate">
+        <option *ngFor="let medicalCertificateOption of medicalCertificateOptions" [value]="medicalCertificateOption.id">
+          {{ medicalCertificateOption.text }}
         </option>
       </select>
     </div>

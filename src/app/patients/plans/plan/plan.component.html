@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-plan-detail [workResults]="workResults" [pains]="pains" [mobilities]="mobilities" [programs]="programs" [plan]="plan"
+      (clickOnSavePlan)="savePlan($event)"></app-plan-detail>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-11">
+    <h5 class="title">Aggiungi Terapia</h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-11">
+    <app-add-plan-session [physiotherapists]="physiotherapists" [therapies]="therapies" (clickOnAddTherapy)="addTherapyToSessions($event)"></app-add-plan-session>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <app-plan-sessions [session]="session" [sessions]="sessions"></app-plan-sessions>
+  </div>
+</div>

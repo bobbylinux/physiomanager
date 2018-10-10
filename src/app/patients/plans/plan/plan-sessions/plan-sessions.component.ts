@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SessionInterface } from './../../../interfaces/session.interface';
-import { Session } from './../../../classes/session';
+import { SessionInterface } from './../../../../interfaces/session.interface';
+import { Session } from './../../../../classes/session';
 
 @Component({
   selector: 'app-plan-sessions',
@@ -16,10 +16,7 @@ export class PlanSessionsComponent implements OnInit {
   @Input()
   set sessions(value) {
     this._sessions.next(value);
-    if (!this.sessions) {
-      this.sessions = [];
-    }
-    console.log(value);
+    console.log(this.sessions);
   }
   get sessions() {
     return this._sessions.getValue();
@@ -27,9 +24,6 @@ export class PlanSessionsComponent implements OnInit {
   @Input()
   set session(value) {
     this._session.next(value);
-    if (this.session) {
-      this.sessions.push(this.session);
-    } 
   }
   get session() {
     return this._session.getValue();

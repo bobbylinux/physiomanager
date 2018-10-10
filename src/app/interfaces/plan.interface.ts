@@ -8,7 +8,7 @@ export interface PlanInterface {
     program: string;
     final_report: string;
     privacy: string;
-    medical_certificate: boolean;
+    medical_certificate: string;
     work_result_id: number;
     pain_id: number;
     mobility_id: number;

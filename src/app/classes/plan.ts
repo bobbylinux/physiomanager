@@ -9,7 +9,7 @@ export class Plan implements PlanInterface  {
     program: string;
     final_report: string;
     privacy: string;
-    medical_certificate: boolean;
+    medical_certificate: string;
     work_result_id : number;
     pain_id : number;
     mobility_id : number;
@@ -23,7 +23,7 @@ export class Plan implements PlanInterface  {
         this.program = '';
         this.final_report = '';
         this.privacy = '';
-        this.medical_certificate = false;
+        this.medical_certificate = '';
         this.work_result_id = 0;
         this.pain_id = 0;
         this.mobility_id = 0;

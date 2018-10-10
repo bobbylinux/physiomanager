@@ -16,13 +16,13 @@ import { PatientsComponent } from '../../patients/patients.component';
 import { PatientService } from '../../services/patient.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { PlanDetailComponent } from '../../patients/plans/plan-detail/plan-detail.component';
-import { AddPlanSessionComponent } from '../../patients/plans/add-plan-session/add-plan-session.component';
+import { PlanDetailComponent } from '../../patients/plans/plan/plan-detail/plan-detail.component';
+import { AddPlanSessionComponent } from '../../patients/plans/plan/add-plan-session/add-plan-session.component';
 import { NewPlanComponent } from '../../patients/plans/new-plan/new-plan.component';
 import { SearchResultComponent } from '../../patients/search-result/search-result.component';
 import { AddPatientComponent } from '../../patients/add-patient/add-patient.component';
 import { PlansComponent } from '../../patients/plans/plans.component';
-import { PlanSessionsComponent } from '../../patients/plans/plan-sessions/plan-sessions.component';
+import { PlanSessionsComponent } from '../../patients/plans/plan/plan-sessions/plan-sessions.component';
 import { DoctorsComponent } from '../../registers/doctors/doctors.component';
 import { DoctorDetailComponent } from '../../registers/doctors/doctor-detail/doctor-detail.component';
 import { MobilitiesComponent } from '../../registers/mobilities/mobilities.component';
@@ -37,13 +37,6 @@ import { WorkResultDetailComponent } from '../../registers/work-results/work-res
 import { WorkResultsComponent } from './../../registers/work-results/work-results.component';
 import { ProgramsComponent } from './../../registers/programs/programs.component';
 import { ProgramDetailComponent } from './../../registers/programs/program-detail/program-detail.component';
-import { DeleteDoctorComponent } from '../../registers/doctors/delete/delete-doctor.component';
-import { DeleteMobilityComponent } from '../../registers/mobilities/delete/delete-mobility.component';
-import { DeletePainComponent } from '../../registers/pains/delete/delete-pain.component';
-import { DeletePhysiotherapistComponent } from '../../registers/physiotherapists/delete/delete-physiotherapist.component';
-import { DeleteProgramComponent } from '../../registers/programs/delete/delete-program.component';
-import { DeleteTherapyComponent } from '../../registers/therapies/delete/delete-therapy.component';
-import { DeleteWorkResultComponent } from '../../registers/work-results/delete/delete-work-result.component';
 import { PlanService } from '../../services/plan.service';
 import { WorkResultService } from '../../services/work-result.service';
 import { MobilityService } from '../../services/mobility.service';
@@ -53,6 +46,8 @@ import { PhysiotherapistService } from '../../services/registers/physiotherapist
 import { ProgramService } from '../../services/registers/program.service';
 import { TherapyService } from '../../services/registers/therapy.service';
 import { SessionService } from '../../services/session.service';
+import { PlanComponent } from '../../patients/plans/plan/plan.component';
+import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -64,6 +59,7 @@ import { SessionService } from '../../services/session.service';
     HttpModule,
     HttpClientModule,
     NgbModule,
+    MatTabsModule,
     ToastrModule.forRoot()
   ],
   declarations: [
@@ -76,6 +72,7 @@ import { SessionService } from '../../services/session.service';
     AddPlanSessionComponent,
     NewPlanComponent,
     PlanSessionsComponent,
+    PlanComponent,
     DoctorsComponent,
     DoctorDetailComponent,
     MobilitiesComponent,

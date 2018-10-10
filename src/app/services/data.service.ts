@@ -34,6 +34,7 @@ export class DataService {
     if (includeParams.length > 0) {
       includeString = '&include=' + includeParams;
     }
+    console.log(this.url + '/' + queryString + includeString);
     return this.httpClient.get(this.url + '/' + queryString + includeString);
   }
 

@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MatIconModule, MatDialogModule } from '@angular/material';
+import { MatIconModule, MatDialogModule, MatTabsModule } from '@angular/material';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DeleteDoctorComponent } from './registers/doctors/delete/delete-doctor.component';
 import { DeleteMobilityComponent } from './registers/mobilities/delete/delete-mobility.component';
@@ -36,7 +36,8 @@ import { DeleteWorkResultComponent } from './registers/work-results/delete/delet
     AppRoutingModule,
     NgbModule.forRoot(),
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
     ],
   declarations: [
     AppComponent,
