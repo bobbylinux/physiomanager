@@ -18,7 +18,7 @@ export class WorkResultsComponent implements OnInit {
   private workResults: WorkResultInterface[] = [];
 
   ngOnInit() {
-    this.workResultService.getAll('').subscribe(
+    this.workResultService.getAll().subscribe(
       response => {
         if (response['data'].length > 0) {
           this.workResults = response['data'];

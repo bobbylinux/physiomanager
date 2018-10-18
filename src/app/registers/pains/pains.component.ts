@@ -18,7 +18,7 @@ export class PainsComponent implements OnInit {
   private pains: PainInterface[] = [];
 
   ngOnInit() {
-    this.painService.getAll('').subscribe(
+    this.painService.getAll().subscribe(
       response => {
         if (response['data'].length > 0) {
           this.pains = response['data'];

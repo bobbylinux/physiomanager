@@ -25,6 +25,8 @@ import { PainInterface } from '../../interfaces/pain.interface';
 import { PhysiotherapistInterface } from '../../interfaces/physiotherapist.interface';
 import { TherapyInterface } from './../../interfaces/therapy.interface';
 import { ToastrService } from 'ngx-toastr';
+import { DoctorService } from './../../services/registers/doctor.service';
+import { DoctorInterface } from './../../interfaces/doctor.interface';
 
 @Component({
   selector: 'app-plans',
@@ -35,6 +37,7 @@ export class PlansComponent implements OnInit {
   newPlan: boolean = false;
   patient: Patient;
   plans: PlanInterface[] = [];
+  doctors: DoctorInterface[] = [];
   workResults: WorkResult[];
   pains: Pain[];
   mobilities: Mobility[];
@@ -61,11 +64,13 @@ export class PlansComponent implements OnInit {
     address: new FormControl(),
     city: new FormControl(),
     phone_number: new FormControl(),
-    email: new FormControl()
+    email: new FormControl(),
+    doctor_id: new FormControl()
   });
 
   constructor(private patientService: PatientService,
     private planService: PlanService,
+    private doctorService: DoctorService,
     private workResultService: WorkResultService,
     private mobilityService: MobilityService,
     private painService: PainService,
@@ -99,6 +104,7 @@ export class PlansComponent implements OnInit {
                   'place_of_birth': this.patient.place_of_birth,
                   'address': this.patient.detail.address,
                   'city': this.patient.detail.city,
+                  'doctor_id' : this.patient.detail.doctor_id, 
                   'phone_number': this.patient.detail.phone_number,
                   'email': this.patient.detail.email
                 }
@@ -128,8 +134,14 @@ export class PlansComponent implements OnInit {
             console.log(error);
           }
         );
+        /* medici */
+        this.doctorService.getAll(null, 'enabled=true').subscribe(
+          response => {
+            this.doctors = response['data'];
+          }
+        )
         /* risultati del lavoro */
-        this.workResultService.getAll('').subscribe(
+        this.workResultService.get(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.workResults = response['data'];
@@ -144,7 +156,7 @@ export class PlansComponent implements OnInit {
           }
         );
         /* mobilità */
-        this.mobilityService.getAll('').subscribe(
+        this.mobilityService.getAll(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.mobilities = response['data'];
@@ -159,7 +171,7 @@ export class PlansComponent implements OnInit {
           }
         );
         /* indici di dolore */
-        this.painService.getAll('').subscribe(
+        this.painService.getAll(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.pains = response['data'];
@@ -174,7 +186,7 @@ export class PlansComponent implements OnInit {
           }
         );
         /* programmi */
-        this.programService.getAll('').subscribe(
+        this.programService.getAll(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.programs = response['data'];
@@ -189,7 +201,7 @@ export class PlansComponent implements OnInit {
           }
         );
         /* terapie */
-        this.therapyService.getAll('').subscribe(
+        this.therapyService.getAll(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.therapies = response['data'];
@@ -204,7 +216,7 @@ export class PlansComponent implements OnInit {
           }
         );
         /* fisioterapisti */
-        this.physiotherapistService.getAll('').subscribe(
+        this.physiotherapistService.getAll(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.physiotherapists = response['data'];
@@ -312,9 +324,9 @@ export class PlansComponent implements OnInit {
             toastClass: "alert alert-warning alert-with-icon",
             positionClass: 'toast-top-right'
           });
-          
+
         },
-        error =>  {
+        error => {
 
         }
       );

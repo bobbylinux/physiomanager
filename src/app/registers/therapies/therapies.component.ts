@@ -19,7 +19,7 @@ export class TherapiesComponent implements OnInit {
   private therapies: Therapy[] = [];
 
   ngOnInit() {
-    this.therapyService.getAll('').subscribe(
+    this.therapyService.getAll().subscribe(
       response => {
         if (response['data'].length > 0) {
           this.therapies = response['data'];

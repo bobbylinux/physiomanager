@@ -77,7 +77,16 @@
                     formControlName="phone_number">
                 </div>
               </div>
-              <div class="col-md-4 px-1">
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label for="doctor-id">Medico</label>
+                  <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
+                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
+                      {{option.first_name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
                 <div class="form-group">
                   <label for="email">E-Mail</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Indirizzo E-Mail"
@@ -86,7 +95,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <button class="btn btn-warning btn-block" (click)="editPatient($event)">{{formGroup.disabled ?
                   'Modifica' : 'Salva'}}</button>
               </div>
@@ -112,7 +121,9 @@
             </div>
           </div>
           <div class="card-body">
-            <app-plan></app-plan>
+            <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" [mobilities]="mobilities"
+              [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies" [plan]="plans[idx]"
+              (clickOnSavePlan)="savePlan($event)"></app-plan>
           </div>
         </div>
       </div>
@@ -132,7 +143,8 @@
           <div class="card-body">
             <mat-tab-group>
               <mat-tab *ngFor="let plan of plans; let idx = index" label="{{idx+1}}">
-                <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" [mobilities]="mobilities" [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
+                <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains"
+                  [mobilities]="mobilities" [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
                   [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)"></app-plan>
               </mat-tab>
             </mat-tab-group>

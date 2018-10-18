@@ -40,10 +40,9 @@ export class AddPatientComponent implements OnInit {
   constructor(private patientService: PatientService, private doctorService: DoctorService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    this.doctorService.getAll('').subscribe(
+    this.doctorService.getAll(null,'enabled=true').subscribe(
         response => {
           this.doctors = response['data'];
-          console.log(this.doctors);
         }
     )
   }

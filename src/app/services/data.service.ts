@@ -9,12 +9,20 @@ export class DataService {
     this.url = url;
   }
 
-  public getAll(params: string) {
-    let include = '';
-    if (params.length > 0) {
-      include = '?include=' + params;
+  public getAll(params?: string, query?: string) {
+    let filter = '';
+    if (query && query.length > 0) {
+      filter="?"+query;
     }
-    return this.httpClient.get(this.url + include);
+    let include = '';
+    if (params && params.length > 0) {
+      if (query.length > 0) {
+        include="&include=" + params;  
+      } else {
+        include = '?include=' + params;
+      }
+    }
+    return this.httpClient.get(this.url + filter + include);
   }
 
   public get(id: number, params: string) {

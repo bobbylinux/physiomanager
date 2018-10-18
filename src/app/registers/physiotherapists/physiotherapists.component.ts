@@ -19,7 +19,7 @@ export class PhysiotherapistsComponent implements OnInit {
   private physiotherapists: PhysiotherapistInterface[] = [];
 
   ngOnInit() {
-    this.physiotherapistService.getAll('').subscribe(
+    this.physiotherapistService.getAll().subscribe(
       response => {
         if (response['data'].length > 0) {
           this.physiotherapists = response['data'];

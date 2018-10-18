@@ -18,7 +18,7 @@ export class MobilitiesComponent implements OnInit {
   private mobilities: MobilityInterface[] = [];
 
   ngOnInit() {
-    this.mobilityService.getAll('').subscribe(
+    this.mobilityService.getAll().subscribe(
       response => {
         if (response['data'].length > 0) {
           this.mobilities = response['data'];

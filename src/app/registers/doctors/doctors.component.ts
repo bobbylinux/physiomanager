@@ -19,7 +19,7 @@ export class DoctorsComponent implements OnInit {
 
    
   ngOnInit() {
-    this.doctorService.getAll('').subscribe(
+    this.doctorService.getAll().subscribe(
       result => {
         this.doctors = result['data'];
       }

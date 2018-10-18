@@ -19,7 +19,7 @@ export class ProgramsComponent implements OnInit {
   private programs: Program[] = [];
 
   ngOnInit() {
-    this.programService.getAll('').subscribe(
+    this.programService.getAll().subscribe(
       response => {
         if (response['data'].length > 0) {
           this.programs = response['data'];

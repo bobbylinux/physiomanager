@@ -28,8 +28,8 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="first-name">Nome</label>
-                  <input required minlength="2" type="text" class="form-control" placeholder="Nome" name="first_name" formControlName="first_name"
-                    id="first-name" value="">
+                  <input required minlength="2" type="text" class="form-control" placeholder="Nome" name="first_name"
+                    formControlName="first_name" id="first-name" value="">
                   <div *ngIf="first_name.touched && first_name.dirty && first_name.invalid">
                     <div class="alert-danger" *ngIf="first_name.errors.required">
                       Il campo nome è obbligatorio
@@ -93,7 +93,8 @@
                       Il campo luogo di nascita è obbligatorio
                     </div>
                     <div class="alert-danger" *ngIf="place_of_birth.errors.minlength">
-                      Il campo luogo di nascita deve essere di almeno {{place_of_birth.errors.minlength.requiredLength}}
+                      Il campo luogo di nascita deve essere di almeno
+                      {{place_of_birth.errors.minlength.requiredLength}}
                       caratteri
                     </div>
                   </div>
@@ -116,6 +117,15 @@
             <div class="row">
               <div class="col-md-3 pr-1">
                 <div class="form-group">
+                  <label for="doctor-id">Medico</label>
+                  <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
+                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
+                      {{option.first_name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
                   <label for="phone-number">Telefono</label>
                   <input required type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
                     formControlName="phone_number">
@@ -135,15 +145,6 @@
                   <label for="email">E-Mail</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Indirizzo E-Mail"
                     formControlName="email">
-                </div>
-              </div>
-              <div class="col-md-3 pr-1">
-                <div class="form-group">
-                  <label for="doctor-id">Medico</label>
-                  <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
-                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
-                      {{option.first_name}}</option>
-                  </select>
                 </div>
               </div>
             </div>

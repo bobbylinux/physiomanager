@@ -47,6 +47,8 @@ import { ProgramService } from '../../services/registers/program.service';
 import { TherapyService } from '../../services/registers/therapy.service';
 import { SessionService } from '../../services/session.service';
 import { PlanComponent } from '../../patients/plans/plan/plan.component';
+import { AuthService } from './../../services/auth.service';
+import { RouteGuardService } from './../../services/route-guard.service';
 import { MatTabsModule } from '@angular/material';
 
 @NgModule({
@@ -93,8 +95,8 @@ import { MatTabsModule } from '@angular/material';
     IconsComponent,
     NotificationsComponent,
   ],
- 
-  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService],
+
+  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService, AuthService, RouteGuardService],
 })
 
 export class AdminLayoutModule { }
