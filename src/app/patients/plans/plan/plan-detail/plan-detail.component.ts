@@ -65,7 +65,7 @@ export class PlanDetailComponent implements OnInit {
         }
       );
       if (this.plan.created_at != null) {
-        //this.plan.created_at.date = Utility.formatDate(this.plan.created_at.date);
+        this.plan.created_at.date = Utility.formatDateTime(this.plan.created_at.date);
       }
     }
   }

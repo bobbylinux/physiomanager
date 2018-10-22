@@ -94,6 +94,7 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.patient = response['data'][0];
+              console.log("birthday",  Utility.formatDateForDatabase(this.patient.birthday,"/"));
               this.formGroup.patchValue(
                 {
                   'id': this.patient.id,
@@ -101,7 +102,7 @@ export class PlansComponent implements OnInit {
                   'first_name': this.patient.first_name,
                   'tax_code': this.patient.tax_code,
                   'sex': this.patient.sex,
-                  'birthday': Utility.formatDate(this.patient.birthday),
+                  'birthday': Utility.formatDateForDatabase(this.patient.birthday),
                   'place_of_birth': this.patient.place_of_birth,
                   'address': this.patient.detail.address,
                   'city': this.patient.detail.city,

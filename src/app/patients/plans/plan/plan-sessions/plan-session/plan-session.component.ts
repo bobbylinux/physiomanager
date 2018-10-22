@@ -47,6 +47,6 @@ export class PlanSessionComponent implements OnInit {
   }
 
   formatDate(date: string) {
-    return Utility.formatDate(date);
+    return Utility.formatDateForUser(date);
   }
 }
