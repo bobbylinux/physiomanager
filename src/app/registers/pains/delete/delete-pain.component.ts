@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
-}
+import { DialogDataInterface } from './../../../interfaces/dialog-data.interface';
+
 @Component({
   selector: 'app-delete-pain',
   templateUrl: './delete-pain.component.html',
@@ -10,7 +9,7 @@ export interface DialogData {
 })
 export class DeletePainComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DeletePainComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(public dialogRef: MatDialogRef<DeletePainComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
 
   ngOnInit() {
   }

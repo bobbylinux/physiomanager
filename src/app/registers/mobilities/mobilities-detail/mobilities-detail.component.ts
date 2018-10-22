@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MobilityService} from '../../../services/mobility.service';
-import {Mobility} from '../../../classes/mobility';
-import {MobilityInterface} from '../../../interfaces/mobility.interface';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MobilityService } from '../../../services/mobility.service';
+import { Mobility } from '../../../classes/mobility';
+import { MobilityInterface } from '../../../interfaces/mobility.interface';
 
 @Component({
   selector: 'app-mobilities-detail',
@@ -15,8 +15,8 @@ export class MobilitiesDetailComponent implements OnInit {
   private newMobility = false;
 
   enabledOptions = [
-    {id: true, text: 'Sì'},
-    {id: false, text: 'No'}
+    { id: true, text: 'Sì' },
+    { id: false, text: 'No' }
   ];
 
   private mobility: MobilityInterface;
@@ -24,6 +24,7 @@ export class MobilitiesDetailComponent implements OnInit {
   formGroup = new FormGroup({
     id: new FormControl(),
     description: new FormControl(),
+    index: new FormControl(),
     enabled: new FormControl()
   });
 
@@ -40,12 +41,12 @@ export class MobilitiesDetailComponent implements OnInit {
         }
         this.mobilityService.get(params.id, '').subscribe(
           response => {
-            console.log(response);
             if (response['data'].length > 0) {
               this.mobility = response['data'][0];
               this.formGroup = new FormGroup({
                 id: new FormControl(this.mobility.id),
                 description: new FormControl(this.mobility.description),
+                index: new FormControl(this.mobility.index),
                 enabled: new FormControl(this.mobility.enabled)
               });
             }
@@ -63,16 +64,22 @@ export class MobilitiesDetailComponent implements OnInit {
     return this.formGroup.get('description');
   }
 
+  get index() {
+    return this.formGroup.get('index');
+  }
+
   get enabled() {
     return this.formGroup.get('enabled');
   }
 
   addMobility() {
     const description = this.description.value;
-    const enabled = this.enabled.value;
+    const index = this.index.value;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const mobility = new Mobility();
     mobility.description = description;
-    mobility.enabled = enabled === 'true' ? true : false;
+    mobility.index = index;
+    mobility.enabled = enabled;
 
     this.mobilityService.create(mobility).subscribe(
       response => {
@@ -84,11 +91,13 @@ export class MobilitiesDetailComponent implements OnInit {
   updateMobility() {
     const id = this.id.value;
     const description = this.description.value;
-    const enabled = this.enabled.value;
+    const index = this.index.value;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const mobility = new Mobility();
     mobility.id = id;
     mobility.description = description;
-    mobility.enabled = enabled === 'true' ? true : false;
+    mobility.index = index;
+    mobility.enabled = enabled;
 
     this.mobilityService.update(mobility).subscribe(
       response => {

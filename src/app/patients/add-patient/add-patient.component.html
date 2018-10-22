@@ -43,14 +43,14 @@
               <div class="col-md-2 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
-                  <input required minlength="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
+                  <input required length="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
                     formControlName="tax_code" id="tax-code" value="">
                   <div *ngIf="tax_code.touched && tax_code.dirty && tax_code.invalid">
                     <div class="alert-danger" *ngIf="tax_code.errors.required">
                       Il campo codice fiscale è obbligatorio
                     </div>
-                    <div class="alert-danger" *ngIf="tax_code.errors.minlength">
-                      Il campo codice fiscale deve essere di almeno {{tax_code.errors.minlength.requiredLength}}
+                    <div class="alert-danger" *ngIf="tax_code.errors.length">
+                      Il campo codice fiscale deve essere di {{tax_code.errors.length.requiredLength}}
                       caratteri
                     </div>
                   </div>
@@ -74,7 +74,7 @@
               <div class="col-md-2 pr-1">
                 <div class="form-group">
                   <label for="birthday">Data di nascita</label>
-                  <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
+                  <input required type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
                     formControlName="birthday">
                   <div *ngIf="birthday.touched && birthday.dirty && birthday.invalid">
                     <div class="alert-danger" *ngIf="birthday.errors.required">

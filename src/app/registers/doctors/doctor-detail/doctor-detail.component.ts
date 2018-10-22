@@ -43,7 +43,6 @@ export class DoctorDetailComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.doctor = response['data'][0];
-              console.log(this.doctor);
               this.formGroup = new FormGroup({
                 id: new FormControl(this.doctor.id),
                 last_name: new FormControl(this.doctor.last_name),
@@ -76,7 +75,7 @@ export class DoctorDetailComponent implements OnInit {
   addDoctor() {
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
-    const enabled = this.enabled.value === 'true' ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const doctor = new Doctor();
     doctor.last_name = last_name;
     doctor.first_name = first_name;
@@ -93,12 +92,12 @@ export class DoctorDetailComponent implements OnInit {
     const id = this.id.value;
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
-    const enabled = this.enabled.value;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const doctor = new Doctor();
     doctor.id = id;
     doctor.last_name = last_name;
     doctor.first_name = first_name;
-    doctor.enabled = enabled === 'true' ? true : false;
+    doctor.enabled = enabled;
 
     this.doctorService.update(doctor).subscribe(
       response => {

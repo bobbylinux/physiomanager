@@ -27,6 +27,7 @@ export class WorkResultDetailComponent implements OnInit {
   formGroup = new FormGroup({
     id: new FormControl(),
     description: new FormControl(),
+    index: new FormControl(),
     enabled: new FormControl()
   });
 
@@ -43,12 +44,12 @@ export class WorkResultDetailComponent implements OnInit {
         }
         this.workResultService.get(params.id, '').subscribe(
           response => {
-            console.log(response);
             if (response['data'].length > 0) {
               this.workResult = response['data'][0];
               this.formGroup = new FormGroup({
                 id: new FormControl(this.workResult.id),
                 description: new FormControl(this.workResult.description),
+                index: new FormControl(this.workResult.index),
                 enabled: new FormControl(this.workResult.enabled)
               });
             }
@@ -66,6 +67,10 @@ export class WorkResultDetailComponent implements OnInit {
     return this.formGroup.get('description');
   }
 
+  get index() {
+    return this.formGroup.get('index');
+  }
+  
   get enabled() {
     return this.formGroup.get('enabled');
   }
@@ -73,9 +78,11 @@ export class WorkResultDetailComponent implements OnInit {
   addWorkResult() {
     const description = this.description.value;
     const enabled = this.enabled.value;
+    const index = this.index.value;
     const workResult = new WorkResult();
     workResult.description = description;
-    workResult.enabled = enabled === 'true' ? true : false;
+    workResult.index = index;
+    workResult.enabled = enabled.toString() == 'true' ? true : false;
 
     this.workResultService.create(workResult).subscribe(
       () => {
@@ -88,10 +95,12 @@ export class WorkResultDetailComponent implements OnInit {
     const id = this.id.value;
     const description = this.description.value;
     const enabled = this.enabled.value;
+    const index = this.index.value;
     const workResult = new WorkResult();
     workResult.id = id;
     workResult.description = description;
-    workResult.enabled = enabled === 'true' ? true : false;
+    workResult.index = index;
+    workResult.enabled = enabled.toString() == 'true' ? true : false;
 
     this.workResultService.update(workResult).subscribe(
       () => {

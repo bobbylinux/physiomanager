@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {TherapyService} from '../../../services/registers/therapy.service';
-import {Therapy} from '../../../classes/therapy';
-import {Program} from '../../../classes/program';
-import {TherapyInterface} from '../../../interfaces/therapy.interface';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TherapyService } from '../../../services/registers/therapy.service';
+import { Therapy } from '../../../classes/therapy';
+import { Program } from '../../../classes/program';
+import { TherapyInterface } from '../../../interfaces/therapy.interface';
 
 @Component({
   selector: 'app-therapy-detail',
@@ -16,8 +16,8 @@ export class TherapyDetailComponent implements OnInit {
   private newTherapy = false;
 
   private enabledOptions = [
-    {id: true, text: 'Sì'},
-    {id: false, text: 'No'}
+    { id: true, text: 'Sì' },
+    { id: false, text: 'No' }
   ];
 
   formGroup = new FormGroup({
@@ -27,7 +27,7 @@ export class TherapyDetailComponent implements OnInit {
     enabled: new FormControl()
   });
 
-  private therapy : TherapyInterface;
+  private therapy: TherapyInterface;
 
   constructor(private theraphyService: TherapyService, private route: ActivatedRoute, private router: Router) {
   }
@@ -76,7 +76,7 @@ export class TherapyDetailComponent implements OnInit {
   addTherapy() {
     const description = this.description.value;
     const price = this.price.value;
-    const enabled = this.enabled.value === 'true' ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const therapy = new Therapy();
     therapy.description = description;
     therapy.price = price;
@@ -93,7 +93,7 @@ export class TherapyDetailComponent implements OnInit {
     const id = this.id.value;
     const description = this.description.value;
     const price = this.price.value;
-    const enabled = this.enabled.value === 'true' ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const therapy = new Therapy();
     therapy.id = id;
     therapy.description = description;

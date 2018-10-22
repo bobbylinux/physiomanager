@@ -22,7 +22,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">ID</th>
+                      <th scope="col">Indice</th>
                       <th scope="col">Descrizione</th>
                       <th scope="col">Abilitato</th>
                       <th scope="col"></th>
@@ -30,7 +30,7 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let workResult of workResults">
-                      <td scope="row">{{workResult.id}}</td>
+                      <td scope="row">{{workResult.index}}</td>
                       <td scope="row">{{workResult.description}}</td>
                       <td scope="row">
                         <i *ngIf="workResult.enabled" class="material-icons">check</i>

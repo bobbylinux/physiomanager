@@ -12,18 +12,28 @@
           <form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="submitForm()">
             <div class="form-group">
               <label for="last-name">Cognome</label>
-              <input type="text" class="form-control" id="last-name" name="last_name" placeholder="Cognome"
-                formControlName="last_name">
-              <div *ngIf="last_name.touched && last_name.dirty && last_name.invalid" class="alert-danger">
-                Il campo cognome è obbligatorio
+              <input required minlength="2" type="text" class="form-control" id="last-name" name="last_name"
+                placeholder="Cognome" formControlName="last_name">
+              <div *ngIf="last_name.touched && last_name.dirty && last_name.invalid">
+                <div class="alert-danger" *ngIf="last_name.errors.required">
+                  Il campo cognome è obbligatorio
+                </div>
+                <div class="alert-danger" *ngIf="last_name.errors.minlength">
+                  Il campo cognome deve essere di almeno {{last_name.errors.minlength.requiredLength}} caratteri
+                </div>
               </div>
             </div>
             <div class="form-group">
               <label for="first-name">Nome</label>
-              <input required type="text" class="form-control" id="first-name" name="first_name" placeholder="Nome"
-                formControlName="first_name">
-              <div *ngIf="first_name.touched && first_name.dirty && first_name.invalid" class="alert-danger">
-                Il campo nome è obbligatorio
+              <input required minlength="2" type="text" class="form-control" id="first-name" name="first_name"
+                placeholder="Nome" formControlName="first_name">
+              <div *ngIf="first_name.touched && first_name.dirty && first_name.invalid">
+                <div class="alert-danger" *ngIf="first_name.errors.required">
+                  Il campo cognome è obbligatorio
+                </div>
+                <div class="alert-danger" *ngIf="first_name.errors.minlength">
+                  Il campo cognome deve essere di almeno {{last_name.errors.minlength.requiredLength}} caratteri
+                </div>
               </div>
             </div>
             <div class="form-group">

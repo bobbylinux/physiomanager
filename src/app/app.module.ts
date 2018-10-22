@@ -23,6 +23,7 @@ import { DeletePhysiotherapistComponent } from './registers/physiotherapists/del
 import { DeleteProgramComponent } from './registers/programs/delete/delete-program.component';
 import { DeleteTherapyComponent } from './registers/therapies/delete/delete-therapy.component';
 import { DeleteWorkResultComponent } from './registers/work-results/delete/delete-work-result.component';
+import { NoteComponent } from './patients/plans/plan/plan-sessions/note/note.component';
 
 @NgModule({
   imports: [
@@ -50,9 +51,10 @@ import { DeleteWorkResultComponent } from './registers/work-results/delete/delet
     DeleteProgramComponent,
     DeleteTherapyComponent,
     DeleteWorkResultComponent,
+    NoteComponent,
 
   ],
-  entryComponents: [DeleteDoctorComponent, DeleteMobilityComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent],
+  entryComponents: [DeleteDoctorComponent, DeleteMobilityComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent, NoteComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -16,16 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of sessions">
-        <td>{{formatDate(item.date)}}</td>
-        <td>{{item.physiotherapist.last_name}} {{item.physiotherapist.first_name}}</td>
-        <td>{{item.therapy.description}}</td>
-        <td>{{item.price}}</td>
-        <td>
-          <i *ngIf="item.note && item.note.length > 0; else noNote" class="now-ui-icons ui-1_email-85"></i>
-        </td>
-        <ng-template #noNote></ng-template>
-        <td class="text-right"><button class="btn btn-danger" (click)="deleteSession(item)"><i class="now-ui-icons ui-1_simple-remove"></i> Cancella</button></td>
+      <tr app-plan-session [session]="session" (onClickDeleteSession)="deleteSession($event)" *ngFor="let session of sessions">
       </tr>
     </tbody>
   </table>

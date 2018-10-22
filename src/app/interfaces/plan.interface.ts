@@ -13,4 +13,5 @@ export interface PlanInterface {
     pain_id: number;
     mobility_id: number;
     sessions : SessionInterface[];
+    created_at: any;
 }

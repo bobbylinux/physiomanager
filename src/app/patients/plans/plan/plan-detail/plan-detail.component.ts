@@ -7,11 +7,8 @@ import { MobilityInterface } from './../../../../interfaces/mobility.interface';
 import { ProgramInterface } from './../../../../interfaces/program.interface';
 
 import { PlanInterface } from '../../../../interfaces/plan.interface';
-import { WorkResult } from '../../../../classes/work-result';
-import { Pain } from '../../../../classes/pain';
-import { Mobility } from '../../../../classes/mobility';
 import { Plan } from '../../../../classes/plan';
-import { Program } from '../../../../classes/program';
+import { Utility } from 'src/app/classes/utility';
 
 @Component({
   selector: 'app-plan-detail',
@@ -67,6 +64,9 @@ export class PlanDetailComponent implements OnInit {
           'final_report' : this.plan.final_report
         }
       );
+      if (this.plan.created_at != null) {
+        //this.plan.created_at.date = Utility.formatDate(this.plan.created_at.date);
+      }
     }
   }
   get plan() {

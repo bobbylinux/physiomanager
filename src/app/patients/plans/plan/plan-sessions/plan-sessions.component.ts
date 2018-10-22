@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SessionInterface } from './../../../../interfaces/session.interface';
 import { Session } from './../../../../classes/session';
+import { Utility } from 'src/app/classes/utility';
 
 @Component({
   selector: 'app-plan-sessions',
@@ -16,7 +17,6 @@ export class PlanSessionsComponent implements OnInit {
   @Input()
   set sessions(value) {
     this._sessions.next(value);
-    console.log(this.sessions);
   }
   get sessions() {
     return this._sessions.getValue();
@@ -31,13 +31,6 @@ export class PlanSessionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  formatDate(date: string) {
-    let day = date.substr(8, 2);
-    let month = date.substr(5, 2);
-    let year = date.substr(0, 4);
-    return day + "-" + month + "-" + year;
   }
 
   deleteSession(session) {

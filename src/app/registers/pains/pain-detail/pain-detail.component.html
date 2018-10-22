@@ -19,6 +19,19 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="index">Indice (ordinamento)</label>
+              <input required pattern="^[1-9][0-9]?$|^100" type="number" class="form-control" id="index" name="index"
+                placeholder="Indice" formControlName="index">
+              <div *ngIf="index.touched && index.dirty && index.invalid">
+                <div class="alert-danger" *ngIf="index.errors.required">
+                  Il campo indice di ordinamento è obbligatorio
+                </div>
+                <div class="alert-danger" *ngIf="index.errors.pattern">
+                  Il campo indice deve contenere numeri ed essere almeno 1 al massimo 99
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
               <label for="enabled">Abilitato</label>
               <select required class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled">
                 <option *ngFor="let option of enabledOptions" [value]="option.id">{{option.text}}</option>

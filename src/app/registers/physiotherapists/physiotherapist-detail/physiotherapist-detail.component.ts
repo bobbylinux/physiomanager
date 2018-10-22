@@ -74,7 +74,7 @@ export class PhysiotherapistDetailComponent implements OnInit {
   addPhysiotherapist() {
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
-    const enabled = this.enabled.value == "1" ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const physiotherapist = new Physiotherapist();
     physiotherapist.last_name = last_name;
     physiotherapist.first_name = first_name;
@@ -91,15 +91,14 @@ export class PhysiotherapistDetailComponent implements OnInit {
     const id = this.id.value;
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
-    const enabled = this.enabled.value == "1" ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const physiotherapist = new Physiotherapist();
     physiotherapist.id = id;
     physiotherapist.last_name = last_name;
     physiotherapist.first_name = first_name;
     physiotherapist.enabled = enabled;
-
     this.physiotherapistService.update(physiotherapist).subscribe(
-      response => {
+      () => {
         this.router.navigate(['physiotherapists']);
       }
     )

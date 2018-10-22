@@ -13,70 +13,108 @@
               <div class="col-md-4 pr-1">
                 <div class="form-group">
                   <label for="last-name">Cognome</label>
-                  <input type="text" class="form-control" placeholder="Cognome" name="last_name" formControlName="last_name"
-                    id="last-name" value="">
+                  <input required minlength="2" type="text" class="form-control" placeholder="Cognome" name="last_name"
+                    formControlName="last_name" id="last-name" value="">
+                  <div *ngIf="last_name.touched && last_name.dirty && last_name.invalid">
+                    <div class="alert-danger" *ngIf="last_name.errors.required">
+                      Il campo cognome è obbligatorio
+                    </div>
+                    <div class="alert-danger" *ngIf="last_name.errors.minlength">
+                      Il campo cognome deve essere di almeno {{last_name.errors.minlength.requiredLength}} caratteri
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="first-name">Nome</label>
-                  <input type="text" class="form-control" placeholder="Nome" name="first_name" formControlName="first_name"
-                    id="first-name" value="">
+                  <input required minlength="2" type="text" class="form-control" placeholder="Nome" name="first_name"
+                    formControlName="first_name" id="first-name" value="">
+                  <div *ngIf="first_name.touched && first_name.dirty && first_name.invalid">
+                    <div class="alert-danger" *ngIf="first_name.errors.required">
+                      Il campo nome è obbligatorio
+                    </div>
+                    <div class="alert-danger" *ngIf="first_name.errors.minlength">
+                      Il campo nome deve essere di almeno {{first_name.errors.minlength.requiredLength}} caratteri
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-3 px-1">
+              <div class="col-md-2 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
-                  <input type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code" formControlName="tax_code"
-                    id="tax-code" value="">
+                  <input required length="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
+                    formControlName="tax_code" id="tax-code" value="">
+                  <div *ngIf="tax_code.touched && tax_code.dirty && tax_code.invalid">
+                    <div class="alert-danger" *ngIf="tax_code.errors.required">
+                      Il campo codice fiscale è obbligatorio
+                    </div>
+                    <div class="alert-danger" *ngIf="tax_code.errors.length">
+                      Il campo codice fiscale deve essere di {{tax_code.errors.length.requiredLength}}
+                      caratteri
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 pr-1">
+                <div class="form-group">
+                  <label for="sex">Sesso</label>
+                  <select required class="custom-select form-control" id="sex" name="sex" formControlName="sex">
+                    <option *ngFor="let option of sexOptions" [value]="option.id">{{option.text}}</option>
+                  </select>
+                  <div *ngIf="sex.touched && sex.dirty && sex.invalid">
+                    <div class="alert-danger" *ngIf="sex.errors.required">
+                      Il campo sesso è obbligatorio
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2 pr-1">
                 <div class="form-group">
-                  <label for="sex">Sesso</label>
-                  <select class="custom-select form-control" id="sex" name="sex" formControlName="sex">
-                    <option *ngFor="let option of sexOptions" [value]="option.id">{{option.text}}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-2 pr-1">
-                <div class="form-group">
                   <label for="birthday">Data di nascita</label>
-                  <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
+                  <input required type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
                     formControlName="birthday">
+                  <div *ngIf="birthday.touched && birthday.dirty && birthday.invalid">
+                    <div class="alert-danger" *ngIf="birthday.errors.required">
+                      Il campo data di nascita è obbligatorio
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3 px-1">
                 <div class="form-group">
                   <label for="place-of-birth">Luogo di nascita</label>
-                  <input type="text" class="form-control" id="place-of-birth" name="place_of_birth" placeholder="Luogo di nascita"
-                    formControlName="place_of_birth">
+                  <input required minlenght="3" type="text" class="form-control" id="place-of-birth" name="place_of_birth"
+                    placeholder="Luogo di nascita" formControlName="place_of_birth">
+                  <div *ngIf="place_of_birth.touched && place_of_birth.dirty && place_of_birth.invalid">
+                    <div class="alert-danger" *ngIf="place_of_birth.errors.required">
+                      Il campo luogo di nascita è obbligatorio
+                    </div>
+                    <div class="alert-danger" *ngIf="place_of_birth.errors.minlength">
+                      Il campo luogo di nascita deve essere di almeno
+                      {{place_of_birth.errors.minlength.requiredLength}}
+                      caratteri
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="address">Indirizzo</label>
                   <input type="text" class="form-control" id="address" name="address" placeholder="Indirizzo"
                     formControlName="address">
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="city">Città</label>
                   <input type="text" class="form-control" id="city" name="city" placeholder="Città" formControlName="city">
                 </div>
               </div>
-              <div class="col-md-3 px-1">
-                <div class="form-group">
-                  <label for="phone-number">Telefono</label>
-                  <input type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
-                    formControlName="phone_number">
-                </div>
-              </div>
+            </div>
+            <div class="row">
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="doctor-id">Medico</label>
@@ -84,6 +122,22 @@
                     <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
                       {{option.first_name}}</option>
                   </select>
+                </div>
+              </div>
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label for="phone-number">Telefono</label>
+                  <input required type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
+                    formControlName="phone_number">
+                  <div *ngIf="phone_number.touched && phone_number.dirty && phone_number.invalid">
+                    <div class="alert-danger" *ngIf="phone_number.errors.required">
+                      Il campo telefono è obbligatorio
+                    </div>
+                    <div class="alert-danger" *ngIf="phone_number.errors.minlength">
+                      Il campo telefono deve essere di almeno {{phone_number.errors.minlength.requiredLength}}
+                      caratteri
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3 px-1">
@@ -96,8 +150,7 @@
             </div>
             <div class="row">
               <div class="col-md-3 pr-1">
-                <button class="btn btn-warning btn-block" (click)="editPatient($event)">{{formGroup.disabled ?
-                  'Modifica' : 'Salva'}}</button>
+                <button class="btn btn-warning btn-block" (click)="editPatient($event)">{{formGroup.disabled ? 'Modifica' : 'Salva'}}</button>
               </div>
               <div class="col-md-7 pr-1 text-right" *ngIf="!newPlan">
                 <button class="btn btn-warning" (click)="addNewPlan()"><i class="now-ui-icons ui-1_simple-add"></i>
@@ -122,7 +175,7 @@
           </div>
           <div class="card-body">
             <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" [mobilities]="mobilities"
-              [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies" [plan]="plans[idx]"
+              [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies" (onCreatedPlan)="planCreated($event)"
               (clickOnSavePlan)="savePlan($event)"></app-plan>
           </div>
         </div>

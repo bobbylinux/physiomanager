@@ -22,7 +22,6 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">ID</th>
                       <th scope="col">Descrizione</th>
                       <th scope="col">Abilitata</th>
                       <th scope="col"></th>
@@ -30,7 +29,6 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let therapy of therapies">
-                      <td scope="row">{{therapy.id}}</td>
                       <td scope="row">{{therapy.description}}</td>
                       <td scope="row">
                         <i *ngIf="therapy.enabled" class="material-icons">check</i>

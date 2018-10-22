@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, Inject} from '@angular/core';
 import {MobilityInterface} from '../../../interfaces/mobility.interface';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DeletePainComponent, DialogData } from '../../pains/delete/delete-pain.component';
+import { DialogDataInterface } from './../../../interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-delete-mobility',
@@ -13,7 +13,7 @@ export class DeleteMobilityComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(public dialogRef: MatDialogRef<DeletePainComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(public dialogRef: MatDialogRef<DeleteMobilityComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
 
   deleteMobility() {
     this.dialogRef.close("delete");

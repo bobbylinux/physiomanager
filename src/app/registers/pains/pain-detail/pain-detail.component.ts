@@ -23,6 +23,7 @@ export class PainDetailComponent implements OnInit {
   formGroup = new FormGroup({
     id: new FormControl(),
     description: new FormControl(),
+    index: new FormControl(),
     enabled: new FormControl()
   });
 
@@ -39,12 +40,12 @@ export class PainDetailComponent implements OnInit {
         }
         this.painService.get(params.id, '').subscribe(
           response => {
-            console.log(response);
             if (response['data'].length > 0) {
               this.pain = response['data'][0];
               this.formGroup = new FormGroup({
                 id: new FormControl(this.pain.id),
                 description: new FormControl(this.pain.description),
+                index: new FormControl(this.pain.index),
                 enabled: new FormControl(this.pain.enabled)
               });
             }
@@ -62,16 +63,22 @@ export class PainDetailComponent implements OnInit {
     return this.formGroup.get('description');
   }
 
+  get index() {
+    return this.formGroup.get('index');
+  }
+
   get enabled() {
     return this.formGroup.get('enabled');
   }
 
   addPain() {
     const description = this.description.value;
-    const enabled = this.enabled.value;
+    const index = this.index.value;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const pain = new Pain();
     pain.description = description;
-    pain.enabled = enabled === 'true' ? true : false;
+    pain.index = index;
+    pain.enabled = enabled;
 
     this.painService.create(pain).subscribe(
       () => {
@@ -83,11 +90,13 @@ export class PainDetailComponent implements OnInit {
   updatePain() {
     const id = this.id.value;
     const description = this.description.value;
-    const enabled = this.enabled.value;
+    const index = this.index.value;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const pain = new Pain();
     pain.id = id;
+    pain.index = index;
     pain.description = description;
-    pain.enabled = enabled === 'true' ? true : false;
+    pain.enabled = enabled;
 
     this.painService.update(pain).subscribe(
       () => {

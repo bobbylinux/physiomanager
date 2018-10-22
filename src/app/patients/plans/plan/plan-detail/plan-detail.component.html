@@ -1,4 +1,9 @@
 <form [formGroup]="planFormGroup">
+  <div *ngIf="plan.created_at" class="row">
+    <div class="col-md-7 pr-1 date-div">
+        <label>Data di creazione:  </label><span><strong>{{plan.created_at.date}}</strong></span>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-7 pr-1">
       <div class="form-group">

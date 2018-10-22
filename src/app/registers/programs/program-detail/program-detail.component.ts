@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Program} from '../../../classes/program';
-import {ProgramService} from '../../../services/registers/program.service';
-import {ProgramInterface} from '../../../interfaces/program.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Program } from '../../../classes/program';
+import { ProgramService } from '../../../services/registers/program.service';
+import { ProgramInterface } from '../../../interfaces/program.interface';
 
 @Component({
   selector: 'app-program-detail',
@@ -15,8 +15,8 @@ export class ProgramDetailComponent implements OnInit {
   private newProgram = false;
 
   enabledOptions = [
-    {id: true, text: 'Sì'},
-    {id: false, text: 'No'}
+    { id: true, text: 'Sì' },
+    { id: false, text: 'No' }
   ];
 
   private program: ProgramInterface;
@@ -75,7 +75,7 @@ export class ProgramDetailComponent implements OnInit {
   addProgram() {
     const title = this.title.value;
     const description = this.description.value;
-    const enabled = this.enabled.value == '1' ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const program = new Program();
     program.title = title;
     program.description = description;
@@ -92,7 +92,7 @@ export class ProgramDetailComponent implements OnInit {
     const id = this.id.value;
     const title = this.title.value;
     const description = this.description.value;
-    const enabled = this.enabled.value == '1' ? true : false;
+    const enabled = this.enabled.value.toString() == 'true' ? true : false;
     const program = new Program();
     program.id = id;
     program.title = title;

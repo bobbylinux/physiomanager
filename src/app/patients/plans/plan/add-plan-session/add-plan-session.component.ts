@@ -86,8 +86,6 @@ export class AddPlanSessionComponent implements OnInit {
     this.note = "";
     this.price = 0;
 
-    console.log("session add-plan-session => ", session);
-
     this.clickOnAddTherapy.emit(session);
 
   }

@@ -33,6 +33,9 @@ export class PlanComponent implements OnInit {
 
   private sessions = [];
 
+  @Output()
+  onCreatedPlan = new EventEmitter<PlanInterface>();
+
   @Input()
   set patient(value) {
     this._patient.next(value);
@@ -55,6 +58,9 @@ export class PlanComponent implements OnInit {
   @Input()
   set newPlan(value) {
     this._newPlan.next(value);
+    if (value) {
+      this.plan = new Plan();
+    }
   }
   get newPlan() {
     return this._newPlan.getValue();
@@ -108,15 +114,15 @@ export class PlanComponent implements OnInit {
 
   addTherapyToSessions(session) {
     this.sessions.push(session);
-    console.log("pushed", session, this.sessions);
   }
 
   savePlan(plan: PlanInterface) {
+    
     if (this.newPlan) {
       plan.patient_id = this.patient.id;
       this.planService.create(plan).subscribe(
         response => {
-          this.toastr.info('Scheda aggiornata correttamente', '', {
+          this.toastr.info('Scheda creata correttamente', '', {
             timeOut: 8000,
             closeButton: true,
             enableHtml: true,
@@ -124,17 +130,16 @@ export class PlanComponent implements OnInit {
             positionClass: 'toast-top-right'
           });
 
-          let planId = response['data'].id;
-
+          plan = response['data'][0];
           if (this.sessions.length > 0) {
             for (let session of this.sessions) {
-              session.plan_id = planId;
+              session.plan_id = plan.id;
               //ora devo salvare le sessioni
               this.sessionService.create(session).subscribe(
                 () => {
                   plan.sessions = this.sessions;
-                  //this.plans.push(plan);
                   this.newPlan = false;
+                  this.onCreatedPlan.emit(plan);
                 },
                 error => {
                   console.log(error);
@@ -142,7 +147,7 @@ export class PlanComponent implements OnInit {
               )
             }
           } else {
-            //this.plans.push(plan);
+            this.onCreatedPlan.emit(plan);
           }
 
         },
@@ -152,7 +157,6 @@ export class PlanComponent implements OnInit {
       );
     } else {
       //modifica scheda
-      console.log(this.sessions);
       this.planService.update(plan).subscribe(
         () => {
           this.toastr.info('Scheda aggiornata correttamente', '', {

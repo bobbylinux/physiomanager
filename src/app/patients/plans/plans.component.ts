@@ -27,6 +27,7 @@ import { TherapyInterface } from './../../interfaces/therapy.interface';
 import { ToastrService } from 'ngx-toastr';
 import { DoctorService } from './../../services/registers/doctor.service';
 import { DoctorInterface } from './../../interfaces/doctor.interface';
+import { Utility } from './../../classes/utility';
 
 @Component({
   selector: 'app-plans',
@@ -100,11 +101,11 @@ export class PlansComponent implements OnInit {
                   'first_name': this.patient.first_name,
                   'tax_code': this.patient.tax_code,
                   'sex': this.patient.sex,
-                  'birthday': this.formatDate(this.patient.birthday),
+                  'birthday': Utility.formatDate(this.patient.birthday),
                   'place_of_birth': this.patient.place_of_birth,
                   'address': this.patient.detail.address,
                   'city': this.patient.detail.city,
-                  'doctor_id' : this.patient.detail.doctor_id, 
+                  'doctor_id': this.patient.detail.doctor_id,
                   'phone_number': this.patient.detail.phone_number,
                   'email': this.patient.detail.email
                 }
@@ -123,7 +124,6 @@ export class PlansComponent implements OnInit {
             if (response['data'].length > 0) {
               this.plans = response['data'];
               this.newPlan = false;
-              console.log(this.plans);
             } else {
               this.plans = [];
               this.newPlan = true;
@@ -141,7 +141,7 @@ export class PlansComponent implements OnInit {
           }
         )
         /* risultati del lavoro */
-        this.workResultService.get(null, 'enabled=true').subscribe(
+        this.workResultService.getAll(null, 'enabled=true').subscribe(
           response => {
             if (response['data'].length > 0) {
               this.workResults = response['data'];
@@ -289,13 +289,6 @@ export class PlansComponent implements OnInit {
     return this.formGroup.get('email');
   }
 
-  formatDate(date: string) {
-    let day = date.substr(0, 2);
-    let month = date.substr(3, 2);
-    let year = date.substr(6, 4);
-    return year + "-" + month + "-" + day;
-  }
-
   editPatient(event) {
     event.preventDefault();
     if (this.formGroup.disabled) {
@@ -327,7 +320,7 @@ export class PlansComponent implements OnInit {
 
         },
         error => {
-
+          console.log(error);
         }
       );
 
@@ -337,6 +330,11 @@ export class PlansComponent implements OnInit {
 
   addNewPlan() {
     this.newPlan = true;
+  }
+
+  planCreated(plan) {
+    this.newPlan = false;
+    this.plans.unshift(plan);
   }
 
 }

@@ -22,7 +22,6 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">ID</th>
                       <th scope="col">Cognome</th>
                       <th scope="col">Nome</th>
                       <th scope="col">Attivo</th>
@@ -31,7 +30,6 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let doctor of doctors">
-                      <td scope="row">{{doctor.id}}</td>
                       <td scope="row">{{doctor.last_name}}</td>
                       <td scope="row">{{doctor.first_name}}</td>
                       <td scope="row">

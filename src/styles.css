@@ -69,3 +69,7 @@ div.alert-danger {
     margin: 1%;
     padding: 1%;
 }
+
+.mat-ink-bar {
+    background-color: #ff3636 !important; 
+}

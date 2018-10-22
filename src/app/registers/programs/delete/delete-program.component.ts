@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogData } from '../../pains/delete/delete-pain.component';
+import { DialogDataInterface } from './../../../interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-delete-program',
@@ -9,7 +9,7 @@ import { DialogData } from '../../pains/delete/delete-pain.component';
 })
 export class DeleteProgramComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DeleteProgramComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(public dialogRef: MatDialogRef<DeleteProgramComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
 
   ngOnInit() {
   }

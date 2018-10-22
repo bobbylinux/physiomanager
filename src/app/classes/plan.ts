@@ -14,19 +14,21 @@ export class Plan implements PlanInterface  {
     pain_id : number;
     mobility_id : number;
     sessions: SessionInterface[];
+    created_at: any; 
 
     constructor() {
         this.id = 0;
-        this.patient_id = 0;
+        this.patient_id = null;
         this.pathological_conditions = '';
         this.note = '';
         this.program = '';
         this.final_report = '';
         this.privacy = '';
         this.medical_certificate = '';
-        this.work_result_id = 0;
-        this.pain_id = 0;
-        this.mobility_id = 0;
+        this.work_result_id = null;
+        this.pain_id = null;
+        this.mobility_id = null;
         this.sessions = [];
+        this.created_at = null;
     }
 }

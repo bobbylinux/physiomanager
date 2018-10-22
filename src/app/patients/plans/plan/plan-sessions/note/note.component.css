@@ -1,0 +1,11 @@
+div.modal-body {
+    height: 70%;
+}
+
+div.modal-header {
+    height: 10%;
+}
+
+div.modal-footer {
+    height: 20%;
+}
