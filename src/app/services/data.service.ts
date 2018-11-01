@@ -12,16 +12,19 @@ export class DataService {
   public getAll(params?: string, query?: string) {
     let filter = '';
     if (query && query.length > 0) {
-      filter="?"+query;
+      filter="?t="+new Date().getTime()+"&"+query;
+    } else {
+      filter="?t="+new Date().getTime();
     }
     let include = '';
     if (params && params.length > 0) {
       if (query.length > 0) {
         include="&include=" + params;  
       } else {
-        include = '?include=' + params;
+        include = "?t="+new Date().getTime()+"&include=" + params;
       }
     }
+    console.log(this.url + filter + include);
     return this.httpClient.get(this.url + filter + include);
   }
 

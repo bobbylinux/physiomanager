@@ -120,9 +120,9 @@ export class AddPatientComponent implements OnInit {
     patient.detail.phone_number = phone;
     patient.detail.email = email;
     patient.detail.doctor_id = doctor_id;
-
+    
     this.patientService.create(patient).subscribe(
-      () => {
+      response => {
         this.toastr.info('Paziente aggiunto correttamente', '', {
           timeOut: 8000,
           closeButton: true,
@@ -130,7 +130,8 @@ export class AddPatientComponent implements OnInit {
           toastClass: "alert alert-info alert-with-icon",
           positionClass: 'toast-top-right'
         });
-        this.router.navigate(['patients']);
+
+        this.router.navigate([`plans/${patient.id}`]);
       },
       error => {
         console.log(error);

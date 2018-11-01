@@ -94,7 +94,6 @@ export class PlansComponent implements OnInit {
           response => {
             if (response['data'].length > 0) {
               this.patient = response['data'][0];
-              console.log("birthday",  Utility.formatDateForDatabase(this.patient.birthday,"/"));
               this.formGroup.patchValue(
                 {
                   'id': this.patient.id,

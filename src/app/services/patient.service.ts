@@ -11,7 +11,7 @@ export class PatientService extends DataService{
   }
 
   searchPatient(lastName: string, firstName: string, taxCode: String) {
-    let queryString: string = "";
+    let queryString: string = "?t="+new Date().getTime();
 
     if (lastName.trim() !== "") {
       queryString +="last_name="+lastName.trim()+"&";

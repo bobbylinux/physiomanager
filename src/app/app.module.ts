@@ -24,6 +24,9 @@ import { DeleteProgramComponent } from './registers/programs/delete/delete-progr
 import { DeleteTherapyComponent } from './registers/therapies/delete/delete-therapy.component';
 import { DeleteWorkResultComponent } from './registers/work-results/delete/delete-work-result.component';
 import { NoteComponent } from './patients/plans/plan/plan-sessions/note/note.component';
+import { LoginComponent } from './login/login.component';
+import { RouteGuardService } from 'src/app/services/route-guard.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   imports: [
@@ -52,8 +55,10 @@ import { NoteComponent } from './patients/plans/plan/plan-sessions/note/note.com
     DeleteTherapyComponent,
     DeleteWorkResultComponent,
     NoteComponent,
+    LoginComponent,
 
   ],
+  providers: [RouteGuardService, AuthService],
   entryComponents: [DeleteDoctorComponent, DeleteMobilityComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent, NoteComponent],
   bootstrap: [AppComponent],
 })

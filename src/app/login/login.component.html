@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-5 offset-3">
+        <img class="img-responsive" src="../../assets/img/logo_login.png" alt="logo">
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 offset-3">
+      <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="../../assets/img/logo.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" name="loginForm" #form="ngForm" (ngSubmit)="login(form)">
+          <span id="reauth-email" class="reauth-email"></span>
+          <input required email ngModel #email="ngModel" type="email" id="inputEmail" class="form-control" name="email"
+            placeholder="Indirizzo E-Mail" autofocus>
+          <div *ngIf="email.dirty && email.touched && email.invalid">
+            <div class="alert-danger" *ngIf="email.errors.required">
+              Il campo e-mail è obbligatorio
+            </div>
+            <div class="alert-danger" *ngIf="email.errors.email">
+              Il campo e-mail deve contenere un indirizzo e-mail valido
+            </div>
+          </div>
+          <input required ngModel #password="ngModel" type="password" id="inputPassword" name="password" class="form-control"
+            placeholder="Password" required>
+          <div *ngIf="password.dirty && password.touched && password.invalid">
+            <div class="alert-danger" *ngIf="password.errors.required">
+              Il campo password è obbligatorio
+            </div>
+          </div>
+          <div id="remember" class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me"> Ricordami
+            </label>
+          </div>
+          <button [disabled]="!form.valid" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
+        </form><!-- /form -->
+      </div><!-- /card-container -->
+    </div>
+  </div>
+</div><!-- /container -->

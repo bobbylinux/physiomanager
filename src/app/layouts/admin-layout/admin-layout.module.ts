@@ -49,7 +49,7 @@ import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   imports: [
-  CommonModule,
+CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
