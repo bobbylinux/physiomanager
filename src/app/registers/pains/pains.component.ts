@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PainService } from '../../services/pain.service';
+import { PainService } from '../../services/registers/pain.service';
 import { PainInterface } from '../../interfaces/pain.interface';
 import { DeletePainComponent } from './delete/delete-pain.component';
 import { MatDialog } from '@angular/material';

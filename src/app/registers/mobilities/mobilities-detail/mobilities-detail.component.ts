@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MobilityService } from '../../../services/mobility.service';
+import { MobilityService } from '../../../services/registers/mobility.service';
 import { Mobility } from '../../../classes/mobility';
 import { MobilityInterface } from '../../../interfaces/mobility.interface';
 

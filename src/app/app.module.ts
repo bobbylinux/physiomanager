@@ -27,6 +27,7 @@ import { NoteComponent } from './patients/plans/plan/plan-sessions/note/note.com
 import { LoginComponent } from './login/login.component';
 import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { AuthService } from './services/auth.service';
+import { UnloggedUsersGuardService } from './services/unlogged-users-guard.service';
 
 @NgModule({
   imports: [
@@ -58,7 +59,7 @@ import { AuthService } from './services/auth.service';
     LoginComponent,
 
   ],
-  providers: [RouteGuardService, AuthService],
+  providers: [RouteGuardService, UnloggedUsersGuardService, AuthService],
   entryComponents: [DeleteDoctorComponent, DeleteMobilityComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent, NoteComponent],
   bootstrap: [AppComponent],
 })

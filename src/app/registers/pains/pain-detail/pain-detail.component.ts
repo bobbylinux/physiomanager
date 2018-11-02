@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PainInterface } from '../../../interfaces/pain.interface';
-import { PainService } from '../../../services/pain.service';
+import { PainService } from '../../../services/registers/pain.service';
 import { Pain } from '../../../classes/pain';
 
 @Component({

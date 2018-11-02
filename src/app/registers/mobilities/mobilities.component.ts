@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MobilityService } from '../../services/mobility.service';
+import { MobilityService } from '../../services/registers/mobility.service';
 import { MobilityInterface } from '../../interfaces/mobility.interface';
 import { DeleteMobilityComponent } from './delete/delete-mobility.component';
 import { MatDialog } from '@angular/material';

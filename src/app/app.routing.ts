@@ -5,11 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { RouteGuardService } from './services/route-guard.service';
+import { UnloggedUsersGuardService } from './services/unlogged-users-guard.service';
 
 const routes: Routes =[
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [UnloggedUsersGuardService] 
   },
   {
     path: '',

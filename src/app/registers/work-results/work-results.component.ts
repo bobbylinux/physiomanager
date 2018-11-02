@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WorkResultInterface } from '../../interfaces/work-result.interface';
 import { DeleteWorkResultComponent } from './delete/delete-work-result.component';
-import { WorkResultService } from '../../services/work-result.service';
+import { WorkResultService } from '../../services/registers/work-result.service';
 import { MatDialog } from '@angular/material';
 
 @Component({

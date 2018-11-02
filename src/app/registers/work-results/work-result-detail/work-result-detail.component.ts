@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {PainService} from '../../../services/pain.service';
+import {PainService} from '../../../services/registers/pain.service';
 import {Pain} from '../../../classes/pain';
 import {PainInterface} from '../../../interfaces/pain.interface';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WorkResultInterface} from '../../../interfaces/work-result.interface';
-import {WorkResultService} from '../../../services/work-result.service';
+import {WorkResultService} from '../../../services/registers/work-result.service';
 import {WorkResult} from '../../../classes/work-result';
 
 @Component({

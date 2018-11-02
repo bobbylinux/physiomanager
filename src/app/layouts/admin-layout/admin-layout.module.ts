@@ -34,9 +34,9 @@ import { WorkResultsComponent } from './../../registers/work-results/work-result
 import { ProgramsComponent } from './../../registers/programs/programs.component';
 import { ProgramDetailComponent } from './../../registers/programs/program-detail/program-detail.component';
 import { PlanService } from '../../services/plan.service';
-import { WorkResultService } from '../../services/work-result.service';
-import { MobilityService } from '../../services/mobility.service';
-import { PainService } from '../../services/pain.service';
+import { WorkResultService } from '../../services/registers/work-result.service';
+import { MobilityService } from '../../services/registers/mobility.service';
+import { PainService } from '../../services/registers/pain.service';
 import { DoctorService } from '../../services/registers/doctor.service';
 import { PhysiotherapistService } from '../../services/registers/physiotherapist.service';
 import { ProgramService } from '../../services/registers/program.service';

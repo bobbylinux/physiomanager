@@ -33,6 +33,11 @@
               <input type="checkbox" value="remember-me"> Ricordami
             </label>
           </div>
+          <div *ngIf="loginError">
+            <div class="alert-danger">
+              {{loginErrorMessage}}
+            </div>
+          </div>
           <button [disabled]="!form.valid" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
         </form><!-- /form -->
       </div><!-- /card-container -->
