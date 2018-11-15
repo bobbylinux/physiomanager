@@ -1,7 +1,7 @@
 <form [formGroup]="planFormGroup">
   <div *ngIf="plan.created_at" class="row">
     <div class="col-md-7 pr-1 date-div">
-        <label>Data di creazione:  </label><span><strong>{{plan.created_at.date}}</strong></span>
+      <label>Data di creazione: </label><span><strong>{{plan.created_at.date}}</strong></span>
     </div>
   </div>
   <div class="row">
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-5 pr-1">
+    <div class="col-md-7 pr-1">
       <label for="select-program">Programma</label>
       <select class="form-control" name="select_program" id="select-program" (change)="selectProgram($event)">
         <option *ngFor="let program of programs" [value]="program.id">
@@ -28,7 +28,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md-1 pr-1">
+    <div class="col-md-2 pr-1">
       <label for="privacy">Privacy</label>
       <select class="form-control" name="privacy" id="privacy" formControlName="privacy">
         <option *ngFor="let privacyOption of privacyOptions" [value]="privacyOption.id">
@@ -44,23 +44,15 @@
         </option>
       </select>
     </div>
-    <div class="col-md-3 pr-1">
-      <label for="work-result">Risultato del lavoro</label>
-      <select class="form-control" name="selectWorResult" ng-model id="work-result" formControlName="work_result_id">
-        <option *ngFor="let workResult of workResults" [value]="workResult.id">
-          {{ workResult.description }}
-        </option>
-      </select>
-    </div>
   </div>
   <div class="row">
-    <div class="col-md-5 pr-1">
+    <div class="col-md-7 pr-1">
       <div class="form-group">
         <textarea class="form-control" placeholder="Programma" name="program" formControlName="program" id="program"
           rows="5"></textarea>
       </div>
     </div>
-    <div class="col-md-3 pr-1">
+    <div class="col-md-2 pr-1">
       <label for="pain">Dolore</label>
       <select class="form-control" name="selectPain" id="pain" formControlName="pain_id">
         <option *ngFor="let pain of pains" [value]="pain.id">
@@ -68,11 +60,11 @@
         </option>
       </select>
     </div>
-    <div class="col-md-3 pr-1">
-      <label for="mobility">Mobilità</label>
-      <select class="form-control" name="selectWorResult" ng-model id="mobility" formControlName="mobility_id">
-        <option *ngFor="let mobility of mobilities" [value]="mobility.id">
-          {{ mobility.description }}
+    <div class="col-md-2 pr-1">
+      <label for="work-result">Risultato del lavoro</label>
+      <select class="form-control" name="selectWorResult" ng-model id="work-result" formControlName="work_result_id">
+        <option *ngFor="let workResult of workResults" [value]="workResult.id">
+          {{ workResult.description }}
         </option>
       </select>
     </div>

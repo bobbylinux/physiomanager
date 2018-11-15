@@ -56,19 +56,6 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2 pr-1">
-                <div class="form-group">
-                  <label for="sex">Sesso</label>
-                  <select required class="custom-select form-control" id="sex" name="sex" formControlName="sex">
-                    <option *ngFor="let option of sexOptions" [value]="option.id">{{option.text}}</option>
-                  </select>
-                  <div *ngIf="sex.touched && sex.dirty && sex.invalid">
-                    <div class="alert-danger" *ngIf="sex.errors.required">
-                      Il campo sesso è obbligatorio
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="row">
               <div class="col-md-2 pr-1">
@@ -174,7 +161,7 @@
             </div>
           </div>
           <div class="card-body">
-            <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" [mobilities]="mobilities"
+            <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" 
               [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies" (onCreatedPlan)="planCreated($event)"
               (clickOnSavePlan)="savePlan($event)"></app-plan>
           </div>
@@ -197,7 +184,7 @@
             <mat-tab-group>
               <mat-tab *ngFor="let plan of plans; let idx = index" label="{{idx+1}}">
                 <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains"
-                  [mobilities]="mobilities" [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
+                  [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
                   [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)"></app-plan>
               </mat-tab>
             </mat-tab-group>

@@ -21,8 +21,6 @@ import { PlanSessionsComponent } from '../../patients/plans/plan/plan-sessions/p
 import { PlanSessionComponent } from './../../patients/plans/plan/plan-sessions/plan-session/plan-session.component';
 import { DoctorsComponent } from '../../registers/doctors/doctors.component';
 import { DoctorDetailComponent } from '../../registers/doctors/doctor-detail/doctor-detail.component';
-import { MobilitiesComponent } from '../../registers/mobilities/mobilities.component';
-import { MobilitiesDetailComponent } from '../../registers/mobilities/mobilities-detail/mobilities-detail.component';
 import { PainDetailComponent } from '../../registers/pains/pain-detail/pain-detail.component';
 import { PainsComponent } from './../../registers/pains/pains.component';
 import { PhysiotherapistsComponent } from './../../registers/physiotherapists/physiotherapists.component';
@@ -35,7 +33,6 @@ import { ProgramsComponent } from './../../registers/programs/programs.component
 import { ProgramDetailComponent } from './../../registers/programs/program-detail/program-detail.component';
 import { PlanService } from '../../services/plan.service';
 import { WorkResultService } from '../../services/registers/work-result.service';
-import { MobilityService } from '../../services/registers/mobility.service';
 import { PainService } from '../../services/registers/pain.service';
 import { DoctorService } from '../../services/registers/doctor.service';
 import { PhysiotherapistService } from '../../services/registers/physiotherapist.service';
@@ -74,8 +71,6 @@ CommonModule,
     PlanComponent,
     DoctorsComponent,
     DoctorDetailComponent,
-    MobilitiesComponent,
-    MobilitiesDetailComponent,
     PainsComponent,
     PainDetailComponent,
     PhysiotherapistsComponent,
@@ -88,7 +83,7 @@ CommonModule,
     ProgramDetailComponent
   ],
 
-  providers: [PatientService, PlanService, WorkResultService, MobilityService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService, AuthService, RouteGuardService],
+  providers: [PatientService, PlanService, WorkResultService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService, AuthService, RouteGuardService],
 })
 
 export class AdminLayoutModule { }

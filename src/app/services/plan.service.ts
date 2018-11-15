@@ -12,7 +12,7 @@ export class PlanService extends DataService {
 
   searchPlan(patient_id: string) {
     let queryString: string = "patient_id="+patient_id.toString();
-    let includeString = "work_result,pain,mobility,patient,sessions";
+    let includeString = "work_result,pain,patient,sessions";
     return super.search(queryString, includeString);
   }
 }

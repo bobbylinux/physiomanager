@@ -7,8 +7,6 @@ import { PlansComponent } from '../../patients/plans/plans.component';
 import { NewPlanComponent } from '../../patients/plans/new-plan/new-plan.component';
 import { DoctorsComponent } from './../../registers/doctors/doctors.component';
 import { DoctorDetailComponent } from './../../registers/doctors/doctor-detail/doctor-detail.component';
-import { MobilitiesComponent } from './../../registers/mobilities/mobilities.component';
-import { MobilitiesDetailComponent } from './../../registers/mobilities/mobilities-detail/mobilities-detail.component';
 import { PainsComponent } from '../../registers/pains/pains.component';
 import { PainDetailComponent } from './../../registers/pains/pain-detail/pain-detail.component';
 import { PhysiotherapistDetailComponent } from './../../registers/physiotherapists/physiotherapist-detail/physiotherapist-detail.component';
@@ -28,10 +26,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'plans/:id/new-plan', component: NewPlanComponent },
     { path: 'doctors', component: DoctorsComponent },
     { path: 'doctors/:id/edit', component: DoctorDetailComponent },
-    { path: 'doctors/new', component: DoctorDetailComponent },
-    { path: 'mobilities', component: MobilitiesComponent },
-    { path: 'mobilities/:id/edit', component: MobilitiesDetailComponent },
-    { path: 'mobilities/new', component: MobilitiesDetailComponent },
     { path: 'doctors/new', component: DoctorDetailComponent },
     { path: 'pains', component: PainsComponent },
     { path: 'pains/:id/edit', component: PainDetailComponent },

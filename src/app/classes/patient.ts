@@ -6,7 +6,6 @@ export class Patient implements PatientInterface {
     last_name: string;
     first_name: string;
     tax_code: string;
-    sex: string;
     birthday: string;
     place_of_birth: string;
     href: string;
@@ -17,7 +16,6 @@ export class Patient implements PatientInterface {
         this.last_name = "";
         this.first_name = "";
         this.tax_code = "";
-        this.sex = "M";
         this.birthday = "2000-01-01";
         this.place_of_birth = "";
         this.href = "";

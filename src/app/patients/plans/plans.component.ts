@@ -3,7 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PatientService } from '../../services/patient.service';
 import { PlanService } from '../../services/plan.service';
 import { WorkResultService } from '../../services/registers/work-result.service';
-import { MobilityService } from '../../services/registers/mobility.service';
 import { PainService } from '../../services/registers/pain.service';
 import { ProgramService } from '../../services/registers/program.service';
 import { TherapyService } from '../../services/registers/therapy.service';
@@ -12,14 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Patient } from '../../classes/patient';
 import { WorkResult } from '../../classes/work-result';
 import { Pain } from '../../classes/pain';
-import { Mobility } from '../../classes/mobility';
 import { Program } from '../../classes/program';
 import { Therapy } from '../../classes/therapy';
 import { Physiotherapist } from '../../classes/physiotherapist';
 import { SessionInterface } from '../../interfaces/session.interface';
 import { PlanInterface } from './../../interfaces/plan.interface';
 import { ProgramInterface } from '../../interfaces/program.interface';
-import { MobilityInterface } from '../../interfaces/mobility.interface';
 import { WorkResultInterface } from '../../interfaces/work-result.interface';
 import { PainInterface } from '../../interfaces/pain.interface';
 import { PhysiotherapistInterface } from '../../interfaces/physiotherapist.interface';
@@ -41,7 +38,6 @@ export class PlansComponent implements OnInit {
   doctors: DoctorInterface[] = [];
   workResults: WorkResult[];
   pains: Pain[];
-  mobilities: Mobility[];
   programs: Program[];
   therapies: Therapy[];
   physiotherapists: Physiotherapist[];
@@ -49,17 +45,11 @@ export class PlansComponent implements OnInit {
   session: SessionInterface;
   formDisabled: boolean = true;
 
-  sexOptions = [
-    { id: 'M', text: 'Maschio' },
-    { id: 'F', text: 'Femmina' }
-  ];
-
   formGroup = new FormGroup({
     patient_id: new FormControl(),
     last_name: new FormControl(),
     first_name: new FormControl(),
     tax_code: new FormControl(),
-    sex: new FormControl(),
     birthday: new FormControl(),
     place_of_birth: new FormControl(),
     address: new FormControl(),
@@ -73,7 +63,6 @@ export class PlansComponent implements OnInit {
     private planService: PlanService,
     private doctorService: DoctorService,
     private workResultService: WorkResultService,
-    private mobilityService: MobilityService,
     private painService: PainService,
     private programService: ProgramService,
     private therapyService: TherapyService,
@@ -100,7 +89,6 @@ export class PlansComponent implements OnInit {
                   'last_name': this.patient.last_name,
                   'first_name': this.patient.first_name,
                   'tax_code': this.patient.tax_code,
-                  'sex': this.patient.sex,
                   'birthday': Utility.formatDateForDatabase(this.patient.birthday),
                   'place_of_birth': this.patient.place_of_birth,
                   'address': this.patient.detail.address,
@@ -110,121 +98,104 @@ export class PlansComponent implements OnInit {
                   'email': this.patient.detail.email
                 }
               );
-
               this.formGroup.disable();
             }
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* cicli */
-        this.planService.searchPlan(params.id).subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.plans = response['data'];
-              this.newPlan = false;
-            } else {
-              this.plans = [];
-              this.newPlan = true;
-            }
-
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* medici */
-        this.doctorService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            this.doctors = response['data'];
-          }
-        )
-        /* risultati del lavoro */
-        this.workResultService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.workResults = response['data'];
-              if (this.workResults) {
-                const emptyItemWorkResult: WorkResultInterface = new WorkResult();
-                this.workResults.unshift(emptyItemWorkResult);
+             /* cicli */
+             this.planService.searchPlan(params.id).subscribe(
+              response => {
+                if (response['data'].length > 0) {
+                  this.plans = response['data'];
+                  this.newPlan = false;
+                } else {
+                  this.plans = [];
+                  this.newPlan = true;
+                }
+                /* medici */
+                this.doctorService.getAll(null, 'enabled=true').subscribe(
+                  response => {
+                    this.doctors = response['data'];
+                    /* risultati del lavoro */
+                    this.workResultService.getAll(null, 'enabled=true').subscribe(
+                      response => {
+                        if (response['data'].length > 0) {
+                          this.workResults = response['data'];
+                          if (this.workResults) {
+                            const emptyItemWorkResult: WorkResultInterface = new WorkResult();
+                            this.workResults.unshift(emptyItemWorkResult);
+                          }
+                        }
+                        /* indici di dolore */
+                        this.painService.getAll(null, 'enabled=true').subscribe(
+                          response => {
+                            if (response['data'].length > 0) {
+                              this.pains = response['data'];
+                              if (this.pains) {
+                                const emptyItemPain: PainInterface = new Pain();
+                                this.pains.unshift(emptyItemPain);
+                              }
+                            }
+                            /* programmi */
+                            this.programService.getAll(null, 'enabled=true').subscribe(
+                              response => {
+                                if (response['data'].length > 0) {
+                                  this.programs = response['data'];
+                                  if (this.programs) {
+                                    const emptyItemProgram: ProgramInterface = new Program();
+                                    this.programs.unshift(emptyItemProgram);
+                                  }
+                                }
+                                /* terapie */
+                                this.therapyService.getAll(null, 'enabled=true').subscribe(
+                                  response => {
+                                    if (response['data'].length > 0) {
+                                      this.therapies = response['data'];
+                                      if (this.therapies) {
+                                        const emptyTherapy: TherapyInterface = new Therapy();
+                                        this.therapies.unshift(emptyTherapy);
+                                      }
+                                    }
+                                    /* fisioterapisti */
+                                    this.physiotherapistService.getAll(null, 'enabled=true').subscribe(
+                                      response => {
+                                        if (response['data'].length > 0) {
+                                          this.physiotherapists = response['data'];
+                                          if (this.physiotherapists) {
+                                            const emptyItemPhysiotherapis: PhysiotherapistInterface = new Physiotherapist();
+                                            this.physiotherapists.unshift(emptyItemPhysiotherapis);
+                                          }
+                                        }
+                                      },
+                                      error => {
+                                        console.log(error);
+                                      }
+                                    );
+                                  },
+                                  error => {
+                                    console.log(error);
+                                  }
+                                );
+                              },
+                              error => {
+                                console.log(error);
+                              }
+                            );
+                          },
+                          error => {
+                            console.log(error);
+                          }
+                        );
+                      },
+                      error => {
+                        console.log(error);
+                      }
+                    );
+                  }
+                )
+              },
+              error => {
+                console.log(error);
               }
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* mobilità */
-        this.mobilityService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.mobilities = response['data'];
-              if (this.mobilities) {
-                const emptyItemMobility: MobilityInterface = new Mobility();
-                this.mobilities.unshift(emptyItemMobility);
-              }
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* indici di dolore */
-        this.painService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.pains = response['data'];
-              if (this.pains) {
-                const emptyItemPain: PainInterface = new Pain();
-                this.pains.unshift(emptyItemPain);
-              }
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* programmi */
-        this.programService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.programs = response['data'];
-              if (this.programs) {
-                const emptyItemProgram: ProgramInterface = new Program();
-                this.programs.unshift(emptyItemProgram);
-              }
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* terapie */
-        this.therapyService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.therapies = response['data'];
-              if (this.therapies) {
-                const emptyTherapy: TherapyInterface = new Therapy();
-                this.therapies.unshift(emptyTherapy);
-              }
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        /* fisioterapisti */
-        this.physiotherapistService.getAll(null, 'enabled=true').subscribe(
-          response => {
-            if (response['data'].length > 0) {
-              this.physiotherapists = response['data'];
-              if (this.physiotherapists) {
-                const emptyItemPhysiotherapis: PhysiotherapistInterface = new Physiotherapist();
-                this.physiotherapists.unshift(emptyItemPhysiotherapis);
-              }
-            }
+            );
           },
           error => {
             console.log(error);
@@ -261,10 +232,6 @@ export class PlansComponent implements OnInit {
     return this.formGroup.get('tax_code');
   }
 
-  get sex() {
-    return this.formGroup.get('sex');
-  }
-
   get birthday() {
     return this.formGroup.get('birthday');
   }
@@ -285,6 +252,10 @@ export class PlansComponent implements OnInit {
     return this.formGroup.get('phone_number');
   }
 
+  get doctor_id() {
+    return this.formGroup.get('doctor_id');
+  }
+
   get email() {
     return this.formGroup.get('email');
   }
@@ -300,13 +271,13 @@ export class PlansComponent implements OnInit {
       patient.first_name = this.first_name.value;
       patient.last_name = this.last_name.value;
       patient.tax_code = this.tax_code.value;
-      patient.sex = this.sex.value;
       patient.birthday = this.birthday.value;
       patient.place_of_birth = this.place_of_birth.value;
       patient.detail.address = this.address.value;
       patient.detail.city = this.city.value;
       patient.detail.phone_number = this.phone_number.value;
       patient.detail.email = this.email.value;
+      patient.detail.doctor_id = this.doctor_id.value;
 
       this.patientService.update(patient).subscribe(
         response => {

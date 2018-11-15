@@ -15,11 +15,6 @@ import { DoctorInterface } from './../../interfaces/doctor.interface';
 })
 export class AddPatientComponent implements OnInit {
 
-  sexOptions = [
-    { id: 'M', text: 'Maschio' },
-    { id: 'F', text: 'Femmina' }
-  ];
-
   doctors: DoctorInterface[];
 
   formGroup = new FormGroup({
@@ -27,7 +22,6 @@ export class AddPatientComponent implements OnInit {
     last_name: new FormControl(),
     first_name: new FormControl(),
     tax_code: new FormControl(),
-    sex: new FormControl(),
     birthday: new FormControl(),
     place_of_birth: new FormControl(),
     address: new FormControl(),
@@ -63,10 +57,6 @@ export class AddPatientComponent implements OnInit {
     return this.formGroup.get('tax_code');
   }
 
-  get sex() {
-    return this.formGroup.get('sex');
-  }
-
   get birthday() {
     return this.formGroup.get('birthday');
   }
@@ -91,7 +81,7 @@ export class AddPatientComponent implements OnInit {
     return this.formGroup.get('email');
   }
 
-  get doctorId() {
+  get doctor_id() {
     return this.formGroup.get('doctor_id');
   }
 
@@ -99,21 +89,19 @@ export class AddPatientComponent implements OnInit {
     const last_name = this.last_name.value;
     const first_name = this.first_name.value;
     const tax_code = this.tax_code.value;
-    const sex = this.sex.value;
     const birthday = this.birthday.value;
     const place_of_birth = this.place_of_birth.value;
     const address = this.address.value;
     const city = this.city.value;
     const phone = this.phone_number.value;
     const email = this.email.value;
-    const doctor_id = this.doctorId.value;
+    const doctor_id = this.doctor_id.value;
     const patient = new Patient();
     patient.last_name = last_name;
     patient.first_name = first_name;
     patient.tax_code = tax_code;
     patient.birthday = birthday;
     patient.place_of_birth = place_of_birth;
-    patient.sex = sex;
     patient.detail = new PatientDetail();
     patient.detail.address = address;
     patient.detail.city = city;

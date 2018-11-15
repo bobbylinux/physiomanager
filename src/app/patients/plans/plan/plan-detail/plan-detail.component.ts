@@ -3,7 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { PainInterface } from './../../../../interfaces/pain.interface';
 import { WorkResultInterface } from './../../../../interfaces/work-result.interface';
-import { MobilityInterface } from './../../../../interfaces/mobility.interface';
 import { ProgramInterface } from './../../../../interfaces/program.interface';
 
 import { PlanInterface } from '../../../../interfaces/plan.interface';
@@ -19,7 +18,6 @@ export class PlanDetailComponent implements OnInit {
 
   private _plan = new BehaviorSubject<PlanInterface>(new Plan());
   private _newPlan = new BehaviorSubject<boolean>(false);
-  private _mobilities = new BehaviorSubject<MobilityInterface[]>([]);
   private _pains = new BehaviorSubject<PainInterface[]>([]);
   private _programs = new BehaviorSubject<ProgramInterface[]>([]);
   private _workResults = new BehaviorSubject<WorkResultInterface[]>([]);
@@ -32,7 +30,6 @@ export class PlanDetailComponent implements OnInit {
     medical_certificate: new FormControl(),
     work_result_id: new FormControl(),
     pain_id: new FormControl(),
-    mobility_id: new FormControl(),
     final_report: new FormControl()
   });
 
@@ -58,7 +55,6 @@ export class PlanDetailComponent implements OnInit {
           'note': this.plan.note,
           'privacy': this.plan.privacy,
           'medical_certificate': this.plan.medical_certificate,
-          'mobility_id': this.plan.mobility_id,
           'pain_id' : this.plan.pain_id,
           'work_result_id' : this.plan.work_result_id,
           'final_report' : this.plan.final_report
@@ -94,13 +90,6 @@ export class PlanDetailComponent implements OnInit {
     return this._workResults.getValue();
   }
   @Input()
-  set mobilities(value) {
-    this._mobilities.next(value);
-  }
-  get mobilities() {
-    return this._mobilities.getValue();
-  }
-  @Input()
   set programs(value) {
     this._programs.next(value);
   }
@@ -127,7 +116,6 @@ export class PlanDetailComponent implements OnInit {
     plan.program = this.planFormGroup.get('program').value;
     plan.privacy = this.planFormGroup.get('privacy').value;
     plan.medical_certificate = this.planFormGroup.get('medical_certificate').value;
-    plan.mobility_id = this.planFormGroup.get('mobility_id').value;
     plan.pain_id = this.planFormGroup.get('pain_id').value;
     plan.work_result_id = this.planFormGroup.get('work_result_id').value;
     plan.final_report = this.planFormGroup.get('final_report').value;

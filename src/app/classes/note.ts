@@ -1,6 +1,4 @@
-export class Note implements NoteInterface {
+export class Note  {
     id: number;
     note: string;
-
-    
 }

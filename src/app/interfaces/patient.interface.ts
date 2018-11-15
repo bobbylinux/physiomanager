@@ -5,7 +5,6 @@ export interface PatientInterface {
     last_name: string;
     first_name: string;
     tax_code: string;
-    sex: string;
     birthday: string;
     place_of_birth: string;
     href: string;

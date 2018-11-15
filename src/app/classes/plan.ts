@@ -12,7 +12,6 @@ export class Plan implements PlanInterface  {
     medical_certificate: string;
     work_result_id : number;
     pain_id : number;
-    mobility_id : number;
     sessions: SessionInterface[];
     created_at: any; 
 
@@ -27,7 +26,6 @@ export class Plan implements PlanInterface  {
         this.medical_certificate = '';
         this.work_result_id = null;
         this.pain_id = null;
-        this.mobility_id = null;
         this.sessions = [];
         this.created_at = null;
     }

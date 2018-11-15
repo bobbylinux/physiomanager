@@ -43,30 +43,8 @@
               <div class="col-md-2 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
-                  <input required length="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
+                  <input length="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
                     formControlName="tax_code" id="tax-code" value="">
-                  <div *ngIf="tax_code.touched && tax_code.dirty && tax_code.invalid">
-                    <div class="alert-danger" *ngIf="tax_code.errors.required">
-                      Il campo codice fiscale è obbligatorio
-                    </div>
-                    <div class="alert-danger" *ngIf="tax_code.errors.length">
-                      Il campo codice fiscale deve essere di {{tax_code.errors.length.requiredLength}}
-                      caratteri
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-2 pr-1">
-                <div class="form-group">
-                  <label for="sex">Sesso</label>
-                  <select required class="custom-select form-control" id="sex" name="sex" formControlName="sex">
-                    <option *ngFor="let option of sexOptions" [value]="option.id">{{option.text}}</option>
-                  </select>
-                  <div *ngIf="sex.touched && sex.dirty && sex.invalid">
-                    <div class="alert-danger" *ngIf="sex.errors.required">
-                      Il campo sesso è obbligatorio
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -74,30 +52,15 @@
               <div class="col-md-2 pr-1">
                 <div class="form-group">
                   <label for="birthday">Data di nascita</label>
-                  <input required type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
+                  <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
                     formControlName="birthday">
-                  <div *ngIf="birthday.touched && birthday.dirty && birthday.invalid">
-                    <div class="alert-danger" *ngIf="birthday.errors.required">
-                      Il campo data di nascita è obbligatorio
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="col-md-3 px-1">
                 <div class="form-group">
                   <label for="place-of-birth">Luogo di nascita</label>
-                  <input required minlenght="3" type="text" class="form-control" id="place-of-birth" name="place_of_birth"
+                  <input minlenght="3" type="text" class="form-control" id="place-of-birth" name="place_of_birth"
                     placeholder="Luogo di nascita" formControlName="place_of_birth">
-                  <div *ngIf="place_of_birth.touched && place_of_birth.dirty && place_of_birth.invalid">
-                    <div class="alert-danger" *ngIf="place_of_birth.errors.required">
-                      Il campo luogo di nascita è obbligatorio
-                    </div>
-                    <div class="alert-danger" *ngIf="place_of_birth.errors.minlength">
-                      Il campo luogo di nascita deve essere di almeno
-                      {{place_of_birth.errors.minlength.requiredLength}}
-                      caratteri
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="col-md-3 pr-1">
@@ -119,8 +82,7 @@
                 <div class="form-group">
                   <label for="doctor-id">Medico</label>
                   <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
-                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
-                      {{option.first_name}}</option>
+                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}} {{option.first_name}}</option>
                   </select>
                 </div>
               </div>

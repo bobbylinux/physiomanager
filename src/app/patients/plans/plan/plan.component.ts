@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { PlanInterface } from '../../../interfaces/plan.interface';
 import { Plan } from '../../../classes/plan';
-import { MobilityInterface } from '../../../interfaces/mobility.interface';
 import { PainInterface } from '../../../interfaces/pain.interface';
 import { ProgramInterface } from '../../../interfaces/program.interface';
 import { WorkResultInterface } from '../../../interfaces/work-result.interface';
@@ -24,7 +23,6 @@ export class PlanComponent implements OnInit {
   private _patient = new BehaviorSubject<PatientInterface>(new Patient());
   private _plan = new BehaviorSubject<PlanInterface>(new Plan());
   private _newPlan = new BehaviorSubject<boolean>(false);
-  private _mobilities = new BehaviorSubject<MobilityInterface[]>([]);
   private _pains = new BehaviorSubject<PainInterface[]>([]);
   private _programs = new BehaviorSubject<ProgramInterface[]>([]);
   private _workResults = new BehaviorSubject<WorkResultInterface[]>([]);
@@ -78,13 +76,6 @@ export class PlanComponent implements OnInit {
   }
   get workResults() {
     return this._workResults.getValue();
-  }
-  @Input()
-  set mobilities(value) {
-    this._mobilities.next(value);
-  }
-  get mobilities() {
-    return this._mobilities.getValue();
   }
   @Input()
   set programs(value) {

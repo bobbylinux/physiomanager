@@ -11,17 +11,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/physiotherapists', title: 'Fisioterapisti',  icon: 'business_badge', class: '' },
     { path: '/pains', title: 'Indici di Dolore',  icon: 'business_badge', class: '' },
     { path: '/doctors', title: 'Medici',  icon: 'business_badge', class: '' },
-    { path: '/mobilities', title: 'Mobilità',  icon: 'business_badge', class: '' },
-    { path: '/programs', title: 'Programmi',  icon: 'business_badge', class: '' },
+    { path: '/programs', title: 'Programmi Riabilitativi',  icon: 'business_badge', class: '' },
     { path: '/work_results', title: 'Risultati del Lavoro',  icon: 'business_badge', class: '' },
     { path: '/therapies', title: 'Terapie',  icon: 'business_badge', class: '' },
-    /*
-    { path: '/icons', title: 'Icons',  icon:'education_atom', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'ui-1_bell-53', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'users_single-02', class: '' },
-    { path: '/table-list', title: 'Table List',  icon:'design_bullet-list-67', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'text_caps-small', class: '' }
-    */
 ];
 
 @Component({

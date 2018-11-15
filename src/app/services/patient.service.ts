@@ -12,21 +12,19 @@ export class PatientService extends DataService{
   }
 
   searchPatient(lastName: string, firstName: string, taxCode: String) {
-    let queryString: string = "?t="+new Date().getTime();
+    let queryString: string = "t="+new Date().getTime();
 
     if (lastName.trim() !== "") {
-      queryString +="last_name="+lastName.trim()+"&";
-    }
+      queryString +="&last_name="+lastName.trim();
+    } 
 
     if (firstName.trim() !== "") {
-      queryString +="first_name="+firstName.trim()+"&";
+      queryString +="&first_name="+firstName.trim();
     }
 
     if (taxCode.trim() !== "") {
-      queryString +="tax_code="+taxCode.trim()+"&";
+      queryString +="&tax_code="+taxCode.trim();
     }
-    
-    queryString = queryString.substring(0, queryString.length - 1);
 
     return super.search(queryString, "");
   }

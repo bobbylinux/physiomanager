@@ -17,7 +17,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule, MatDialogModule, MatTabsModule } from '@angular/material';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DeleteDoctorComponent } from './registers/doctors/delete/delete-doctor.component';
-import { DeleteMobilityComponent } from './registers/mobilities/delete/delete-mobility.component';
 import { DeletePainComponent } from './registers/pains/delete/delete-pain.component';
 import { DeletePhysiotherapistComponent } from './registers/physiotherapists/delete/delete-physiotherapist.component';
 import { DeleteProgramComponent } from './registers/programs/delete/delete-program.component';
@@ -49,7 +48,6 @@ import { UnloggedUsersGuardService } from './services/unlogged-users-guard.servi
     AdminLayoutComponent,    
     /*delete*/
     DeleteDoctorComponent,
-    DeleteMobilityComponent,
     DeletePainComponent,
     DeletePhysiotherapistComponent,
     DeleteProgramComponent,
@@ -60,7 +58,7 @@ import { UnloggedUsersGuardService } from './services/unlogged-users-guard.servi
 
   ],
   providers: [RouteGuardService, UnloggedUsersGuardService, AuthService],
-  entryComponents: [DeleteDoctorComponent, DeleteMobilityComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent, NoteComponent],
+  entryComponents: [DeleteDoctorComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent, NoteComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
