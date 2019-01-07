@@ -8,6 +8,13 @@ import { ProgramInterface } from './../../../../interfaces/program.interface';
 import { PlanInterface } from '../../../../interfaces/plan.interface';
 import { Plan } from '../../../../classes/plan';
 import { Utility } from 'src/app/classes/utility';
+import { MatDialog } from '@angular/material';
+import { PaymentsComponent } from './../../payments/payments.component';
+import { PaymentTypeService } from 'src/app/services/registers/payment-type.service';
+import { PaymentService } from './../../../../services/payment.service';
+import { PaymentTypeInterface } from './../../../../interfaces/payment-type.interface';
+import { PaymentType } from 'src/app/classes/payment-type';
+import { PaymentInterface } from 'src/app/interfaces/payment.interface';
 
 @Component({
   selector: 'app-plan-detail',
@@ -44,7 +51,7 @@ export class PlanDetailComponent implements OnInit {
     { id: false, text: 'No' }
   ];
 
-  @Input() 
+  @Input()
   set plan(value) {
     this._plan.next(value);
     if (this.plan) {
@@ -55,9 +62,9 @@ export class PlanDetailComponent implements OnInit {
           'note': this.plan.note,
           'privacy': this.plan.privacy,
           'medical_certificate': this.plan.medical_certificate,
-          'pain_id' : this.plan.pain_id,
-          'work_result_id' : this.plan.work_result_id,
-          'final_report' : this.plan.final_report
+          'pain_id': this.plan.pain_id,
+          'work_result_id': this.plan.work_result_id,
+          'final_report': this.plan.final_report
         }
       );
       if (this.plan.created_at != null) {
@@ -97,14 +104,14 @@ export class PlanDetailComponent implements OnInit {
     return this._programs.getValue();
   }
 
-  constructor() { }
+  constructor(private dialog: MatDialog, private paymentTypeService: PaymentTypeService, private paymentService: PaymentService) { }
 
   ngOnInit() { }
 
   selectProgram(event) {
     const selectedId = event.target.value;
     const program = this.programs.find(x => x.id == selectedId);
-    this.planFormGroup.patchValue({'program': program.description.toString()});
+    this.planFormGroup.patchValue({ 'program': program.description.toString() });
   }
 
   savePlan() {
@@ -119,7 +126,38 @@ export class PlanDetailComponent implements OnInit {
     plan.pain_id = this.planFormGroup.get('pain_id').value;
     plan.work_result_id = this.planFormGroup.get('work_result_id').value;
     plan.final_report = this.planFormGroup.get('final_report').value;
-    
+
     this.clickOnSavePlan.emit(plan);
+  }
+
+  managePayments() {
+    let paymentTypes: PaymentTypeInterface[];
+    let payments: PaymentInterface[];
+    this.paymentTypeService.getAll(null, 'enabled=true').subscribe(
+      (response) => {
+        if (response['data'].length > 0) {
+          paymentTypes = response['data'];
+          if (paymentTypes) {
+            const emptyItemPaymentType: PaymentTypeInterface = new PaymentType();
+            paymentTypes.unshift(emptyItemPaymentType);
+          }
+          this.paymentService.getAll(null, 'plan_id=' + this.plan.id).subscribe(
+            (response) => {
+
+              payments = response['data'];
+              console.log(payments);
+
+              this.dialog.open(PaymentsComponent, {
+                height: '80%',
+                width: '60%',
+                data: {
+                  planId: this.plan.id,
+                  paymentTypeService: this.paymentTypeService,
+                  paymentService: this.paymentService,
+                }
+              });
+            });
+        }
+      });
   }
 }

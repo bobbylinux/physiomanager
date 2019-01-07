@@ -43,10 +43,12 @@ import { PlanComponent } from '../../patients/plans/plan/plan.component';
 import { AuthService } from './../../services/auth.service';
 import { RouteGuardService } from './../../services/route-guard.service';
 import { MatTabsModule } from '@angular/material';
+import { PaymentService } from './../../services/payment.service';
+import { PaymentTypeService } from './../../services/registers/payment-type.service';
 
 @NgModule({
   imports: [
-CommonModule,
+    CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
@@ -83,7 +85,7 @@ CommonModule,
     ProgramDetailComponent
   ],
 
-  providers: [PatientService, PlanService, WorkResultService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService, AuthService, RouteGuardService],
+  providers: [PatientService, PlanService, WorkResultService, PainService, DoctorService, PhysiotherapistService, ProgramService, TherapyService, SessionService, AuthService, RouteGuardService, PaymentTypeService, PaymentService],
 })
 
 export class AdminLayoutModule { }

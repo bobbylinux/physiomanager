@@ -7,10 +7,10 @@ export class Payment implements PaymentInterface {
     note: string;
 
     constructor() {
-        id: 0;
-        amount: 0.00;
-        payment_type_id: 0;
-        note: null;
+        this.id = 0;
+        this.amount = 0.00;
+        this.payment_type_id = 0;
+        this.note = null;
     }
 
 }

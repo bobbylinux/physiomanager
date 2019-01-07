@@ -14,10 +14,6 @@ export class NoteComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteDoctor() {
-    this.dialogRef.close("delete");
-  }
-
   closeDialog() {
     this.dialogRef.close();
   }

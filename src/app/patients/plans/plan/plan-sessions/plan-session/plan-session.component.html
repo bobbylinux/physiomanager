@@ -1,7 +1,7 @@
 <td>{{formatDate(session.date)}}</td>
 <td>{{session.physiotherapist.last_name}} {{session.physiotherapist.first_name}}</td>
 <td>{{session.therapy.description}}</td>
-<td>{{session.price}}</td>
+<td>{{session.price}} &euro;</td>
 <td>
   <i *ngIf="session.note && session.note.length > 0; else noNote" class="material-icons" (click)="showNote()">
     mail

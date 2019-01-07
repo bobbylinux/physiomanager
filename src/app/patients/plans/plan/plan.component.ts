@@ -30,6 +30,7 @@ export class PlanComponent implements OnInit {
   private _therapies = new BehaviorSubject<TherapyInterface[]>([]);
 
   private sessions = [];
+  private totalAmount = 0;
 
   @Output()
   onCreatedPlan = new EventEmitter<PlanInterface>();
@@ -46,6 +47,9 @@ export class PlanComponent implements OnInit {
     this._plan.next(value);
     if (this.plan && this.plan.sessions) {
       this.sessions = this.plan.sessions;
+      for(let session of this.sessions) {
+        this.totalAmount += parseFloat(session.price.toString());
+      }
     } else {
       this.sessions = [];
     }
@@ -105,6 +109,7 @@ export class PlanComponent implements OnInit {
 
   addTherapyToSessions(session) {
     this.sessions.push(session);
+    this.totalAmount += parseFloat(session.price.toString());    
   }
 
   savePlan(plan: PlanInterface) {
@@ -200,5 +205,9 @@ export class PlanComponent implements OnInit {
         }
       )
     }
+  }
+
+  deleteSession(session) {
+    this.totalAmount -= parseFloat(session.price.toString()); 
   }
 }
