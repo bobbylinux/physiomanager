@@ -1,11 +1,6 @@
-.modal-header {
-    height: 15%;
+.row {
+    margin-bottom: 20px;
 }
 
-.modal-body {
-    height: 60%;
-}
-
-.modal-footer {
-    height: 10%;
+.btn-close-dialog {
 }

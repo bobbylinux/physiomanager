@@ -4,7 +4,6 @@ import { DialogDataInterface } from 'src/app/interfaces/dialog-data.interface';
 import { PaymentService } from './../../../services/payment.service';
 import { PaymentTypeService } from './../../../services/registers/payment-type.service';
 import { PaymentTypeInterface } from './../../../interfaces/payment-type.interface';
-import { PaymentType } from 'src/app/classes/payment-type';
 import { PaymentInterface } from 'src/app/interfaces/payment.interface';
 
 @Component({
@@ -14,9 +13,9 @@ import { PaymentInterface } from 'src/app/interfaces/payment.interface';
 })
 export class PaymentsComponent implements OnInit {
 
+  private selectedPaymentType: PaymentTypeInterface;
   private paymentTypes: PaymentTypeInterface[];
   private payments: PaymentInterface[];
-  private paymentTypeService: PaymentTypeService;
   private paymentService: PaymentService;
   private planId: number;
 
@@ -25,13 +24,17 @@ export class PaymentsComponent implements OnInit {
 
   ngOnInit() {
     this.paymentService = this.data.paymentService;
-    this.paymentTypeService = this.data.paymentTypeSerive;
     this.planId = this.data.planId;
-    
+    this.payments = this.data.payments; 
+    this.paymentTypes = this.data.paymentTypes;
   }
 
   closeDialog() {
     this.dialogRef.close();
   }
 
+  selectPaymentType(event) {
+    const selectedId = event.target.value;
+    this.selectedPaymentType =  this.paymentTypes.find(x => x.id == selectedId);
+  }
 }

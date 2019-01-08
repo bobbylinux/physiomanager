@@ -141,18 +141,20 @@ export class PlanDetailComponent implements OnInit {
             const emptyItemPaymentType: PaymentTypeInterface = new PaymentType();
             paymentTypes.unshift(emptyItemPaymentType);
           }
-          this.paymentService.getAll(null, 'plan_id=' + this.plan.id).subscribe(
+
+          console.log("paymentTypes", paymentTypes);
+          this.paymentService.getAll('payment_type', 'plan_id=' + this.plan.id).subscribe(
             (response) => {
 
               payments = response['data'];
-              console.log(payments);
 
               this.dialog.open(PaymentsComponent, {
                 height: '80%',
                 width: '60%',
                 data: {
                   planId: this.plan.id,
-                  paymentTypeService: this.paymentTypeService,
+                  paymentTypes: paymentTypes,
+                  payments: payments,
                   paymentService: this.paymentService,
                 }
               });
