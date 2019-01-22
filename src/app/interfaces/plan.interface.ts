@@ -7,8 +7,8 @@ export interface PlanInterface {
     note: string;
     program: string;
     final_report: string;
-    privacy: string;
-    medical_certificate: string;
+    privacy: boolean;
+    medical_certificate: boolean;
     work_result_id: number;
     pain_id: number;
     sessions : SessionInterface[];

@@ -7,7 +7,7 @@ export class Doctor implements DoctorInterface {
     enabled: boolean;
 
     constructor() {
-        this.id = 0;
+        this.id = null;
         this.last_name = "";
         this.first_name = "";
         this.enabled = false;

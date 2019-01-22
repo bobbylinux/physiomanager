@@ -8,4 +8,5 @@ export interface DialogDataInterface {
   paymentTypes: PaymentTypeInterface[];
   payments: PaymentInterface[],
   planId: number;
+  total: number;
 }

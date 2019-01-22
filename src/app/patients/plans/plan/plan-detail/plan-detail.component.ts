@@ -41,12 +41,10 @@ export class PlanDetailComponent implements OnInit {
   });
 
   privacyOptions = [
-    { id: null, text: null },
     { id: true, text: 'Sì' },
     { id: false, text: 'No' }
   ];
   medicalCertificateOptions = [
-    { id: null, text: null },
     { id: true, text: 'Sì' },
     { id: false, text: 'No' }
   ];
@@ -133,6 +131,12 @@ export class PlanDetailComponent implements OnInit {
   managePayments() {
     let paymentTypes: PaymentTypeInterface[];
     let payments: PaymentInterface[];
+
+    let sessions = this.plan.sessions;
+    let total = 0;
+    for(let session of sessions) {
+      total += (+session.price);
+    }
     this.paymentTypeService.getAll(null, 'enabled=true').subscribe(
       (response) => {
         if (response['data'].length > 0) {
@@ -141,8 +145,6 @@ export class PlanDetailComponent implements OnInit {
             const emptyItemPaymentType: PaymentTypeInterface = new PaymentType();
             paymentTypes.unshift(emptyItemPaymentType);
           }
-
-          console.log("paymentTypes", paymentTypes);
           this.paymentService.getAll('payment_type', 'plan_id=' + this.plan.id).subscribe(
             (response) => {
 
@@ -156,6 +158,7 @@ export class PlanDetailComponent implements OnInit {
                   paymentTypes: paymentTypes,
                   payments: payments,
                   paymentService: this.paymentService,
+                  total: total
                 }
               });
             });

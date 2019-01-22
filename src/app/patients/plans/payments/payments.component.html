@@ -16,12 +16,25 @@
   <div class="row">
     <div class="col-md-6 offset-3">
       <label>Importo</label>
-      <input type="number" name="amount" class="form-control">
+      <input [(ngModel)]="amount" type="number" name="amount" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 offset-3">
+      <label>Note</label>
+      <input [(ngModel)]="note" type="text" name="note" class="form-control">
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 offset-3">
       <button class="btn btn-warning btn-block btn-add-payment" (click)="addPaymentToPlan()">Aggiungi</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p>Totale terapie: <strong>{{total | number : '1.2-2'}} &euro;</strong></p>
+      <p>Totale pagato: <strong>{{totalPayments | number : '1.2-2'}} &euro;</strong></p>
+      <p>Totale da pagare: <strong>{{total - totalPayments | number : '1.2-2'}} &euro;</strong></p>
     </div>
   </div>
   <div class="row">
@@ -34,13 +47,15 @@
         <th scope="col">Data</th>
         <th scope="col">Importo</th>
         <th scope="col">Tipo di pagamento</th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments">
-          <td>{{payment.date.date}}</td>
-          <td>{{payment.amount}} &euro;</td>
+          <td>{{payment.date.date | date: 'dd-MM-yyyy'}}</td>
+          <td>{{payment.amount | number : '1.2-2'}} &euro;</td>
           <td>{{payment.payment_type.decription}}</td>
+          <td class="text-right"><button class="btn btn-danger" (click)="deletePayment(payment)"><i class="now-ui-icons ui-1_simple-remove"></i></button></td>
         </tr>
       </tbody>
     </table>

@@ -6,14 +6,12 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule } from 'ngx-toastr';
 import { PatientsComponent } from '../../patients/patients.component';
 import { PatientService } from '../../services/patient.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { PlanDetailComponent } from '../../patients/plans/plan/plan-detail/plan-detail.component';
 import { AddPlanSessionComponent } from '../../patients/plans/plan/add-plan-session/add-plan-session.component';
-import { NewPlanComponent } from '../../patients/plans/new-plan/new-plan.component';
 import { SearchResultComponent } from '../../patients/search-result/search-result.component';
 import { AddPatientComponent } from '../../patients/add-patient/add-patient.component';
 import { PlansComponent } from '../../patients/plans/plans.component';
@@ -56,8 +54,7 @@ import { PaymentTypeService } from './../../services/registers/payment-type.serv
     HttpModule,
     HttpClientModule,
     NgbModule,
-    MatTabsModule,
-    ToastrModule.forRoot()
+    MatTabsModule
   ],
   declarations: [
     DashboardComponent,
@@ -67,7 +64,6 @@ import { PaymentTypeService } from './../../services/registers/payment-type.serv
     PlansComponent,
     PlanDetailComponent,
     AddPlanSessionComponent,
-    NewPlanComponent,
     PlanSessionsComponent,
     PlanSessionComponent,
     PlanComponent,

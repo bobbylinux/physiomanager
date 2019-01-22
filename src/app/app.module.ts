@@ -28,6 +28,7 @@ import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { AuthService } from './services/auth.service';
 import { UnloggedUsersGuardService } from './services/unlogged-users-guard.service';
 import { PaymentsComponent } from './patients/plans/payments/payments.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { PaymentsComponent } from './patients/plans/payments/payments.component'
     NgbModule.forRoot(),
     MatIconModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    ToastrModule.forRoot()
     ],
   declarations: [
     AppComponent,

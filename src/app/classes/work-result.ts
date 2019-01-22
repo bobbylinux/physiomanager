@@ -7,7 +7,7 @@ export class WorkResult implements WorkResultInterface {
     enabled: boolean;
 
     constructor() {
-        this.id = 0;
+        this.id = null;
         this.description = '';
         this.index = 0;
         this.enabled = false;
