@@ -121,10 +121,10 @@ export class PlanDetailComponent implements OnInit {
     plan.program = this.planFormGroup.get('program').value;
     plan.privacy = this.planFormGroup.get('privacy').value;
     plan.medical_certificate = this.planFormGroup.get('medical_certificate').value;
-    plan.pain_id = this.planFormGroup.get('pain_id').value;
-    plan.work_result_id = this.planFormGroup.get('work_result_id').value;
+    plan.pain_id = parseInt(this.planFormGroup.get('pain_id').value) == 0 ? null : parseInt(this.planFormGroup.get('pain_id').value);
+    plan.work_result_id = parseInt(this.planFormGroup.get('work_result_id').value) == 0 ? null : parseInt(this.planFormGroup.get('work_result_id').value);
     plan.final_report = this.planFormGroup.get('final_report').value;
-
+    console.log("plan", plan);
     this.clickOnSavePlan.emit(plan);
   }
 

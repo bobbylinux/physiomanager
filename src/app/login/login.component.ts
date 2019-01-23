@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   
   loginError: boolean = false;
   loginErrorMessage: string = "";
-
+  place = "Fisiocenter";
   constructor(private auth: AuthService, private router: Router) {
     auth.userLoggedIn.subscribe(
       () => {

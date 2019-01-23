@@ -2,11 +2,12 @@
 <div class="logo">
     <a href="http://localhost:4200" class="simple-text logo-mini">
       <div class="logo-img">
-          <img src="./assets/img/logo.png"/>
+          <img *ngIf="place=='Istituto Florence'" src="./assets/img/logo-florence.png"/>
+          <img *ngIf="place=='Fisiocenter'" src="./assets/img/logo-fisiocenter.png"/>
       </div>
     </a>
     <a href="#" [routerLink]="[dashboard]" class="simple-text logo-normal">
-        Istituto Florence
+        {{place}}
     </a>
 </div>
 <div class="sidebar-wrapper">

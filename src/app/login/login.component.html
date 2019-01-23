@@ -1,13 +1,14 @@
 <div class="container">
   <div class="row">
       <div class="col-md-5 offset-3">
-        <img class="img-responsive" src="../../assets/img/logo_login.png" alt="logo">
+        <img *ngIf="place=='Fisiocenter'"class="img-responsive" src="../../assets/img/logo_login-fisiocenter.png" alt="logo">
+        <img *ngIf="place!='Fisiocenter'"class="img-responsive" src="../../assets/img/logo_login-florence.png" alt="logo">
       </div>
   </div>
   <div class="row">
     <div class="col-md-5 offset-3">
       <div class="card card-container">
-        <img id="profile-img" class="profile-img-card" src="../../assets/img/logo.png" />
+        <img  id="profile-img" class="profile-img-card" src="../../assets/img/user-icon.png" />
         <p id="profile-name" class="profile-name-card"></p>
         <form class="form-signin" name="loginForm" #form="ngForm" (ngSubmit)="login(form)">
           <span id="reauth-email" class="reauth-email"></span>

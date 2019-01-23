@@ -7,7 +7,7 @@ export class Pain implements PainInterface {
     enabled: boolean;
 
     constructor() {
-        this.id = null;
+        this.id = 0;
         this.description = '';
         this.index = 0;
         this.enabled = false;

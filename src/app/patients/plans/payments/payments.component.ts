@@ -52,7 +52,6 @@ export class PaymentsComponent implements OnInit {
   selectPaymentType(event) {
     const selectedId = event.target.value;
     this.selectedPaymentType =  this.paymentTypes.find(x => x.id == selectedId);
-    console.log("pagamento selezionato", this.selectedPaymentType);
   }
 
   addPaymentToPlan() {
@@ -70,8 +69,9 @@ export class PaymentsComponent implements OnInit {
         this.amount = null;
         this.note = "";
         this.payment_type = null;        
-        payment = response['data'][0];
+        let payment = response['data'][0];
         payment.payment_type = this.selectedPaymentType;
+        console.log(payment);
         this.payments.push(payment);
         console.log("payments", this.payments);
         this.toastr.info('Pagamento inserito correttamente', '', {

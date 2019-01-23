@@ -269,6 +269,9 @@
     &[data-color="yellow"]{
       @include sidebar-color($warning-color);
     }
+    &[data-color="fisiocenter"]{
+      @include sidebar-color($fisiocenter-color);
+    }
 }
 
 .visible-on-sidebar-regular{

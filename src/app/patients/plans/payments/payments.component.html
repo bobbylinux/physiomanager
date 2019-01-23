@@ -47,6 +47,7 @@
         <th scope="col">Data</th>
         <th scope="col">Importo</th>
         <th scope="col">Tipo di pagamento</th>
+        <th scope="col">Note</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -54,7 +55,8 @@
         <tr *ngFor="let payment of payments">
           <td>{{payment.date.date | date: 'dd-MM-yyyy'}}</td>
           <td>{{payment.amount | number : '1.2-2'}} &euro;</td>
-          <td>{{payment.payment_type.decription}}</td>
+          <td>{{payment.payment_type.description}}</td>
+          <td>{{payment.note}}</td>
           <td class="text-right"><button class="btn btn-danger" (click)="deletePayment(payment)"><i class="now-ui-icons ui-1_simple-remove"></i></button></td>
         </tr>
       </tbody>

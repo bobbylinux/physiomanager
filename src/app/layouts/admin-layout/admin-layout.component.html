@@ -1,6 +1,13 @@
 <div class="wrapper">
-    <div class="sidebar" data-color="red">
-        <app-sidebar></app-sidebar>
+    <div *ngIf="place=='Fisiocenter'">
+        <div class="sidebar" data-color="fisiocenter">
+            <app-sidebar [place]="place"></app-sidebar>
+        </div>
+    </div>
+    <div *ngIf="place!='Fisiocenter'">
+        <div class="sidebar" data-color="fisiocenter">
+            <app-sidebar [place]="place"></app-sidebar>
+        </div>
     </div>
     <div class="main-panel">
         <app-navbar></app-navbar>
