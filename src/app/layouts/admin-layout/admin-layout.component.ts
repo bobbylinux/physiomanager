@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { Observable } from 'rxjs';
+import { environment } from './../../../environments/environment.prod';
 
 @Component({
     selector: 'app-admin-layout',
@@ -17,8 +16,7 @@ export class AdminLayoutComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    //private place = "Istituto Florence";
-    private place = "Fisiocenter";
+    private place = environment.place;
     
     constructor(public location: Location, private router: Router) { }
 

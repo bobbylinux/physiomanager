@@ -3,6 +3,7 @@ import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   
   loginError: boolean = false;
   loginErrorMessage: string = "";
-  place = "Fisiocenter";
+  private place = environment.place;
   constructor(private auth: AuthService, private router: Router) {
     auth.userLoggedIn.subscribe(
       () => {
