@@ -12,14 +12,14 @@ import { ProgramInterface } from '../../../interfaces/program.interface';
 })
 export class ProgramDetailComponent implements OnInit {
 
-  private newProgram = false;
+  public newProgram = false;
 
   enabledOptions = [
     { id: true, text: 'Sì' },
     { id: false, text: 'No' }
   ];
 
-  private program: ProgramInterface;
+  public program: ProgramInterface;
 
   formGroup = new FormGroup({
     id: new FormControl(),

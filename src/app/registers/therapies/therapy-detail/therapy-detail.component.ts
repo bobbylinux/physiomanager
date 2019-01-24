@@ -13,9 +13,9 @@ import { TherapyInterface } from '../../../interfaces/therapy.interface';
 })
 export class TherapyDetailComponent implements OnInit {
 
-  private newTherapy = false;
+  public newTherapy = false;
 
-  private enabledOptions = [
+  public enabledOptions = [
     { id: true, text: 'Sì' },
     { id: false, text: 'No' }
   ];

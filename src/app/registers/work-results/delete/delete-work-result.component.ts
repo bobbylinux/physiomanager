@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogDataInterface } from './../../../interfaces/dialog-data.interface';
+import { DialogDataWorkResultInterface } from 'src/app/interfaces/dialog_data/dialog-data-work-result.interface';
 
 @Component({
   selector: 'app-delete-work-result',
@@ -9,7 +9,7 @@ import { DialogDataInterface } from './../../../interfaces/dialog-data.interface
 })
 export class DeleteWorkResultComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DeleteWorkResultComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
+  constructor(public dialogRef: MatDialogRef<DeleteWorkResultComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataWorkResultInterface) { }
 
   ngOnInit() {
   }

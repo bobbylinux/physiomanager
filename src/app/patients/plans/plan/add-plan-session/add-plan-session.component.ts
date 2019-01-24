@@ -13,16 +13,16 @@ import { Session } from '../../../../classes/session';
 })
 export class AddPlanSessionComponent implements OnInit {
 
-  private _therapies = new BehaviorSubject<TherapyInterface[]>([]);
-  private _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>([]);
-  private date: string = "01/01/1900";
-  private price: number = 0;
-  private note: string = null;
-  private physiotherapist: number = 0;
-  private therapy: number = 0;
-  private units: number = 1;
-  private selectedPhisiotherapist: PhysiotherapistInterface;
-  private selectedTherapy: TherapyInterface;
+  public _therapies = new BehaviorSubject<TherapyInterface[]>([]);
+  public _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>([]);
+  public date: string = "01/01/1900";
+  public price: number = 0;
+  public note: string = null;
+  public physiotherapist: number = 0;
+  public therapy: number = 0;
+  public units: number = 1;
+  public selectedPhisiotherapist: PhysiotherapistInterface;
+  public selectedTherapy: TherapyInterface;
 
   @Input()
   set therapies(value) {

@@ -12,7 +12,7 @@ import { DoctorInterface } from '../../../interfaces/doctor.interface';
 })
 export class DoctorDetailComponent implements OnInit {
 
-  private newDoctor = false;
+  public newDoctor = false;
 
   enabledOptions = [
     { id: true, text: 'Sì' },

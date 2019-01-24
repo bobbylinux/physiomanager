@@ -11,11 +11,11 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./pains.component.css']
 })
 export class PainsComponent implements OnInit {
+  constructor(private dialog: MatDialog, private painService: PainService, private route: Router) {}
 
-  constructor(private dialog: MatDialog, private painService: PainService, private route: Router) {
-  }
-
-  private pains: PainInterface[] = [];
+  
+  
+  public pains: PainInterface[] = [];
 
   ngOnInit() {
     this.painService.getAll().subscribe(

@@ -12,7 +12,7 @@ import { PhysiotherapistInterface } from '../../../interfaces/physiotherapist.in
 })
 export class PhysiotherapistDetailComponent implements OnInit {
 
-  private newPhysiotherapist = false;
+  public newPhysiotherapist = false;
 
   enabledOptions = [
     { id: true, text: 'Sì' },

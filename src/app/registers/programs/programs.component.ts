@@ -16,7 +16,7 @@ export class ProgramsComponent implements OnInit {
   constructor(private dialog: MatDialog, private programService: ProgramService, private route: Router) {
   }
 
-  private programs: Program[] = [];
+  public programs: Program[] = [];
 
   ngOnInit() {
     this.programService.getAll().subscribe(

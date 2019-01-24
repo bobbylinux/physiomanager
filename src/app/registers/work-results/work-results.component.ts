@@ -15,7 +15,7 @@ export class WorkResultsComponent implements OnInit {
   constructor(private dialog: MatDialog, private workResultService: WorkResultService, private route: Router) {
   }
 
-  private workResults: WorkResultInterface[] = [];
+  public workResults: WorkResultInterface[] = [];
 
   ngOnInit() {
     this.workResultService.getAll().subscribe(
@@ -56,5 +56,4 @@ export class WorkResultsComponent implements OnInit {
       }
     );
   }
-
 }

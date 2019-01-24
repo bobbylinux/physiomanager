@@ -16,7 +16,7 @@ export class PhysiotherapistsComponent implements OnInit {
   constructor(private dialog: MatDialog, private physiotherapistService: PhysiotherapistService, private route: Router) {
   }
 
-  private physiotherapists: PhysiotherapistInterface[] = [];
+  public physiotherapists: PhysiotherapistInterface[] = [];
 
   ngOnInit() {
     this.physiotherapistService.getAll().subscribe(

@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogDataInterface } from 'src/app/interfaces/dialog-data.interface';
 import { PaymentService } from './../../../services/payment.service';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentTypeInterface } from './../../../interfaces/payment-type.interface';
 import { PaymentInterface } from 'src/app/interfaces/payment.interface';
 import { Payment } from 'src/app/classes/payment';
 import { forkJoin } from 'rxjs';
+import { DialogDataPaymentsInterface } from 'src/app/interfaces/dialog_data/dialog-data-payments.interface';
 
 @Component({
   selector: 'app-payments',
@@ -16,17 +16,17 @@ import { forkJoin } from 'rxjs';
 export class PaymentsComponent implements OnInit {
 
   private selectedPaymentType: PaymentTypeInterface;
-  private paymentTypes: PaymentTypeInterface[];
-  private payments: PaymentInterface[];
-  private paymentService: PaymentService;
-  private planId: number;
-  private amount: number;
-  private payment_type: number;
-  private note: string;
-  private total: number;
-  private totalPayments: number;
+  public paymentTypes: PaymentTypeInterface[];
+  public payments: PaymentInterface[];
+  public paymentService: PaymentService;
+  public planId: number;
+  public amount: number;
+  public payment_type: number;
+  public note: string;
+  public total: number;
+  public totalPayments: number;
 
-  constructor(private toastr: ToastrService, public dialogRef: MatDialogRef<PaymentsComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
+  constructor(private toastr: ToastrService, public dialogRef: MatDialogRef<PaymentsComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataPaymentsInterface) { }
 
 
   ngOnInit() {

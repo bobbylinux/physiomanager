@@ -16,7 +16,7 @@ export class TherapiesComponent implements OnInit {
   constructor(private dialog: MatDialog, private therapyService: TherapyService, private route: Router) {
   }
 
-  private therapies: Therapy[] = [];
+  public therapies: Therapy[] = [];
 
   ngOnInit() {
     this.therapyService.getAll().subscribe(

@@ -15,7 +15,7 @@ import {WorkResult} from '../../../classes/work-result';
 })
 export class WorkResultDetailComponent implements OnInit {
 
-  private newWorkResult = false;
+  public newWorkResult = false;
 
   enabledOptions = [
     {id: true, text: 'Sì'},

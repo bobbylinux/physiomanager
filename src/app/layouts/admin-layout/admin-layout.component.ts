@@ -16,7 +16,7 @@ export class AdminLayoutComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    private place = environment.place;
+    public place = environment.place;
     
     constructor(public location: Location, private router: Router) { }
 

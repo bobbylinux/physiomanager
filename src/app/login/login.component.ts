@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   
   loginError: boolean = false;
   loginErrorMessage: string = "";
-  private place = environment.place;
+  public place = environment.place;
   constructor(private auth: AuthService, private router: Router) {
     auth.userLoggedIn.subscribe(
       () => {

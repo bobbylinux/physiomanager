@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogDataInterface } from './../../../interfaces/dialog-data.interface';
+import { DialogDataDoctorInterface } from 'src/app/interfaces/dialog_data/dialog-data-doctor.interface';
 
 @Component({
   selector: 'app-delete-doctor',
@@ -9,7 +9,7 @@ import { DialogDataInterface } from './../../../interfaces/dialog-data.interface
 })
 export class DeleteDoctorComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DeleteDoctorComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
+  constructor(public dialogRef: MatDialogRef<DeleteDoctorComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataDoctorInterface) { }
 
   ngOnInit() {
   }

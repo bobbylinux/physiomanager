@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DialogDataInterface } from './../../../../../interfaces/dialog-data.interface';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogDataNoteInterface } from 'src/app/interfaces/dialog_data/dialog-data-note.interface';
 
 @Component({
   selector: 'app-note',
@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class NoteComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<NoteComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
+  constructor(public dialogRef: MatDialogRef<NoteComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataNoteInterface) { }
 
   ngOnInit() {
   }

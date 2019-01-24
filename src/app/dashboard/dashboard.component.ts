@@ -17,5 +17,8 @@ export class DashboardComponent implements OnInit {
     notes: new FormControl()
   });
 
+  submitForm() {
+    return null;
+  }
   
 }

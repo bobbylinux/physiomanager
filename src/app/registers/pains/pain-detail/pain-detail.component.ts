@@ -11,7 +11,7 @@ import { Pain } from '../../../classes/pain';
   styleUrls: ['./pain-detail.component.css']
 })
 export class PainDetailComponent implements OnInit {
-  private newPain = false;
+  public newPain = false;
 
   enabledOptions = [
     { id: true, text: 'Sì' },

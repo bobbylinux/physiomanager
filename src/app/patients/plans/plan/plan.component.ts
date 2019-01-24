@@ -29,8 +29,8 @@ export class PlanComponent implements OnInit {
   private _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>([]);
   private _therapies = new BehaviorSubject<TherapyInterface[]>([]);
 
-  private sessions = [];
-  private totalAmount = 0;
+  public sessions = [];
+  public totalAmount = 0;
 
   @Output()
   onCreatedPlan = new EventEmitter<PlanInterface>();

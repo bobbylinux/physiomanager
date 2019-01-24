@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogDataInterface } from './../../../interfaces/dialog-data.interface';
+import { DialogDataPhysiotherapistInterface } from 'src/app/interfaces/dialog_data/dialog-data-physiotherapist.interface';
 
 @Component({
   selector: 'app-physiotherapists-delete',
@@ -10,7 +10,7 @@ import { DialogDataInterface } from './../../../interfaces/dialog-data.interface
 export class DeletePhysiotherapistComponent implements OnInit {
 
  
-  constructor(public dialogRef: MatDialogRef<DeletePhysiotherapistComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataInterface) { }
+  constructor(public dialogRef: MatDialogRef<DeletePhysiotherapistComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogDataPhysiotherapistInterface) { }
 
   ngOnInit() {
   }
