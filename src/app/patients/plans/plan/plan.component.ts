@@ -174,6 +174,7 @@ export class PlanComponent implements OnInit {
                   for (let session of this.sessions) {
                     session.plan_id = plan.id;
                     this.sessionService.create(session).subscribe(
+                      () => {},
                       error => {
                         console.log(error);
                       }
@@ -189,6 +190,7 @@ export class PlanComponent implements OnInit {
                 for (let session of this.sessions) {
                   session.plan_id = plan.id;
                   this.sessionService.create(session).subscribe(
+                    () => {},
                     error => {
                       console.log(error);
                     }

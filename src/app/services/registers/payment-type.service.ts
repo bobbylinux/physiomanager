@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class PaymentTypeService  extends DataService {
 
   constructor(httpClient: HttpClient, auth: AuthService) {
-    super(httpClient, auth, 'http://localhost:8000/api/v1/payment_types');
+    super(httpClient, auth, 'api/v1/payment_types');
   }
 }
 

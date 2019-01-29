@@ -4,8 +4,11 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class DataService {
+  private baseUrl = "http://localhost:8000/";
 
-  constructor(private httpClient: HttpClient, private auth: AuthService, private url: string) {}
+  constructor(private httpClient: HttpClient, private auth: AuthService, private url: string) {
+    this.baseUrl += url; 
+  }
 
   public getAuthHeader(): HttpHeaders {
     let headers = new HttpHeaders(
@@ -18,6 +21,7 @@ export class DataService {
   }
 
   public getAll(params?: string, query?: string) {
+    console.log("entro qua");
     let filter = '';
     if (query && query.length > 0) {
       filter = "?t=" + new Date().getTime() + "&" + query;
@@ -32,7 +36,7 @@ export class DataService {
         include = "?t=" + new Date().getTime() + "&include=" + params;
       }
     }
-    return this.httpClient.get(this.url + filter + include, { headers: this.getAuthHeader() });
+    return this.httpClient.get(this.baseUrl + filter + include, { headers: this.getAuthHeader() });
   }
 
   public get(id: number, params: string) {
@@ -40,7 +44,7 @@ export class DataService {
     if (params.length > 0) {
       include = '?include=' + params;
     }
-    return this.httpClient.get(this.url + '/' + id + include, { headers: this.getAuthHeader() });
+    return this.httpClient.get(this.baseUrl + '/' + id + include, { headers: this.getAuthHeader() });
   }
 
   public search(queryParams: string, includeParams: string) {
@@ -52,18 +56,18 @@ export class DataService {
     if (includeParams.length > 0) {
       includeString = '&include=' + includeParams;
     }
-    return this.httpClient.get(this.url + '/' + queryString + includeString, { headers: this.getAuthHeader() });
+    return this.httpClient.get(this.baseUrl + '/' + queryString + includeString, { headers: this.getAuthHeader() });
   }
 
   public create(resource: any) {
-    return this.httpClient.post(this.url.toString(), resource, { headers: this.getAuthHeader() });
+    return this.httpClient.post(this.baseUrl.toString(), resource, { headers: this.getAuthHeader() });
   }
 
   public update(resource: any) {
-    return this.httpClient.put(this.url.toString() + '/' + resource.id, resource, { headers: this.getAuthHeader() });
+    return this.httpClient.put(this.baseUrl.toString() + '/' + resource.id, resource, { headers: this.getAuthHeader() });
   }
 
   public delete(id) {
-    return this.httpClient.delete(this.url + '/' + id, { headers: this.getAuthHeader() });
+    return this.httpClient.delete(this.baseUrl + '/' + id, { headers: this.getAuthHeader() });
   }
 }

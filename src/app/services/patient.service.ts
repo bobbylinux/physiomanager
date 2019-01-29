@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 export class PatientService extends DataService{
 
   constructor(httpClient: HttpClient, auth: AuthService) {
-    super(httpClient, auth, "http://localhost:8000/api/v1/patients");
+    super(httpClient, auth, "api/v1/patients");
   }
 
   searchPatient(lastName: string, firstName: string, taxCode: String) {

@@ -7,6 +7,6 @@ import { AuthService } from './../auth.service';
 export class PhysiotherapistService extends DataService{
 
   constructor(httpClient: HttpClient, auth: AuthService) {
-    super(httpClient, auth, 'http://localhost:8000/api/v1/physiotherapists');
+    super(httpClient, auth, 'api/v1/physiotherapists');
   }
 }

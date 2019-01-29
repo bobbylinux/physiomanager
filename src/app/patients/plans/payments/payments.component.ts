@@ -71,9 +71,7 @@ export class PaymentsComponent implements OnInit {
         this.payment_type = null;        
         let payment = response['data'][0];
         payment.payment_type = this.selectedPaymentType;
-        console.log(payment);
         this.payments.push(payment);
-        console.log("payments", this.payments);
         this.toastr.info('Pagamento inserito correttamente', '', {
           timeOut: 8000,
           closeButton: true,
@@ -146,6 +144,7 @@ export class PaymentsComponent implements OnInit {
           for (let newPayment of this.payments) {
             newPayment.plan_id = this.planId;
             this.paymentService.create(newPayment).subscribe(
+              () => {},
               error => {
                 console.log(error);
               }

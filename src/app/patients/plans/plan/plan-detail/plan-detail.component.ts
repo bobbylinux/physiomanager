@@ -124,21 +124,23 @@ export class PlanDetailComponent implements OnInit {
     plan.pain_id = parseInt(this.planFormGroup.get('pain_id').value) == 0 ? null : parseInt(this.planFormGroup.get('pain_id').value);
     plan.work_result_id = parseInt(this.planFormGroup.get('work_result_id').value) == 0 ? null : parseInt(this.planFormGroup.get('work_result_id').value);
     plan.final_report = this.planFormGroup.get('final_report').value;
-    console.log("plan", plan);
     this.clickOnSavePlan.emit(plan);
   }
 
   managePayments() {
     let paymentTypes: PaymentTypeInterface[];
     let payments: PaymentInterface[];
-
     let sessions = this.plan.sessions;
     let total = 0;
-    for(let session of sessions) {
+    console.log("sessions", sessions);
+    console.log("plan", this.plan);
+    /*for(let session of sessions) {
       total += (+session.price);
-    }
-    this.paymentTypeService.getAll(null, 'enabled=true').subscribe(
-      (response) => {
+    }*/
+    /*this.paymentTypeService.getAll(null, 'enabled=true').subscribe(
+      response => {
+        console.log("response", response);
+        
         if (response['data'].length > 0) {
           paymentTypes = response['data'];
           if (paymentTypes) {
@@ -163,6 +165,9 @@ export class PlanDetailComponent implements OnInit {
               });
             });
         }
-      });
+      },
+      error => {
+        console.log("errore this.paymentService.getAll: " + error);
+      });*/
   }
 }
