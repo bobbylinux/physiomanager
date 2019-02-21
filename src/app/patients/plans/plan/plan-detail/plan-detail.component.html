@@ -8,14 +8,15 @@
     <div class="col-md-7 pr-1">
       <div class="form-group">
         <label for="pathological-conditions">Quadro Clinico</label>
-        <textarea class="form-control" placeholder="Quadro Clinico" name="pathological_conditions" formControlName="pathological_conditions"
-          id="pathological-conditions" rows="5"></textarea>
+        <textarea class="form-control" placeholder="Quadro Clinico" name="pathological_conditions"
+          formControlName="pathological_conditions" id="pathological-conditions" rows="5"></textarea>
       </div>
     </div>
     <div class="col-md-4 pr-1">
       <div class="form-group">
         <label for="note">Note</label>
-        <textarea class="form-control" placeholder="Note" name="note" formControlName="note" id="note" rows="5"></textarea>
+        <textarea class="form-control" placeholder="Note" name="note" formControlName="note" id="note"
+          rows="5"></textarea>
       </div>
     </div>
   </div>
@@ -38,8 +39,10 @@
     </div>
     <div class="col-md-2 pr-1">
       <label for="medical-certificate">Certificato Medico</label>
-      <select class="form-control" name="medical_certificate" id="medical-certificate" formControlName="medical_certificate">
-        <option *ngFor="let medicalCertificateOption of medicalCertificateOptions" [value]="medicalCertificateOption.id">
+      <select class="form-control" name="medical_certificate" id="medical-certificate"
+        formControlName="medical_certificate">
+        <option *ngFor="let medicalCertificateOption of medicalCertificateOptions"
+          [value]="medicalCertificateOption.id">
           {{ medicalCertificateOption.text }}
         </option>
       </select>
@@ -72,15 +75,19 @@
   <div class="row">
     <div class="col-md-11 pr-1">
       <label for="final-report">Referto Finale</label>
-      <textarea class="form-control" id="final-report" name="final_report" rows="3" formControlName="final_report"></textarea>
+      <textarea class="form-control" id="final-report" name="final_report" rows="3"
+        formControlName="final_report"></textarea>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6 pr-1">
+    <div class="col-md-4 pr-1">
       <button class="btn btn-warning" (click)="savePlan()">Salva Scheda</button>
     </div>
-    <div class="col-md-6 pr-1">
+    <div class="col-md-4 pr-1">
       <button class="btn btn-primary" (click)="managePayments()">Gestisci Pagamenti</button>
+    </div>
+    <div class="col-md-4 pr-1">
+      <button *ngIf="!newPlan && admin" class="btn btn-danger" (click)="deleteConfirmation(plan)">Elimina Scheda</button>
     </div>
   </div>
 </form>

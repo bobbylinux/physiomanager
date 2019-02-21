@@ -35,6 +35,9 @@ export class PlanComponent implements OnInit {
   @Output()
   onCreatedPlan = new EventEmitter<PlanInterface>();
 
+  @Output()
+  onDeletedPlan = new EventEmitter<PlanInterface>();
+
   @Input()
   set patient(value) {
     this._patient.next(value);
@@ -207,6 +210,25 @@ export class PlanComponent implements OnInit {
         }
       )
     }
+  }
+
+  deletePlan(plan: PlanInterface) {
+    this.planService.delete(plan.id).subscribe(
+      () => {
+        this.toastr.info('Scheda eliminata correttamente', '', {
+          timeOut: 8000,
+          closeButton: true,
+          enableHtml: true,
+          toastClass: "alert alert-warning alert-with-icon",
+          positionClass: 'toast-top-right'
+        });
+        
+        this.onDeletedPlan.emit(plan);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   deleteSession(session) {

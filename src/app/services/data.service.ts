@@ -21,7 +21,6 @@ export class DataService {
   }
 
   public getAll(params?: string, query?: string) {
-    console.log("entro qua");
     let filter = '';
     if (query && query.length > 0) {
       filter = "?t=" + new Date().getTime() + "&" + query;

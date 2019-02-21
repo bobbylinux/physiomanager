@@ -5,3 +5,7 @@ form {
 .date-div span {
     margin-left: 4px;
 }
+
+.date-div {
+    margin-bottom: 20px;
+}

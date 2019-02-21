@@ -4,6 +4,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { Router } from '@angular/router';
 import Chart from 'chart.js';
 import { AuthService } from './../../services/auth.service';
+import { UserInterface } from './../../interfaces/user.interface';
 
 @Component({
     selector: 'app-navbar',
@@ -11,6 +12,7 @@ import { AuthService } from './../../services/auth.service';
     styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+    private user: UserInterface;
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
@@ -25,6 +27,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.user = JSON.parse(localStorage.getItem("user"));
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -81,8 +84,6 @@ export class NavbarComponent implements OnInit {
         html.classList.remove('nav-open');
     };
     sidebarToggle() {
-        // const toggleButton = this.toggleButton;
-        // const html = document.getElementsByTagName('html')[0];
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
         if (this.sidebarVisible === false) {

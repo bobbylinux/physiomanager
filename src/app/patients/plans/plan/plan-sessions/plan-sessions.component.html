@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr app-plan-session [session]="session" (onClickDeleteSession)="deleteSession($event)" *ngFor="let session of sessions">
+      <tr app-plan-session [session]="session" (onClickDeleteSession)="deleteSession($event)" *ngFor="let session of sessions" [class]="session.class">
       </tr>
     </tbody>
   </table>

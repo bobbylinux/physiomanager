@@ -13,6 +13,7 @@ export class Session implements SessionInterface {
   units: number;
   note: string;
   date: string;
+  class: string;
 
   constructor() {
     this.id = 0;
@@ -22,5 +23,6 @@ export class Session implements SessionInterface {
     this.units = 1;
     this.note = '';
     this.date = '01/01/1900';
+    this.class= null;
   }
 }

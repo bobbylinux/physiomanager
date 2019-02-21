@@ -9,12 +9,14 @@ import { PlanInterface } from '../../../../interfaces/plan.interface';
 import { Plan } from '../../../../classes/plan';
 import { Utility } from 'src/app/classes/utility';
 import { MatDialog } from '@angular/material';
-import { PaymentsComponent } from './../../payments/payments.component';
 import { PaymentTypeService } from 'src/app/services/registers/payment-type.service';
 import { PaymentService } from './../../../../services/payment.service';
 import { PaymentTypeInterface } from './../../../../interfaces/payment-type.interface';
-import { PaymentType } from 'src/app/classes/payment-type';
 import { PaymentInterface } from 'src/app/interfaces/payment.interface';
+import { SessionInterface } from './../../../../interfaces/session.interface';
+import { PaymentsComponent } from '../../payments/payments.component';
+import { PaymentType } from 'src/app/classes/payment-type';
+import { DeletePlanComponent } from './../delete-plan/delete-plan.component';
 
 @Component({
   selector: 'app-plan-detail',
@@ -23,12 +25,16 @@ import { PaymentInterface } from 'src/app/interfaces/payment.interface';
 })
 export class PlanDetailComponent implements OnInit {
 
+  private admin: boolean;
+
   private _plan = new BehaviorSubject<PlanInterface>(new Plan());
+  private _sessions = new BehaviorSubject<SessionInterface[]>([]);
   private _newPlan = new BehaviorSubject<boolean>(false);
   private _pains = new BehaviorSubject<PainInterface[]>([]);
   private _programs = new BehaviorSubject<ProgramInterface[]>([]);
   private _workResults = new BehaviorSubject<WorkResultInterface[]>([]);
   @Output() clickOnSavePlan = new EventEmitter();
+  @Output() clickOnDeletePlan = new EventEmitter();
   planFormGroup = new FormGroup({
     pathological_conditions: new FormControl(),
     note: new FormControl(),
@@ -48,6 +54,14 @@ export class PlanDetailComponent implements OnInit {
     { id: true, text: 'Sì' },
     { id: false, text: 'No' }
   ];
+
+  @Input()
+  set sessions(value) {
+    this._sessions.next(value);
+  }
+  get sessions() {
+    return this._sessions.getValue();
+  }
 
   @Input()
   set plan(value) {
@@ -74,13 +88,6 @@ export class PlanDetailComponent implements OnInit {
     return this._plan.getValue();
   }
   @Input()
-  set newPlan(value) {
-    this._newPlan.next(value);
-  }
-  get newPlan() {
-    return this._newPlan.getValue();
-  }
-  @Input()
   set pains(value) {
     this._pains.next(value);
   }
@@ -101,10 +108,23 @@ export class PlanDetailComponent implements OnInit {
   get programs() {
     return this._programs.getValue();
   }
+  @Input()
+  set newPlan(value) {
+    this._newPlan.next(value);
+    if (value) {
+      this.plan = new Plan();
+    }
+  }
+  get newPlan() {
+    return this._newPlan.getValue();
+  }
 
   constructor(private dialog: MatDialog, private paymentTypeService: PaymentTypeService, private paymentService: PaymentService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.admin = user.admin;
+  }
 
   selectProgram(event) {
     const selectedId = event.target.value;
@@ -127,19 +147,30 @@ export class PlanDetailComponent implements OnInit {
     this.clickOnSavePlan.emit(plan);
   }
 
+  deleteConfirmation(plan: PlanInterface) {
+    const dialogRef = this.dialog.open(DeletePlanComponent, {
+      data: {
+        plan: plan
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete') {
+        this.clickOnDeletePlan.emit(plan);
+      }
+    });
+  }
+
   managePayments() {
     let paymentTypes: PaymentTypeInterface[];
     let payments: PaymentInterface[];
-    let sessions = this.plan.sessions;
+    let sessions = this.sessions;
     let total = 0;
-    console.log("sessions", sessions);
-    console.log("plan", this.plan);
-    /*for(let session of sessions) {
+    for(let session of sessions) {
       total += (+session.price);
-    }*/
-    /*this.paymentTypeService.getAll(null, 'enabled=true').subscribe(
+    }
+    this.paymentTypeService.getAll(null, 'enabled=true').subscribe(
       response => {
-        console.log("response", response);
         
         if (response['data'].length > 0) {
           paymentTypes = response['data'];
@@ -168,6 +199,6 @@ export class PlanDetailComponent implements OnInit {
       },
       error => {
         console.log("errore this.paymentService.getAll: " + error);
-      });*/
+      });
   }
 }

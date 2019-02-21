@@ -50,9 +50,12 @@ export class WorkResultsComponent implements OnInit {
 
   deleteTherapy(workResult: WorkResultInterface) {
     this.workResultService.delete(workResult.id).subscribe(
-      () => {
+      result => {
         const idx = this.workResults.indexOf(workResult);
         this.workResults.splice(idx, 1);
+      },
+      error => {
+        
       }
     );
   }

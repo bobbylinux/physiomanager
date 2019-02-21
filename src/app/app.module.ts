@@ -29,6 +29,8 @@ import { AuthService } from './services/auth.service';
 import { UnloggedUsersGuardService } from './services/unlogged-users-guard.service';
 import { PaymentsComponent } from './patients/plans/payments/payments.component';
 import { ToastrModule } from 'ngx-toastr';
+import { DeletePatientComponent } from './patients/search-result/delete/delete-patient.component';
+import { DeletePlanComponent } from './patients/plans/plan/delete-plan/delete-plan.component';
 
 @NgModule({
   imports: [
@@ -49,20 +51,21 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AdminLayoutComponent,    
+    NoteComponent,
+    LoginComponent,
+    PaymentsComponent,
     /*delete*/
+    DeletePatientComponent,
     DeleteDoctorComponent,
     DeletePainComponent,
     DeletePhysiotherapistComponent,
     DeleteProgramComponent,
     DeleteTherapyComponent,
     DeleteWorkResultComponent,
-    NoteComponent,
-    LoginComponent,
-    PaymentsComponent,
-
+    DeletePlanComponent
   ],
   providers: [RouteGuardService, UnloggedUsersGuardService, AuthService],
-  entryComponents: [DeleteDoctorComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeleteWorkResultComponent, NoteComponent, PaymentsComponent],
+  entryComponents: [DeleteDoctorComponent, DeletePlanComponent, DeletePainComponent, DeletePhysiotherapistComponent, DeleteProgramComponent, DeleteTherapyComponent, DeletePatientComponent, DeleteWorkResultComponent, NoteComponent, PaymentsComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

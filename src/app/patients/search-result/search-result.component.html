@@ -23,6 +23,8 @@
         <td class="text-right">
           <button class="btn btn-warning" routerLink='/plans/{{patient.id}}'><i class="now-ui-icons design_bullet-list-67"></i>
             Vai alla Scheda</button>
+          <button *ngIf="admin" class="btn btn-danger" (click)="deleteConfirmation(patient)">
+            Elimina</button>
         </td>
       </tr>
     </tbody>

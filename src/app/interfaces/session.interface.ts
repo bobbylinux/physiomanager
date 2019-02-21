@@ -12,4 +12,5 @@ export interface SessionInterface {
   units: number;
   date: string;
   note: string;
+  class: string;
 }

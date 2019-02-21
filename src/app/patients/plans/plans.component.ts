@@ -308,4 +308,9 @@ export class PlansComponent implements OnInit {
     this.plans.unshift(plan);
   }
 
+  planDeleted(plan) {
+    const idx = this.plans.indexOf(plan);
+    this.plans.splice(idx, 1);
+  }
+
 }

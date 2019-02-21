@@ -1,6 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from '../classes/user';
-import { HttpClient, HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
 import { Jwt } from './../interfaces/jwt';
 import { UserInterface } from '../interfaces/user.interface';
 
@@ -30,10 +30,9 @@ export class AuthService {
     }).subscribe(
       (payload: Jwt) => {
         localStorage.setItem("token", payload.access_token);
-        localStorage.setItem("user", JSON.stringify(payload));
+        localStorage.setItem("user", JSON.stringify(payload.user));
         let user = new User();
-        user.email = payload.email;
-        user.name = payload.name;
+        user = payload.user;
         this.userLoggedIn.emit(user);
       },
       (httpResponse: HttpHeaderResponse) => {

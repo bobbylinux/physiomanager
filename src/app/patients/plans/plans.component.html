@@ -185,7 +185,7 @@
               <mat-tab *ngFor="let plan of plans; let idx = index" label="{{idx+1}}">
                 <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains"
                   [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
-                  [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)"></app-plan>
+                  [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)" (onDeletedPlan)="planDeleted($event)"></app-plan>
               </mat-tab>
             </mat-tab-group>
           </div>
