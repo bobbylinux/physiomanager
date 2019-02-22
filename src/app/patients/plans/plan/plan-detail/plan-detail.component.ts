@@ -25,7 +25,7 @@ import { DeletePlanComponent } from './../delete-plan/delete-plan.component';
 })
 export class PlanDetailComponent implements OnInit {
 
-  private admin: boolean;
+  admin: boolean;
 
   private _plan = new BehaviorSubject<PlanInterface>(new Plan());
   private _sessions = new BehaviorSubject<SessionInterface[]>([]);

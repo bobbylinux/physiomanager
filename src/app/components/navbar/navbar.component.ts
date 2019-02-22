@@ -12,7 +12,7 @@ import { UserInterface } from './../../interfaces/user.interface';
     styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-    private user: UserInterface;
+    user: UserInterface;
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
