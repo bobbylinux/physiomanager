@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  place: 'Florence'
+  place: 'Istituto Florence'
+  //place: 'Fisiocenter'
 };
 
 /*
