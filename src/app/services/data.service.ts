@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class DataService {
-  private baseUrl = "http://localhost:8000/";
+  private baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient, private auth: AuthService, private url: string) {
     this.baseUrl += url; 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 declare interface RouteInfo {
     path: string;
@@ -23,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
+    baseUrl: string = environment.baseUrl;
     menuItems: any[];
     @Input() place: string;
     

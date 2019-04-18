@@ -3,6 +3,7 @@ import { User } from '../classes/user';
 import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
 import { Jwt } from './../interfaces/jwt';
 import { UserInterface } from '../interfaces/user.interface';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { UserInterface } from '../interfaces/user.interface';
 export class AuthService {
 
   private isUserLogged = false;
-  private authUrl = 'http://localhost:8000/api/auth/';
+  private authUrl = environment.authUrl;
   @Output() userLoggedIn = new EventEmitter<User>();
   @Output() userNotLoggedIn = new EventEmitter<HttpHeaderResponse>();
   @Output() userLoggedOut = new EventEmitter();
