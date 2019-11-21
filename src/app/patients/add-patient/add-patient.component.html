@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Aggiungi Nuovo Paziente</h5>
@@ -43,8 +43,13 @@
               <div class="col-md-2 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
-                  <input length="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
-                    formControlName="tax_code" id="tax-code" value="">
+                  <input required length="16" type="text" class="form-control" placeholder="Codice Fiscale"
+                    name="tax_code" formControlName="tax_code" id="tax-code" value="">
+                  <div *ngIf="tax_code.touched && tax_code.dirty && tax_code.invalid">
+                    <div class="alert-danger" *ngIf="tax_code.errors.required">
+                      Il campo codice fiscale è obbligatorio
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -52,8 +57,13 @@
               <div class="col-md-2 pr-1">
                 <div class="form-group">
                   <label for="birthday">Data di nascita</label>
-                  <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
-                    formControlName="birthday">
+                  <input required type="date" class="form-control" id="birthday" name="birthday"
+                    placeholder="Data di nascita" formControlName="birthday">
+                  <div *ngIf="birthday.touched && birthday.dirty && birthday.invalid">
+                    <div class="alert-danger" *ngIf="birthday.errors.required">
+                      Il campo data di nascita è obbligatorio
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-3 px-1">
@@ -73,7 +83,8 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="city">Città</label>
-                  <input type="text" class="form-control" id="city" name="city" placeholder="Città" formControlName="city">
+                  <input type="text" class="form-control" id="city" name="city" placeholder="Città"
+                    formControlName="city">
                 </div>
               </div>
             </div>
@@ -81,16 +92,18 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="doctor-id">Medico</label>
-                  <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
-                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}} {{option.first_name}}</option>
+                  <select class="custom-select form-control" id="doctor-id" name="doctor_id"
+                    formControlName="doctor_id">
+                    <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
+                      {{option.first_name}}</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="phone-number">Telefono</label>
-                  <input required type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
-                    formControlName="phone_number">
+                  <input required type="text" class="form-control" id="phone-number" name="phone_number"
+                    placeholder="Numero di telefono" formControlName="phone_number">
                   <div *ngIf="phone_number.touched && phone_number.dirty && phone_number.invalid">
                     <div class="alert-danger" *ngIf="phone_number.errors.required">
                       Il campo telefono è obbligatorio
@@ -112,7 +125,7 @@
             </div>
             <div class="row">
               <div class="col-md-11 pr-1">
-                <button class="btn btn-warning btn-block" [disabled]="form.invalid">Salva</button>
+                <button class="btn btn-warning btn-block" [disabled]="form.invalid || loading">Salva</button>
               </div>
             </div>
           </form>

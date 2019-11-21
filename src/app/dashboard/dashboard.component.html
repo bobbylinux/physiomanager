@@ -1,29 +1,29 @@
 <div class="panel-header panel-header-sm">
-  </div>
-  <div class="main-content">
-    <div class="row">
-      <div class="col-md-10">
-        <div class="card">
-          <div class="card-header">
-          </div>
-          <div class="card-body">
-            <form #form="ngForm" (ngSubmit)="submitForm()" [formGroup]="formGroup">
-              <div class="row">
-                <div class="col-md-12 pr-1">
-                  <div class="form-group">
-                    <label for="last-name">Appunti</label>
-                    <textarea class="form-control" name="notes" formControlName="notes" id="notes"></textarea>
-                  </div>
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+          <form #form="ngForm" (ngSubmit)="submitForm()" [formGroup]="formGroup">
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label for="last-name">Appunti</label>
+                  <textarea class="form-control" name="notes" formControlName="notes" id="notes"></textarea>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12 pr-1">
-                  <button class="btn btn-warning btn-block" [disabled]="form.invalid">Salva</button>
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <button class="btn btn-warning btn-block" [disabled]="form.invalid">Salva</button>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,24 +1,24 @@
 import { Component, OnInit } from "@angular/core";
-import { PhysiotherapistService } from "../../services/registers/physiotherapist.service";
-import { DeletePhysiotherapistComponent } from "./delete/delete-physiotherapist.component";
-import { PhysiotherapistInterface } from "../../interfaces/physiotherapist.interface";
-import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material";
-import { Logouttable } from "src/app/classes/logouttable";
+import { PaymentTypeService } from "src/app/services/registers/payment-type.service";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import { Logouttable } from "src/app/classes/logouttable";
+import { PaymentTypeInterface } from "src/app/interfaces/payment-type.interface";
+import { DeletePaymentTypeComponent } from "./delete/delete-payment-type.component";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: "app-physiotherapists",
-  templateUrl: "./physiotherapists.component.html",
-  styleUrls: ["./physiotherapists.component.css"]
+  selector: "app-payment-types",
+  templateUrl: "./payment-types.component.html",
+  styleUrls: ["./payment-types.component.css"]
 })
-export class PhysiotherapistsComponent extends Logouttable implements OnInit {
+export class PaymentTypesComponent extends Logouttable implements OnInit {
   private loading: boolean = true;
 
   constructor(
     private dialog: MatDialog,
-    private physiotherapistService: PhysiotherapistService,
+    private paymentTypesService: PaymentTypeService,
     private router: Router,
     private auth: AuthService,
     private toastr: ToastrService
@@ -26,13 +26,14 @@ export class PhysiotherapistsComponent extends Logouttable implements OnInit {
     super();
   }
 
-  public physiotherapists: PhysiotherapistInterface[] = [];
+  public paymentTypes: PaymentTypeInterface[] = [];
 
   ngOnInit() {
-    this.physiotherapistService.getAll().subscribe(
+    this.paymentTypesService.getAll().subscribe(
       response => {
         if (response["data"].length > 0) {
-          this.physiotherapists = response["data"];
+          this.paymentTypes = response["data"];
+          console.log("paymentTypes", this.paymentTypes);
         }
         this.loading = false;
       },
@@ -41,7 +42,7 @@ export class PhysiotherapistsComponent extends Logouttable implements OnInit {
           this.logout(this.auth, this.router, this.toastr);
         } else {
           this.toastr.info(
-            "Errore in fase di caricamento dei fisioterapisti",
+            "Errore in fase di caricamento dei tipi di pagamento",
             "",
             {
               timeOut: 8000,
@@ -57,44 +58,45 @@ export class PhysiotherapistsComponent extends Logouttable implements OnInit {
     );
   }
 
-  editPhysiotherapist(physiotherapist: PhysiotherapistInterface) {
-    this.router.navigate(["physiotherapists", physiotherapist.id, "edit"]);
+  editPaymentType(paymentType: PaymentTypeInterface) {
+    this.router.navigate(["payment_types", paymentType.id, "edit"]);
   }
 
-  deleteConfirmation(physiotherapist: PhysiotherapistInterface) {
-    const dialogRef = this.dialog.open(DeletePhysiotherapistComponent, {
+  deleteConfirmation(paymentType: PaymentTypeInterface) {
+    const dialogRef = this.dialog.open(DeletePaymentTypeComponent, {
       data: {
-        physiotherapist: physiotherapist
+        paymentType: paymentType
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === "delete") {
-        this.deletePhysiotherapist(physiotherapist);
+        this.loading = true;
+        this.deletePaymentType(paymentType);
       }
     });
   }
 
-  deletePhysiotherapist(physiotherapist: PhysiotherapistInterface) {
-    this.physiotherapistService.delete(physiotherapist.id).subscribe(
-      response => {
-        const idx = this.physiotherapists.indexOf(physiotherapist);
-        this.physiotherapists.splice(idx, 1);
-        this.toastr.info("Fisioterapista eliminato correttamente", "", {
+  deletePaymentType(paymentType: PaymentTypeInterface) {
+    this.paymentTypesService.delete(paymentType.id).subscribe(
+      result => {
+        const idx = this.paymentTypes.indexOf(paymentType);
+        this.paymentTypes.splice(idx, 1);
+        this.loading = false;
+        this.toastr.info("Tipo di pagamento eliminato correttamente", "", {
           timeOut: 8000,
           closeButton: true,
           enableHtml: true,
           toastClass: "alert alert-primary alert-with-icon",
           positionClass: "toast-top-right"
         });
-        this.loading = false;
       },
       error => {
         if (error.status && error.status == 401) {
           this.logout(this.auth, this.router, this.toastr);
         } else {
           this.toastr.info(
-            "Errore in fase di eliminazione del fisioterapista",
+            "Errore in fase di eliminazione dei tipi di pagamento",
             "",
             {
               timeOut: 8000,
@@ -104,6 +106,7 @@ export class PhysiotherapistsComponent extends Logouttable implements OnInit {
               positionClass: "toast-top-right"
             }
           );
+          this.loading = false;
         }
       }
     );

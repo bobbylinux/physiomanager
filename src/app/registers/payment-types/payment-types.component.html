@@ -11,46 +11,44 @@
           <div class="card-header">
             <div class="row">
               <div class="col-md-6">
-                <h5 class="title">Indici Di Dolore</h5>
+                <h5 class="title">Tipi di pagamento</h5>
               </div>
               <div class="col-md-6 text-right">
-                <button class="btn btn-warning" [routerLink]="['/pains/new']"><i
+                <button class="btn btn-warning" [routerLink]="['/payment_types/new']"><i
                     class="now-ui-icons ui-1_simple-add"></i>
-                  Aggiungi un indice di dolore</button>
+                  Aggiungi un tipo di pagamento</button>
               </div>
             </div>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-11">
-                <div class="table-responsive" *ngIf="pains.length > 0">
+              <div class="col-md-12">
+                <div class="table-responsive" *ngIf="paymentTypes.length > 0">
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Indice</th>
                         <th scope="col">Descrizione</th>
-                        <th scope="col">Abilitato</th>
+                        <th scope="col">Attivo</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let pain of pains">
-                        <td scope="row">{{pain.index}}</td>
-                        <td scope="row">{{pain.description}}</td>
+                      <tr *ngFor="let paymentType of paymentTypes">
+                        <td scope="row">{{paymentType.description}}</td>
                         <td scope="row">
-                          <i *ngIf="pain.enabled" class="material-icons">check</i>
-                          <i *ngIf="!pain.enabled" class="material-icons">close</i>
+                          <i *ngIf="paymentType.enabled" class="material-icons">check</i>
+                          <i *ngIf="!paymentType.enabled" class="material-icons">close</i>
                         </td>
                         <td class="text-right">
-                          <i class="material-icons" (click)="editPain(pain)">edit</i>
-                          <i class="material-icons" (click)="deleteConfirmation(pain)">delete</i>
+                          <i class="material-icons" (click)="editPaymentType(paymentType)">edit</i>
+                          <i class="material-icons" (click)="deleteConfirmation(paymentType)">delete</i>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <div *ngIf="pains.length == 0" class="register-empty-body">
-                  <h5 class="text-center">Ancora nessun indice di dolore registrato</h5>
+                <div *ngIf="paymentTypes.length == 0" class="register-empty-body">
+                  <h5 class="text-center">Ancora nessun tipo di pagamento registrato</h5>
                 </div>
               </div>
             </div>

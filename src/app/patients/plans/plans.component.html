@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Dati Anagrafici</h5>
@@ -43,8 +43,8 @@
               <div class="col-md-2 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
-                  <input required length="16" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
-                    formControlName="tax_code" id="tax-code" value="">
+                  <input required length="16" type="text" class="form-control" placeholder="Codice Fiscale"
+                    name="tax_code" formControlName="tax_code" id="tax-code" value="">
                   <div *ngIf="tax_code.touched && tax_code.dirty && tax_code.invalid">
                     <div class="alert-danger" *ngIf="tax_code.errors.required">
                       Il campo codice fiscale è obbligatorio
@@ -61,8 +61,8 @@
               <div class="col-md-2 pr-1">
                 <div class="form-group">
                   <label for="birthday">Data di nascita</label>
-                  <input required type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita"
-                    formControlName="birthday">
+                  <input required type="date" class="form-control" id="birthday" name="birthday"
+                    placeholder="Data di nascita" formControlName="birthday">
                   <div *ngIf="birthday.touched && birthday.dirty && birthday.invalid">
                     <div class="alert-danger" *ngIf="birthday.errors.required">
                       Il campo data di nascita è obbligatorio
@@ -73,8 +73,8 @@
               <div class="col-md-3 px-1">
                 <div class="form-group">
                   <label for="place-of-birth">Luogo di nascita</label>
-                  <input required minlenght="3" type="text" class="form-control" id="place-of-birth" name="place_of_birth"
-                    placeholder="Luogo di nascita" formControlName="place_of_birth">
+                  <input required minlenght="3" type="text" class="form-control" id="place-of-birth"
+                    name="place_of_birth" placeholder="Luogo di nascita" formControlName="place_of_birth">
                   <div *ngIf="place_of_birth.touched && place_of_birth.dirty && place_of_birth.invalid">
                     <div class="alert-danger" *ngIf="place_of_birth.errors.required">
                       Il campo luogo di nascita è obbligatorio
@@ -97,7 +97,8 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="city">Città</label>
-                  <input type="text" class="form-control" id="city" name="city" placeholder="Città" formControlName="city">
+                  <input type="text" class="form-control" id="city" name="city" placeholder="Città"
+                    formControlName="city">
                 </div>
               </div>
             </div>
@@ -105,7 +106,8 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="doctor-id">Medico</label>
-                  <select class="custom-select form-control" id="doctor-id" name="doctor_id" formControlName="doctor_id">
+                  <select class="custom-select form-control" id="doctor-id" name="doctor_id"
+                    formControlName="doctor_id">
                     <option *ngFor="let option of doctors" [value]="option.id">{{option.last_name}}
                       {{option.first_name}}</option>
                   </select>
@@ -114,8 +116,8 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label for="phone-number">Telefono</label>
-                  <input required type="text" class="form-control" id="phone-number" name="phone_number" placeholder="Numero di telefono"
-                    formControlName="phone_number">
+                  <input required type="text" class="form-control" id="phone-number" name="phone_number"
+                    placeholder="Numero di telefono" formControlName="phone_number">
                   <div *ngIf="phone_number.touched && phone_number.dirty && phone_number.invalid">
                     <div class="alert-danger" *ngIf="phone_number.errors.required">
                       Il campo telefono è obbligatorio
@@ -137,7 +139,8 @@
             </div>
             <div class="row">
               <div class="col-md-3 pr-1">
-                <button class="btn btn-warning btn-block" (click)="editPatient($event)">{{formGroup.disabled ? 'Modifica' : 'Salva'}}</button>
+                <button class="btn btn-warning btn-block"
+                  (click)="editPatient($event)">{{formGroup.disabled ? 'Modifica' : 'Salva'}}</button>
               </div>
               <div class="col-md-7 pr-1 text-right" *ngIf="!newPlan">
                 <button class="btn btn-warning" (click)="addNewPlan()"><i class="now-ui-icons ui-1_simple-add"></i>
@@ -149,48 +152,54 @@
       </div>
     </div>
   </div>
-  <div *ngIf="newPlan; else elsePlans">
-    <div class="row">
-      <div class="col-md-10 offset-1">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="title">Nuova Scheda</h5>
+  <ng-container *ngIf="loading; else noLoading">
+    <app-loader></app-loader>
+  </ng-container>
+  <ng-template #noLoading>
+    <div *ngIf="newPlan; else elsePlans">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="title">Nuova Scheda</h5>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-body">
-            <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains" 
-              [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies" (onCreatedPlan)="planCreated($event)"
-              (clickOnSavePlan)="savePlan($event)"></app-plan>
+            <div class="card-body">
+              <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains"
+                [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
+                (onCreatedPlan)="planCreated($event)" (clickOnSavePlan)="savePlan($event)"></app-plan>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <ng-template #elsePlans>
-    <div class="row">
-      <div class="col-md-10 offset-1">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="title">Schede</h5>
+    <ng-template #elsePlans>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="title">Schede</h5>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-body">
-            <mat-tab-group>
-              <mat-tab *ngFor="let plan of plans; let idx = index" label="{{idx+1}}">
-                <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains"
-                  [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
-                  [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)" (onDeletedPlan)="planDeleted($event)"></app-plan>
-              </mat-tab>
-            </mat-tab-group>
+            <div class="card-body">
+              <mat-tab-group>
+                <mat-tab *ngFor="let plan of plans; let idx = index" label="{{idx+1}}">
+                  <app-plan [newPlan]="newPlan" [patient]="patient" [workResults]="workResults" [pains]="pains"
+                    [programs]="programs" [physiotherapists]="physiotherapists" [therapies]="therapies"
+                    [plan]="plans[idx]" (clickOnSavePlan)="savePlan($event)" (onDeletedPlan)="planDeleted($event)">
+                  </app-plan>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-template>
   </ng-template>
 </div>

@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h5 class="title">Elimina Metodo di Pagamento</h5>
+  <button type="button" class="close" aria-label="Close" (click)="closeDialog()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>Si è sicuri di voler eliminare questo metodo di pagamento <strong>"{{data.paymentType.description}}"</strong> ?
+    L'operazione
+    è irreversibile</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="closeDialog()">Annulla</button>
+  <button type="button" class="btn btn-warning" (click)="deletePaymentType()">Elimina</button>
+</div>

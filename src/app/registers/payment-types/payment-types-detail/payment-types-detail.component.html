@@ -5,8 +5,8 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title" *ngIf="newTherapy" class="text-center">Aggiungi Terapia</h5>
-          <h5 class="title" *ngIf="!newTherapy" class="text-center">Modifica Terapia</h5>
+          <h5 class="title" *ngIf="newPaymentType" class="text-center">Aggiungi Tipo Di Pagamento</h5>
+          <h5 class="title" *ngIf="!newPaymentType" class="text-center">Modifica Tipo Di Pagamento</h5>
         </div>
         <div class="card-body">
           <form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="submitForm()">
@@ -16,14 +16,6 @@
                 placeholder="Descrizione" formControlName="description" [disabled]="loading">
               <div *ngIf="description.touched && description.dirty && description.invalid" class="alert-danger">
                 Il campo descrizione è obbligatorio
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="price">Prezzo</label>
-              <input required type="number" class="form-control" id="price" name="price" placeholder="Prezzo"
-                formControlName="price" [disabled]="loading">
-              <div *ngIf="price.touched && price.dirty && price.invalid" class="alert-danger">
-                Il campo prezzo è obbligatorio
               </div>
             </div>
             <div class="form-group">

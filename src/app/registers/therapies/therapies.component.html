@@ -2,52 +2,58 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-12">
       <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-5">
-              <h5 class="title">Terapie</h5>
-            </div>
-            <div class="col-md-6 text-right">
-              <button class="btn btn-warning" [routerLink]="['/therapies/new']"><i class="now-ui-icons ui-1_simple-add"></i>
-                Aggiungi una terapia</button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-11">
-              <div class="table-responsive" *ngIf="therapies.length > 0">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Descrizione</th>
-                      <th scope="col">Abilitata</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let therapy of therapies">
-                      <td scope="row">{{therapy.description}}</td>
-                      <td scope="row">
-                        <i *ngIf="therapy.enabled" class="material-icons">check</i>
-                        <i *ngIf="!therapy.enabled" class="material-icons">close</i>
-                      </td>
-                      <td>
-                        <i class="material-icons" (click)="editTherapy(therapy)">edit</i>
-                        <i class="material-icons" (click)="deleteConfirmation(therapy)">delete</i>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+        <ng-container *ngIf="loading; else noLoading">
+          <app-loader></app-loader>
+        </ng-container>
+        <ng-template #noLoading>
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-6">
+                <h5 class="title">Terapie</h5>
               </div>
-              <div *ngIf="therapies.length == 0" class="register-empty-body">
-                <h5 class="text-center">Ancora nessuna terapia registrata</h5>
+              <div class="col-md-6 text-right">
+                <button class="btn btn-warning" [routerLink]="['/therapies/new']"><i
+                    class="now-ui-icons ui-1_simple-add"></i>
+                  Aggiungi una terapia</button>
               </div>
             </div>
           </div>
-        </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table-responsive" *ngIf="therapies.length > 0">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Abilitata</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let therapy of therapies">
+                        <td scope="row">{{therapy.description}}</td>
+                        <td scope="row">
+                          <i *ngIf="therapy.enabled" class="material-icons">check</i>
+                          <i *ngIf="!therapy.enabled" class="material-icons">close</i>
+                        </td>
+                        <td class="text-right">
+                          <i class="material-icons" (click)="editTherapy(therapy)">edit</i>
+                          <i class="material-icons" (click)="deleteConfirmation(therapy)">delete</i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div *ngIf="therapies.length == 0" class="register-empty-body">
+                  <h5 class="text-center">Ancora nessuna terapia registrata</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
