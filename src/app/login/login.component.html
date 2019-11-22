@@ -1,14 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
-      <img *ngIf="place=='Fisiocenter'" class="img-responsive" src="/assets/img/logo_login-fisiocenter.png" alt="logo">
-      <img *ngIf="place!='Fisiocenter'" class="img-responsive" src="/assets/img/logo_login-florence.png" alt="logo">
+      <ng-container *ngIf="isFisioCenter; else noFisioCenter">
+        <img class="img-responsive" src="/assets/img/logo_login-fisiocenter.png" alt="logo">
+      </ng-container>
+      <ng-template #noFisioCenter>
+        <img class="img-responsive" src="/assets/img/logo_login-florence.png" alt="logo">
+      </ng-template>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="card card-container">
-        <img id="profile-img" class="profile-img-card" src="/assets/img/user-icon.png" />
         <form class="form-signin" name="loginForm" #form="ngForm" (ngSubmit)="login(form)">
           <span id="reauth-email" class="reauth-email"></span>
           <input required email ngModel #email="ngModel" type="email" id="inputEmail" class="form-control" name="email"
@@ -33,8 +36,8 @@
               {{loginErrorMessage}}
             </div>
           </div>
-          <button [disabled]="!form.valid || loading" class="btn btn-lg btn-danger btn-block btn-signin"
-            type="submit">Login</button>
+          <button [disabled]="!form.valid || loading" class="btn btn-lg btn-danger btn-block btn-signin" type="submit"
+            [class.btn-login-florence]="!isFisioCenter" [class.btn-login-fisiocenter]="isFisioCenter">Login</button>
         </form><!-- /form -->
       </div><!-- /card-container -->
     </div>

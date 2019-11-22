@@ -11,6 +11,7 @@ import { environment } from "src/environments/environment.prod";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  private isFisioCenter: boolean = false;
   private buttonClassColor: string;
   private loading: boolean = false;
 
@@ -21,6 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
+    console.log("enviroment", environment);
+    this.isFisioCenter = this.place == "Fisiocenter";
     this.auth.userLoggedIn.subscribe(() => {
       this.router.navigate(["dashboard"]);
     });
@@ -31,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.loginErrorMessage =
         error.status == 401
           ? "Username o password non validi"
-          : "Si è verificato un errore nel tentativo di collegarsi con la piattaforma";
+          : "Si è verificato un errore nel tentativo di collegarsi alla piattaforma";
     });
   }
 
