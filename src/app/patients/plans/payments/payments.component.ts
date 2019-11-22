@@ -72,10 +72,10 @@ export class PaymentsComponent extends Logouttable implements OnInit {
     payment.note = this.note;
     payment.payment_type_id = this.payment_type;
     payment.payment_type = this.selectedPaymentType;
-    this.totalPayments += +this.amount;
 
     this.paymentService.create(payment).subscribe(
       response => {
+        this.totalPayments += +this.amount;
         this.amount = null;
         this.note = "";
         this.payment_type = null;
@@ -87,7 +87,7 @@ export class PaymentsComponent extends Logouttable implements OnInit {
           timeOut: 8000,
           closeButton: true,
           enableHtml: true,
-          toastClass: "alert alert-warning alert-with-icon",
+          toastClass: "alert alert-primary alert-with-icon",
           positionClass: "toast-top-right"
         });
       },
@@ -95,7 +95,7 @@ export class PaymentsComponent extends Logouttable implements OnInit {
         if (error.status && error.status == 401) {
           this.logout(this.auth, this.router, this.toastr);
         } else {
-          this.toastr.info("Errore in fase di inserimento del pagamento", "", {
+          this.toastr.info("Errore in fase di aggiunta del pagamento", "", {
             timeOut: 8000,
             closeButton: true,
             enableHtml: true,

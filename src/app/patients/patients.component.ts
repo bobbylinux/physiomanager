@@ -5,6 +5,7 @@ import { Logouttable } from "../classes/logouttable";
 import { Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { ToastrService } from "ngx-toastr";
+import { UtilityService } from "../services/utility.service";
 
 @Component({
   selector: "app-patients",
@@ -23,7 +24,8 @@ export class PatientsComponent extends Logouttable implements OnInit {
     private service: PatientService,
     private router: Router,
     private auth: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private utilityService: UtilityService
   ) {
     super();
   }
@@ -54,5 +56,13 @@ export class PatientsComponent extends Logouttable implements OnInit {
           }
         }
       );
+  }
+
+  ngOnDestroy() {
+    let patient = new Patient();
+    patient.last_name = this.last_name;
+    patient.first_name = this.first_name;
+    patient.tax_code = this.tax_code;
+    this.utilityService.setPatientData(patient);
   }
 }

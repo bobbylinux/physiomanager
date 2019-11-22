@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-md-12">
-    <app-plan-detail [workResults]="workResults" [pains]="pains" [programs]="programs" [plan]="plan"
-      [sessions]="sessions" [newPlan]="newPlan" (clickOnSavePlan)="savePlan($event)"
-      (clickOnDeletePlan)="deletePlan($event)"></app-plan-detail>
+    <app-plan-detail [workResults]="workResults" [pains]="pains" [programs]="programs" [plan]="plan" [loading]="loading"
+      [savePlanEvent]="savePlanEventsSubject.asObservable()"
+      [managePaymentsEvent]="managePaymentsEventsSubject.asObservable()" [sessions]="sessions" [newPlan]="newPlan"
+      (clickOnSavePlan)="savePlan($event)" (clickOnDeletePlan)="deletePlan($event)"></app-plan-detail>
   </div>
 </div>
 <hr>
@@ -22,5 +23,13 @@
   <div class="col-md-12">
     <app-plan-sessions [sessions]="sessions" [totalAmount]="totalAmount" (onClickDeleteSession)="deleteSession($event)">
     </app-plan-sessions>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 pr-1">
+    <button class="btn btn-warning" (click)="mapPlanObject()">Salva Scheda</button>
+    <button class="btn btn-primary" (click)="managePayments()">Gestisci Pagamenti</button>
+    <button *ngIf="!newPlan && admin" class="btn btn-danger" (click)="deletePlanConfirmation(plan)">Elimina
+      Scheda</button>
   </div>
 </div>

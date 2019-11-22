@@ -46,6 +46,7 @@ import { PaymentTypeService } from "./../../services/registers/payment-type.serv
 import { LoaderComponent } from "src/app/components/loader/loader.component";
 import { PaymentTypesDetailComponent } from "src/app/registers/payment-types/payment-types-detail/payment-types-detail.component";
 import { PaymentTypesComponent } from "src/app/registers/payment-types/payment-types.component";
+import { UtilityService } from "src/app/services/utility.service";
 
 @NgModule({
   imports: [
@@ -100,7 +101,8 @@ import { PaymentTypesComponent } from "src/app/registers/payment-types/payment-t
     AuthService,
     RouteGuardService,
     PaymentTypeService,
-    PaymentService
+    PaymentService,
+    UtilityService
   ]
 })
 export class AdminLayoutModule {}
