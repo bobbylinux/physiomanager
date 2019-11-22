@@ -36,7 +36,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./plans.component.css"]
 })
 export class PlansComponent extends Logouttable implements OnInit {
-  private loading: boolean = true;
+  public loading: boolean = true;
   newPlan: boolean = true;
   patient: Patient;
   plans: PlanInterface[] = [];
@@ -49,7 +49,7 @@ export class PlansComponent extends Logouttable implements OnInit {
   sessions: SessionInterface[] = [];
   session: SessionInterface;
   formDisabled: boolean = true;
-  private patientId;
+  public patientId;
 
   formGroup = new FormGroup({
     patient_id: new FormControl(),

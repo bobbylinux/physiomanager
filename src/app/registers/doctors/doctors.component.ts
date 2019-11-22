@@ -15,8 +15,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./doctors.component.css"]
 })
 export class DoctorsComponent extends Logouttable implements OnInit {
-  private doctors: Doctor[] = [];
-  private loading: boolean = true;
+  public doctors: Doctor[] = [];
+  public loading: boolean = true;
 
   constructor(
     private dialog: MatDialog,

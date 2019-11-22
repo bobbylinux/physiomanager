@@ -14,8 +14,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./therapy-detail.component.css"]
 })
 export class TherapyDetailComponent extends Logouttable implements OnInit {
-  private loading: boolean = false;
-  private newTherapy: boolean = false;
+  public loading: boolean = false;
+  public newTherapy: boolean = false;
 
   public enabledOptions = [
     { id: true, text: "Sì" },

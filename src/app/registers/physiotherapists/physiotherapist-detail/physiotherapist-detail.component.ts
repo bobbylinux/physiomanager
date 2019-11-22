@@ -15,8 +15,8 @@ import { ToastrService } from "ngx-toastr";
 })
 export class PhysiotherapistDetailComponent extends Logouttable
   implements OnInit {
-  private loading: boolean = false;
-  private newPhysiotherapist: boolean = false;
+  public loading: boolean = false;
+  public newPhysiotherapist: boolean = false;
 
   enabledOptions = [
     { id: true, text: "Sì" },

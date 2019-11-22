@@ -17,9 +17,9 @@ import { UtilityService } from "src/app/services/utility.service";
   styleUrls: ["./add-patient.component.css"]
 })
 export class AddPatientComponent extends Logouttable implements OnInit {
-  private loading: boolean = true;
-  private doctors: DoctorInterface[];
-  private formGroup: FormGroup;
+  public loading: boolean = true;
+  public doctors: DoctorInterface[];
+  public formGroup: FormGroup;
 
   constructor(
     private patientService: PatientService,

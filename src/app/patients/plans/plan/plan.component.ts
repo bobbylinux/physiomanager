@@ -24,20 +24,20 @@ import { DeletePlanComponent } from "./delete-plan/delete-plan.component";
   styleUrls: ["./plan.component.css"]
 })
 export class PlanComponent extends Logouttable implements OnInit {
-  private admin: boolean = false;
-  private loading: boolean = false;
-  private savePlanEventsSubject: Subject<void> = new Subject<void>();
-  private managePaymentsEventsSubject: Subject<void> = new Subject<void>();
-  private _patient = new BehaviorSubject<PatientInterface>(new Patient());
-  private _plan = new BehaviorSubject<PlanInterface>(new Plan());
-  private _newPlan = new BehaviorSubject<boolean>(false);
-  private _pains = new BehaviorSubject<PainInterface[]>([]);
-  private _programs = new BehaviorSubject<ProgramInterface[]>([]);
-  private _workResults = new BehaviorSubject<WorkResultInterface[]>([]);
-  private _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>(
+  public admin: boolean = false;
+  public loading: boolean = false;
+  public savePlanEventsSubject: Subject<void> = new Subject<void>();
+  public managePaymentsEventsSubject: Subject<void> = new Subject<void>();
+  public _patient = new BehaviorSubject<PatientInterface>(new Patient());
+  public _plan = new BehaviorSubject<PlanInterface>(new Plan());
+  public _newPlan = new BehaviorSubject<boolean>(false);
+  public _pains = new BehaviorSubject<PainInterface[]>([]);
+  public _programs = new BehaviorSubject<ProgramInterface[]>([]);
+  public _workResults = new BehaviorSubject<WorkResultInterface[]>([]);
+  public _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>(
     []
   );
-  private _therapies = new BehaviorSubject<TherapyInterface[]>([]);
+  public _therapies = new BehaviorSubject<TherapyInterface[]>([]);
 
   public sessions = [];
   public totalAmount = 0;
