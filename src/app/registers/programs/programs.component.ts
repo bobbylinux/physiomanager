@@ -15,7 +15,7 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./programs.component.css"]
 })
 export class ProgramsComponent extends Logouttable implements OnInit {
-  private loading: boolean = true;
+  public loading: boolean = true;
 
   constructor(
     private dialog: MatDialog,

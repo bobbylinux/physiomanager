@@ -12,7 +12,7 @@ import { Session } from "../../../../classes/session";
   styleUrls: ["./add-plan-session.component.css"]
 })
 export class AddPlanSessionComponent implements OnInit {
-  private loading: boolean = false;
+  public loading: boolean = false;
   public _therapies = new BehaviorSubject<TherapyInterface[]>([]);
   public _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>(
     []

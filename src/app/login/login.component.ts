@@ -11,9 +11,9 @@ import { environment } from "src/environments/environment.prod";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  private isFisioCenter: boolean = false;
-  private buttonClassColor: string;
-  private loading: boolean = false;
+  public isFisioCenter: boolean = false;
+  public buttonClassColor: string;
+  public loading: boolean = false;
 
   loginError: boolean = false;
   loginErrorMessage: string = "";

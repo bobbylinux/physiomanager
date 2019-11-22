@@ -31,7 +31,7 @@ export class PlanDetailComponent extends Logouttable implements OnInit {
   private managePaymentsEventsSubscription: any;
   @Input() savePlanEvent: Observable<void>;
   @Input() managePaymentsEvent: Observable<void>;
-  @Input() private loading: boolean = false;
+  @Input() public loading: boolean = false;
   private _plan = new BehaviorSubject<PlanInterface>(new Plan());
   private _sessions = new BehaviorSubject<SessionInterface[]>([]);
   private _newPlan = new BehaviorSubject<boolean>(false);

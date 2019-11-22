@@ -17,8 +17,8 @@ import { Router } from "@angular/router";
   styleUrls: ["./payments.component.css"]
 })
 export class PaymentsComponent extends Logouttable implements OnInit {
-  private loading: boolean = false;
-  private selectedPaymentType: PaymentTypeInterface;
+  public loading: boolean = false;
+  public selectedPaymentType: PaymentTypeInterface;
   public paymentTypes: PaymentTypeInterface[];
   public payments: PaymentInterface[];
   public paymentService: PaymentService;

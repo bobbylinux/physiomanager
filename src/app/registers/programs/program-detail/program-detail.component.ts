@@ -14,8 +14,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./program-detail.component.css"]
 })
 export class ProgramDetailComponent extends Logouttable implements OnInit {
-  private newProgram: boolean = false;
-  private loading: boolean = false;
+  public newProgram: boolean = false;
+  public loading: boolean = false;
 
   enabledOptions = [
     { id: true, text: "Sì" },

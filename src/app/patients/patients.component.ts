@@ -13,7 +13,7 @@ import { UtilityService } from "../services/utility.service";
   styleUrls: ["./patients.component.css"]
 })
 export class PatientsComponent extends Logouttable implements OnInit {
-  private loading: boolean = false;
+  public loading: boolean = false;
   searched = false;
   last_name = "";
   first_name = "";

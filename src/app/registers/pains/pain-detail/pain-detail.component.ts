@@ -14,8 +14,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./pain-detail.component.css"]
 })
 export class PainDetailComponent extends Logouttable implements OnInit {
-  private newPain: boolean = false;
-  private loading: boolean = false;
+  public newPain: boolean = false;
+  public loading: boolean = false;
 
   enabledOptions = [
     { id: true, text: "Sì" },

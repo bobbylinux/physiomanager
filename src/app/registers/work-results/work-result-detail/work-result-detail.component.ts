@@ -14,8 +14,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./work-result-detail.component.css"]
 })
 export class WorkResultDetailComponent extends Logouttable implements OnInit {
-  private newWorkResult: boolean = false;
-  private loading: boolean = false;
+  public newWorkResult: boolean = false;
+  public loading: boolean = false;
   enabledOptions = [
     { id: true, text: "Sì" },
     { id: false, text: "No" }
