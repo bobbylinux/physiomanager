@@ -1,32 +1,42 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { BehaviorSubject, forkJoin } from 'rxjs';
-import { PlanInterface } from '../../../interfaces/plan.interface';
-import { Plan } from '../../../classes/plan';
-import { PainInterface } from '../../../interfaces/pain.interface';
-import { ProgramInterface } from '../../../interfaces/program.interface';
-import { WorkResultInterface } from '../../../interfaces/work-result.interface';
-import { PhysiotherapistInterface } from '../../../interfaces/physiotherapist.interface';
-import { TherapyInterface } from '../../../interfaces/therapy.interface';
-import { SessionService } from '../../../services/session.service';
-import { PlanService } from '../../../services/plan.service';
-import { PatientInterface } from '../../../interfaces/patient.interface';
-import { Patient } from './../../../classes/patient';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { BehaviorSubject, forkJoin, Subject } from "rxjs";
+import { PlanInterface } from "../../../interfaces/plan.interface";
+import { Plan } from "../../../classes/plan";
+import { PainInterface } from "../../../interfaces/pain.interface";
+import { ProgramInterface } from "../../../interfaces/program.interface";
+import { WorkResultInterface } from "../../../interfaces/work-result.interface";
+import { PhysiotherapistInterface } from "../../../interfaces/physiotherapist.interface";
+import { TherapyInterface } from "../../../interfaces/therapy.interface";
+import { SessionService } from "../../../services/session.service";
+import { PlanService } from "../../../services/plan.service";
+import { PatientInterface } from "../../../interfaces/patient.interface";
+import { Patient } from "./../../../classes/patient";
+import { ToastrService } from "ngx-toastr";
+import { Logouttable } from "src/app/classes/logouttable";
+import { AuthService } from "src/app/services/auth.service";
+import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material";
+import { DeletePlanComponent } from "./delete-plan/delete-plan.component";
 
 @Component({
-  selector: 'app-plan',
-  templateUrl: './plan.component.html',
-  styleUrls: ['./plan.component.css']
+  selector: "app-plan",
+  templateUrl: "./plan.component.html",
+  styleUrls: ["./plan.component.css"]
 })
-export class PlanComponent implements OnInit {
-
+export class PlanComponent extends Logouttable implements OnInit {
+  private admin: boolean = false;
+  private loading: boolean = false;
+  private savePlanEventsSubject: Subject<void> = new Subject<void>();
+  private managePaymentsEventsSubject: Subject<void> = new Subject<void>();
   private _patient = new BehaviorSubject<PatientInterface>(new Patient());
   private _plan = new BehaviorSubject<PlanInterface>(new Plan());
   private _newPlan = new BehaviorSubject<boolean>(false);
   private _pains = new BehaviorSubject<PainInterface[]>([]);
   private _programs = new BehaviorSubject<ProgramInterface[]>([]);
   private _workResults = new BehaviorSubject<WorkResultInterface[]>([]);
-  private _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>([]);
+  private _physiotherapists = new BehaviorSubject<PhysiotherapistInterface[]>(
+    []
+  );
   private _therapies = new BehaviorSubject<TherapyInterface[]>([]);
 
   public sessions = [];
@@ -50,7 +60,7 @@ export class PlanComponent implements OnInit {
     this._plan.next(value);
     if (this.plan && this.plan.sessions) {
       this.sessions = this.plan.sessions;
-      for(let session of this.sessions) {
+      for (let session of this.sessions) {
         this.totalAmount += parseFloat(session.price.toString());
       }
     } else {
@@ -105,35 +115,52 @@ export class PlanComponent implements OnInit {
   get therapies() {
     return this._therapies.getValue();
   }
-  constructor(private planService: PlanService, private sessionService: SessionService, private toastr: ToastrService) { }
+  constructor(
+    private planService: PlanService,
+    private sessionService: SessionService,
+    private toastr: ToastrService,
+    private auth: AuthService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    super();
+  }
 
   ngOnInit() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    this.admin = user.admin;
   }
 
   addTherapyToSessions(session) {
     this.sessions.push(session);
-    this.totalAmount += parseFloat(session.price.toString());    
+    this.totalAmount += parseFloat(session.price.toString());
+  }
+
+  mapPlanObject() {
+    this.savePlanEventsSubject.next();
+  }
+
+  managePayments() {
+    this.managePaymentsEventsSubject.next();
   }
 
   savePlan(plan: PlanInterface) {
-    
     if (this.newPlan) {
       plan.patient_id = this.patient.id;
       this.planService.create(plan).subscribe(
         response => {
-          this.toastr.info('Scheda creata correttamente', '', {
+          this.toastr.info("Scheda aggiunta correttamente", "", {
             timeOut: 8000,
             closeButton: true,
             enableHtml: true,
-            toastClass: "alert alert-warning alert-with-icon",
-            positionClass: 'toast-top-right'
+            toastClass: "alert alert-primary alert-with-icon",
+            positionClass: "toast-top-right"
           });
 
-          plan = response['data'][0];
+          plan = response["data"][0];
           if (this.sessions.length > 0) {
             for (let session of this.sessions) {
               session.plan_id = plan.id;
-              //ora devo salvare le sessioni
               this.sessionService.create(session).subscribe(
                 () => {
                   plan.sessions = this.sessions;
@@ -141,97 +168,229 @@ export class PlanComponent implements OnInit {
                   this.onCreatedPlan.emit(plan);
                 },
                 error => {
-                  console.log(error);
+                  if (error.status && error.status == 401) {
+                    this.logout(this.auth, this.router, this.toastr);
+                  } else {
+                    this.toastr.info(
+                      "Errore in fase di aggiunta della sessione",
+                      "",
+                      {
+                        timeOut: 8000,
+                        closeButton: true,
+                        enableHtml: true,
+                        toastClass: "alert alert-warning alert-with-icon",
+                        positionClass: "toast-top-right"
+                      }
+                    );
+                  }
+                  this.loading = false;
                 }
-              )
+              );
             }
           } else {
             this.onCreatedPlan.emit(plan);
           }
-
         },
         error => {
-          console.log(error);
+          if (error.status && error.status == 401) {
+            this.logout(this.auth, this.router, this.toastr);
+          } else {
+            this.toastr.info("Errore in fase di aggiunta della scheda", "", {
+              timeOut: 8000,
+              closeButton: true,
+              enableHtml: true,
+              toastClass: "alert alert-warning alert-with-icon",
+              positionClass: "toast-top-right"
+            });
+          }
         }
       );
     } else {
-      //modifica scheda
       this.planService.update(plan).subscribe(
         () => {
-          this.toastr.info('Scheda aggiornata correttamente', '', {
+          this.toastr.info("Scheda aggiornata correttamente", "", {
             timeOut: 8000,
             closeButton: true,
             enableHtml: true,
-            toastClass: "alert alert-warning alert-with-icon",
-            positionClass: 'toast-top-right'
+            toastClass: "alert alert-primary alert-with-icon",
+            positionClass: "toast-top-right"
           });
 
-          this.sessionService.search('plan_id=' + plan.id, '').subscribe(response => {
-            let observables = new Array();
-            for (let session of response['data']) {
-              observables.push(this.sessionService.delete(session.id));
-            }
-            if (observables.length > 0) {
-              forkJoin(observables).subscribe(
-                () => {
+          this.sessionService.search("plan_id=" + plan.id, "").subscribe(
+            response => {
+              let observables = new Array();
+              for (let session of response["data"]) {
+                observables.push(this.sessionService.delete(session.id));
+              }
+              if (observables.length > 0) {
+                forkJoin(observables).subscribe(
+                  () => {
+                    for (let session of this.sessions) {
+                      session.plan_id = plan.id;
+                      this.sessionService.create(session).subscribe(
+                        () => {},
+                        error => {
+                          if (error.status && error.status == 401) {
+                            this.logout(this.auth, this.router, this.toastr);
+                          } else {
+                            this.toastr.info(
+                              "Errore in fase di caricamento delle sessioni",
+                              "",
+                              {
+                                timeOut: 8000,
+                                closeButton: true,
+                                enableHtml: true,
+                                toastClass:
+                                  "alert alert-warning alert-with-icon",
+                                positionClass: "toast-top-right"
+                              }
+                            );
+
+                            this.loading = false;
+                          }
+                        }
+                      );
+                    }
+                  },
+                  error => {
+                    if (error.status && error.status == 401) {
+                      this.logout(this.auth, this.router, this.toastr);
+                    } else {
+                      this.toastr.info(
+                        "Errore in fase di caricamento delle sessioni",
+                        "",
+                        {
+                          timeOut: 8000,
+                          closeButton: true,
+                          enableHtml: true,
+                          toastClass: "alert alert-warning alert-with-icon",
+                          positionClass: "toast-top-right"
+                        }
+                      );
+
+                      this.loading = false;
+                    }
+                  }
+                );
+              } else {
+                if (this.sessions.length > 0) {
                   for (let session of this.sessions) {
                     session.plan_id = plan.id;
                     this.sessionService.create(session).subscribe(
                       () => {},
                       error => {
-                        console.log(error);
+                        if (error.status && error.status == 401) {
+                          this.logout(this.auth, this.router, this.toastr);
+                        } else {
+                          this.toastr.info(
+                            "Errore in fase di aggiunta della sessione",
+                            "",
+                            {
+                              timeOut: 8000,
+                              closeButton: true,
+                              enableHtml: true,
+                              toastClass: "alert alert-warning alert-with-icon",
+                              positionClass: "toast-top-right"
+                            }
+                          );
+
+                          this.loading = false;
+                        }
                       }
                     );
                   }
-                },
-                error => {
-                  console.log(error);
-                }
-              );
-            } else {
-              if (this.sessions.length > 0) {
-                for (let session of this.sessions) {
-                  session.plan_id = plan.id;
-                  this.sessionService.create(session).subscribe(
-                    () => {},
-                    error => {
-                      console.log(error);
-                    }
-                  );
                 }
               }
+            },
+            error => {
+              if (error.status && error.status == 401) {
+                this.logout(this.auth, this.router, this.toastr);
+              } else {
+                this.toastr.info(
+                  "Errore in fase di aggiornamento della scheda",
+                  "",
+                  {
+                    timeOut: 8000,
+                    closeButton: true,
+                    enableHtml: true,
+                    toastClass: "alert alert-warning alert-with-icon",
+                    positionClass: "toast-top-right"
+                  }
+                );
+
+                this.loading = false;
+              }
             }
-          }, error => {
-            console.log(error);
-          });
+          );
         },
         error => {
-          console.log(error);
+          if (error.status && error.status == 401) {
+            this.logout(this.auth, this.router, this.toastr);
+          } else {
+            this.toastr.info(
+              "Errore in fase di aggiornamento della scheda",
+              "",
+              {
+                timeOut: 8000,
+                closeButton: true,
+                enableHtml: true,
+                toastClass: "alert alert-warning alert-with-icon",
+                positionClass: "toast-top-right"
+              }
+            );
+
+            this.loading = false;
+          }
         }
-      )
+      );
     }
+  }
+
+  deletePlanConfirmation(plan: PlanInterface) {
+    const dialogRef = this.dialog.open(DeletePlanComponent, {
+      data: {
+        plan: plan
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === "delete") {
+        this.deletePlan(plan);
+      }
+    });
   }
 
   deletePlan(plan: PlanInterface) {
     this.planService.delete(plan.id).subscribe(
       () => {
-        this.toastr.info('Scheda eliminata correttamente', '', {
+        this.toastr.info("Scheda eliminata correttamente", "", {
           timeOut: 8000,
           closeButton: true,
           enableHtml: true,
-          toastClass: "alert alert-warning alert-with-icon",
-          positionClass: 'toast-top-right'
+          toastClass: "alert alert-primary alert-with-icon",
+          positionClass: "toast-top-right"
         });
-        
+        this.loading = false;
         this.onDeletedPlan.emit(plan);
       },
       error => {
-        console.log(error);
+        if (error.status && error.status == 401) {
+          this.logout(this.auth, this.router, this.toastr);
+        } else {
+          this.toastr.info("Errore in fase di eliminazione della scheda", "", {
+            timeOut: 8000,
+            closeButton: true,
+            enableHtml: true,
+            toastClass: "alert alert-warning alert-with-icon",
+            positionClass: "toast-top-right"
+          });
+          this.loading = false;
+        }
       }
     );
   }
 
   deleteSession(session) {
-    this.totalAmount -= parseFloat(session.price.toString()); 
+    this.totalAmount -= parseFloat(session.price.toString());
   }
 }

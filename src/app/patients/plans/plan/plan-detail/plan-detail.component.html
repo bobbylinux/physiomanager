@@ -79,15 +79,4 @@
         formControlName="final_report"></textarea>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-4 pr-1">
-      <button class="btn btn-warning" (click)="savePlan()">Salva Scheda</button>
-    </div>
-    <div class="col-md-4 pr-1">
-      <button class="btn btn-primary" (click)="managePayments()">Gestisci Pagamenti</button>
-    </div>
-    <div class="col-md-4 pr-1">
-      <button *ngIf="!newPlan && admin" class="btn btn-danger" (click)="deleteConfirmation(plan)">Elimina Scheda</button>
-    </div>
-  </div>
 </form>

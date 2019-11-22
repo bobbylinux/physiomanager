@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h5 class="title" *ngIf="newTherapy" class="text-center">Aggiungi Terapia</h5>
@@ -12,8 +12,8 @@
           <form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="submitForm()">
             <div class="form-group">
               <label for="description">Descrizione</label>
-              <input required type="text" class="form-control" id="description" name="description" placeholder="Descrizione"
-                formControlName="description">
+              <input required type="text" class="form-control" id="description" name="description"
+                placeholder="Descrizione" formControlName="description" [disabled]="loading">
               <div *ngIf="description.touched && description.dirty && description.invalid" class="alert-danger">
                 Il campo descrizione è obbligatorio
               </div>
@@ -21,23 +21,25 @@
             <div class="form-group">
               <label for="price">Prezzo</label>
               <input required type="number" class="form-control" id="price" name="price" placeholder="Prezzo"
-                formControlName="price">
+                formControlName="price" [disabled]="loading">
               <div *ngIf="price.touched && price.dirty && price.invalid" class="alert-danger">
                 Il campo prezzo è obbligatorio
               </div>
             </div>
             <div class="form-group">
               <label for="enabled">Abilitato</label>
-              <select required class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled">
+              <select required class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled"
+                [disabled]="loading">
                 <option *ngFor="let option of enabledOptions" [value]="option.id">{{option.text}}</option>
               </select>
               <div *ngIf="enabled.touched && enabled.dirty && enabled.invalid" class="alert-danger">
-                Il campo prezzo è obbligatorio
+                Il campo abilitato è obbligatorio
               </div>
             </div>
             <div class="form-group">
               <input type="hidden" formControlName="id" id="id" name="id">
-              <button type="submit" class="btn btn-block btn-warning" [disabled]="form.invalid">Salva</button>
+              <button type="submit" class="btn btn-block btn-warning"
+                [disabled]="form.invalid || loading">Salva</button>
             </div>
           </form>
         </div>

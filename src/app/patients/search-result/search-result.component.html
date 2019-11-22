@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive col-12">
   <table class="table">
     <thead>
       <tr>
@@ -21,7 +21,8 @@
         <td>{{patient.first_name}}</td>
         <td>{{patient.tax_code}}</td>
         <td class="text-right">
-          <button class="btn btn-warning" routerLink='/plans/{{patient.id}}'><i class="now-ui-icons design_bullet-list-67"></i>
+          <button class="btn btn-warning" routerLink='/plans/{{patient.id}}'><i
+              class="now-ui-icons design_bullet-list-67"></i>
             Vai alla Scheda</button>
           <button *ngIf="admin" class="btn btn-danger" (click)="deleteConfirmation(patient)">
             Elimina</button>

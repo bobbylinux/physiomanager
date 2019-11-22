@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Ricerca Paziente</h5>
@@ -27,8 +27,8 @@
               <div class="col-md-3 px-1">
                 <div class="form-group">
                   <label for="tax-code">Codice Fiscale</label>
-                  <input [(ngModel)]="tax_code" type="text" class="form-control" placeholder="Codice Fiscale" name="tax_code"
-                    id="tax-code" value="">
+                  <input [(ngModel)]="tax_code" type="text" class="form-control" placeholder="Codice Fiscale"
+                    name="tax_code" id="tax-code" value="">
                 </div>
               </div>
             </div>
@@ -42,43 +42,48 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="searched">
-    <div class="col-md-10 offset-1">
-      <div *ngIf="patients.length > 0" class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-5">
-              <h5 class="title">Lista pazienti</h5>
+  <ng-container *ngIf="loading; else noLoading">
+    <app-loader></app-loader>
+  </ng-container>
+  <ng-template #noLoading>
+    <div class="row" *ngIf="searched">
+      <div class="col-md-12">
+        <div *ngIf="patients.length > 0" class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-6">
+                <h5 class="title">Lista pazienti</h5>
+              </div>
+              <div class="col-md-6 text-right">
+                <button class="btn btn-warning" [routerLink]="['/add-patient']"><i
+                    class="now-ui-icons ui-1_simple-add"></i>
+                  Aggiungi Paziente</button>
+              </div>
             </div>
-            <div class="col-md-6 text-right">
-              <button class="btn btn-warning" [routerLink]="['/add-patient']"><i class="now-ui-icons ui-1_simple-add"></i>
-                Aggiungi Paziente</button>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <app-search-result [searched]="searched" [patients]="patients"></app-search-result>
+              </div>
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-11">
-              <app-search-result [searched]="searched" [patients]="patients"></app-search-result>
+        <div *ngIf="patients.length == 0" class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-6">
+                <h5 class="title">Nessun paziente trovato</h5>
+              </div>
+              <div class="col-md-6 text-right">
+                <button class="btn btn-warning" [routerLink]="['/add-patient']"><i
+                    class="now-ui-icons ui-1_simple-add"></i>
+                  Aggiungi Paziente</button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div *ngIf="patients.length == 0" class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-5">
-              <h5 class="title">Nessun paziente trovato</h5>
-            </div>
-            <div class="col-md-6 text-right">
-              <button class="btn btn-warning" [routerLink]="['/add-patient']"><i class="now-ui-icons ui-1_simple-add"></i>
-                Aggiungi Paziente</button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>

@@ -2,7 +2,7 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h5 class="title" *ngIf="newPhysiotherapist" class="text-center">Aggiungi Fisioterapista</h5>
@@ -13,7 +13,7 @@
             <div class="form-group">
               <label for="last-name">Cognome</label>
               <input required minlength="2" type="text" class="form-control" id="last-name" name="last_name"
-                placeholder="Cognome" formControlName="last_name">
+                placeholder="Cognome" formControlName="last_name" [disabled]="loading">
               <div *ngIf="last_name.touched && last_name.dirty && last_name.invalid">
                 <div class="alert-danger" *ngIf="last_name.errors.required">
                   Il campo cognome è obbligatorio
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label for="first-name">Nome</label>
               <input required minlength="2" type="text" class="form-control" id="first-name" name="first_name"
-                placeholder="Nome" formControlName="first_name">
+                placeholder="Nome" formControlName="first_name" [disabled]="loading">
               <div *ngIf="first_name.touched && first_name.dirty && first_name.invalid">
                 <div class="alert-danger" *ngIf="first_name.errors.required">
                   Il campo cognome è obbligatorio
@@ -38,7 +38,8 @@
             </div>
             <div class="form-group">
               <label for="enabled">Abilitato</label>
-              <select required class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled">
+              <select required class="custom-select form-control" id="enabled" name="enabled" formControlName="enabled"
+                [disabled]="loading">
                 <option *ngFor="let option of enabledOptions" [value]="option.id">{{option.text}}</option>
               </select>
               <div *ngIf="enabled.touched && enabled.dirty && enabled.invalid" class="alert-danger">
@@ -47,7 +48,8 @@
             </div>
             <div class="form-group">
               <input type="hidden" formControlName="id" id="id" name="id">
-              <button type="submit" class="btn btn-block btn-warning" [disabled]="form.invalid">Salva</button>
+              <button type="submit" class="btn btn-block btn-warning"
+                [disabled]="form.invalid || loading">Salva</button>
             </div>
           </form>
         </div>
